@@ -1,12 +1,12 @@
 import Example from "../src/components/example/Example";
 import Logo from "../src/components/logo/Logo";
+import Avatar from "../src/components/avatar/Avatar";
 
 export default function Index() {
   return (
-    //Test with if both variants are working and they are working :)
     <div>
       <Logo type="muted"/>
-      <Logo/>
+      <Avatar url = '/images/avatar.png' verified = "true"/>
     </div>
   );
 }
