@@ -1,0 +1,30 @@
+@use "../../styles/colors";
+
+.user{
+    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    // justify-content: center;
+}
+
+.name{
+    color: colors.$text_primary;
+    margin: 0rem;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline;
+}
+
+.info {
+    color: colors.$success_main;
+    margin: 0rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+}
+
+.infoDiv {
+    flex: 1;
+    padding-left: 0.7rem;
+}
