@@ -1,3 +1,24 @@
+// .avatar{
+//     position: relative;
+//     display: block;
+//     margin-left: auto;
+//     margin-right: auto;
+// }
+
+// .image{
+//     position: absolute;
+//     border-radius: 50%;
+//     width: 100%
+// }
+
+// .badge{
+//     position: absolute;
+//     border-radius: 150%;
+//     width: 25%;
+//     bottom: 25%;
+//     right: 0;
+// }
+
 .avatar{
     position: relative;
     display: block;
@@ -6,6 +27,7 @@
 }
 
 .image{
+    position: absolute;
     border-radius: 50%;
     width: 100%
 }
@@ -13,7 +35,7 @@
 .badge{
     position: absolute;
     border-radius: 50%;
-    width: 25%;
+    width: 33%;
     bottom: 0;
     right: 0;
 }

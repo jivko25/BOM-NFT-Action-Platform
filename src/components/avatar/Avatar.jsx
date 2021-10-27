@@ -1,4 +1,4 @@
-import styles from './Avatar.module.scss';
+import styles from '../avatar/Avatar.module.scss';
 
 function Avatar({size = 90, url, verified = false}){
     return(
