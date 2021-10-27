@@ -11,7 +11,7 @@ export default function Index() {
       <Header/>
       {/* <Avatar url = '/images/avatar.png' verified = "true"/> */}
       {/* <User name = "test" info = "testInfo" avatar = '/images/avatar.png' verified = "true"/> */}
-      <Card name="Clock" likes={1} mediaUrl="/images/nft.jpg" user={{avatarUrl: "/images/avatar.png", verified: true}} price= "12.2" currency="ETH"/>
+      <Card name="Clock" likes={1000} mediaUrl="/images/nft.jpg" user={{avatarUrl: "/images/avatar.png", verified: true}} price= "12.2" currency="ETH"/>
     </div>
   );
 }

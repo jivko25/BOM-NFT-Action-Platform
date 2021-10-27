@@ -7,8 +7,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Chip from '@mui/material/Chip';
 import styles from './Card.module.scss';
 import Avatar from '../avatar/Avatar';
+import millify from "millify";
 
-function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = ''}){
+function Card({name, likes = 0, mediaUrl, user, price, currency}){
     return(
     <CardM className={styles.card}>
         <CardHeader 
@@ -29,26 +30,26 @@ function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency =
             <Chip 
                 className={styles.likes} 
                 icon={<FavoriteIcon className={likes > 0 ? styles.icon : null}/>} 
-                label = {kFormatter(likes)} 
+                label={millify(likes, { lowercase: true })} 
                 variant="outlined" />
         </CardActions>
     </CardM>
     );
 }
 
-function kFormatter(num) {
-    if(num > 999999999){
-        return Math.sign(num)*((Math.abs(num)/1000000000).toFixed(1)) + 'B';
-    }
-    else if(num > 999999){
-        return Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'M';
-    }
-    else if(num > 999){
-        return Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'K';
-    }
-    else{
-        return num;
-    }
-}
+// function kFormatter(num) {
+//     if(num > 999999999){
+//         return Math.sign(num)*((Math.abs(num)/1000000000).toFixed(1)) + 'B';
+//     }
+//     else if(num > 999999){
+//         return Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'M';
+//     }
+//     else if(num > 999){
+//         return Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'K';
+//     }
+//     else{
+//         return num;
+//     }
+// }
 
 export default Card;
