@@ -7,6 +7,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import Chip from '@mui/material/Chip';
 import styles from './Card.module.scss';
 import Avatar from '../avatar/Avatar';
+import millify from 'millify';
 
 export default function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = ''}){
     return(
@@ -29,7 +30,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '', user, price =
             <Chip 
                 className={styles.likes} 
                 icon={<FavoriteIcon className={likes > 0 ? styles.icon : null}/>} 
-                label = {kFormatter(likes)} 
+                label = {millify(likes)} 
                 variant="outlined" />
         </CardActions>
     </CardM>

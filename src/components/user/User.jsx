@@ -1,7 +1,7 @@
 import styles from './User.module.scss';
 import Avatar  from '../avatar/Avatar';
 
-function User({name = '', info = '', avatar = '', size = 55, verified = false}){
+export default function User({name = '', info = '', avatar = '', size = 55, verified = false}){
     return(
         <div className={styles.user}>
             <Avatar url={avatar} size={size} verified={verified}/>
@@ -12,5 +12,3 @@ function User({name = '', info = '', avatar = '', size = 55, verified = false}){
         </div>
     )
 }
-
-export default User;
