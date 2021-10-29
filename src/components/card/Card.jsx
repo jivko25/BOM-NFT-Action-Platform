@@ -8,7 +8,7 @@ import Chip from '@mui/material/Chip';
 import styles from './Card.module.scss';
 import Avatar from '../avatar/Avatar';
 
-function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = ''}){
+export default function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = ''}){
     return(
     <CardM className={styles.card}>
         <CardHeader 
@@ -35,20 +35,3 @@ function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency =
     </CardM>
     );
 }
-
-function kFormatter(num) {
-    if(num > 999999999){
-        return Math.sign(num)*((Math.abs(num)/1000000000).toFixed(1)) + 'B';
-    }
-    else if(num > 999999){
-        return Math.sign(num)*((Math.abs(num)/1000000).toFixed(1)) + 'M';
-    }
-    else if(num > 999){
-        return Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'K';
-    }
-    else{
-        return num;
-    }
-}
-
-export default Card;
