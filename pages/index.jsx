@@ -22,21 +22,21 @@ export default function Index() {
           currency: 'ETH'
         },
         {
-          name: "Ivy",
+          name: "DOGE",
           user: {avatarUrl: 'images/avatar.png', verified : true},
           mediaUrl: 'images/nft.jpg',
           price: '1',
           currency: 'ETH'
         },
         {
-          name: "Ivy",
+          name: "BTC",
           user: {avatarUrl: 'images/avatar.png', verified : true},
           mediaUrl: 'images/nft.jpg',
           price: '1',
           currency: 'ETH'
         },
         {
-          name: "Ivy",
+          name: "Litecoin",
           user: {avatarUrl: 'images/avatar.png', verified : true},
           mediaUrl: 'images/nft.jpg',
           price: '1',

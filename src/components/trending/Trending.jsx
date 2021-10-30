@@ -4,7 +4,7 @@ import styles from "./Trending.module.scss";
 import classNames from "classnames";
 import Card from "../card/Card"
 import Select from '@mui/material/Select';
-import { Avatar, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 
 const options = ["Today", "This week", "This month"];
