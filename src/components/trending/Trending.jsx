@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import Container from "@mui/material/Container";
 import styles from "./Trending.module.scss";
-import classNames from "classnames";
 import Card from "../card/Card"
 import Select from '@mui/material/Select';
 import { Grid } from "@mui/material";
@@ -13,13 +12,13 @@ export default function Trending({cards = []}){
         const [timeOption, setTimeOption] = useState(options[0]);
 
         return (
-            <Container className={classNames(styles.container)} maxWidth="xl">
+            <Container className={styles.container} maxWidth="xl">
                 <Grid container spacing={12}>
                     <Grid item xs={10}>
                         <h1>Trending</h1>
                     </Grid >
                     <Grid item xs={2}>
-                      <Select className={classNames(styles.select)} label="Age"
+                      <Select className={styles.select} label="Age"
                       value={timeOption}
                       onChange={(event) => {
                         setTimeOption(event.target.value)

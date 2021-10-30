@@ -15,7 +15,7 @@ export default function Index() {
       {/* <Card name="Clock" likes={1000} mediaUrl="/images/nft.jpg" user={{avatarUrl: "/images/avatar.png", verified: true}} price= "12.2" currency="ETH"/> */}
       <Trending cards = {[
         {
-          name: "Ivy",
+          name: "Clock",
           user: {avatarUrl: 'images/avatar.png', verified : true},
           mediaUrl: 'images/nft.jpg',
           price: '1',
