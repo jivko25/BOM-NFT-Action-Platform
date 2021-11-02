@@ -6,6 +6,7 @@ import Header  from "../src/components/header/Header";
 import Card from "../src/components/card/Card";
 import Trending from "../src/components/trending/Trending";
 import Auctions from "../src/components/auctions/Auctions";
+import Footer from "../src/components/footer/Footer";
 
 export default function Index() {
   return (
@@ -48,6 +49,7 @@ export default function Index() {
           timeLeft: 100000
         }
       ]}/>
+      <Footer/>
     </div>
   );
 }
