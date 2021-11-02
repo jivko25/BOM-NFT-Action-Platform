@@ -10,16 +10,39 @@ import Avatar from '../avatar/Avatar';
 import millify from 'millify';
 import Countdown from 'react-countdown';
 
-export default function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = ''}){
+export default function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = '', timeLeft}){
+    const Completionist = () => <span>Time runs out!</span>;
+
+    const renderer = ({ hours, minutes, seconds, completed }) => {
+        if (completed) {
+          // Render a complete state
+          return <Completionist />;
+        } else {
+          // Render a countdown
+          return (
+            <bolt>
+              {hours}:{minutes}:{seconds}
+            </bolt>
+          );
+        }
+      };
+
     return(
-    <CardM className={styles.card}>
+    <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
         <CardHeader 
             avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
         <CardMedia 
             className={styles.media}
             component="img"
             image={mediaUrl}
-            />
+            /> 
+        {timeLeft != null ? <div className={styles.badge}>⚫ Live</div> : null}
+        {timeLeft != null ? <div className={styles.countdown}><Countdown
+    date={Date.now() + timeLeft * 1000}
+    intervalDelay={10}
+    precision={1}
+    renderer={renderer}/>
+    </div> : null}
         <CardActions disableSpacing sx={{ padding: '0.25rem 1rem 1.375rem 1rem' }}>
                 <div className={styles.cardAction}>
                     <span className={styles.title}>{name}</span>
