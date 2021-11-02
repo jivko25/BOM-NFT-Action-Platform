@@ -8,6 +8,7 @@ import Chip from '@mui/material/Chip';
 import styles from './Card.module.scss';
 import Avatar from '../avatar/Avatar';
 import millify from 'millify';
+import Countdown from 'react-countdown';
 
 export default function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = ''}){
     return(
@@ -22,10 +23,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '', user, price =
         <CardActions disableSpacing sx={{ padding: '0.25rem 1rem 1.375rem 1rem' }}>
                 <div className={styles.cardAction}>
                     <span className={styles.title}>{name}</span>
-                    {price.includes(".") ?
-                        <span className={styles.price}>~{price} {currency}</span> :
-                        <span className={styles.price}>{price} {currency}</span>
-                    }
+                        <span className={styles.price}>{price} {currency}</span> 
                 </div>
             <Chip 
                 className={styles.likes} 

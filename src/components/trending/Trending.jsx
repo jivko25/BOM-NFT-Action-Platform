@@ -34,7 +34,7 @@ export default function Trending({cards = []}){
                 <Grid container spacing={3}>
                     {(
                         cards.map(card => {
-                            return   <Grid item xs={3}>
+                            return   <Grid item xs={3} key={card.name}>
                                         <Card {...card} />
                                     </Grid >
                     }))}
