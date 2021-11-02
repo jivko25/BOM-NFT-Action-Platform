@@ -1,0 +1,32 @@
+@use "../../styles/colors.scss";
+
+.container {
+    display: grid;
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+    background-color: colors.$background_paper;
+    top: 100px;
+}
+
+.logo{
+    display: grid;
+    align-items: center;
+    // position: absolute;
+    // left: 100px;
+    // top: 10px;
+}
+
+.copyright{
+    position: relative;
+    text-align: center;
+    top: 30%;
+    color: #484866;
+}
+
+.policy{
+    background-color: #484866;
+    color: #484866 !important;
+    position: relative;
+    top: 30%;
+}
