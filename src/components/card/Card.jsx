@@ -20,9 +20,9 @@ export default function Card({name = '', likes = 0, mediaUrl = '', user, price =
         } else {
           // Render a countdown
           return (
-            <bolt>
+            <span>
               {hours}:{minutes}:{seconds}
-            </bolt>
+            </span>
           );
         }
       };
