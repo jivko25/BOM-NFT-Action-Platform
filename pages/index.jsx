@@ -19,7 +19,8 @@ export default function Index() {
           user: {avatarUrl: 'images/avatar.png', verified : true},
           mediaUrl: 'images/nft.jpg',
           price: '1',
-          currency: 'ETH'
+          currency: 'ETH',
+          timeLeft: 50
         },
         {
           name: "DOGE",
