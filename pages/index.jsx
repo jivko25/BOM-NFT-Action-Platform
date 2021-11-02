@@ -20,14 +20,15 @@ export default function Index() {
           mediaUrl: 'images/nft.jpg',
           price: '1',
           currency: 'ETH',
-          timeLeft: 50
+          timeLeft: 100
         },
         {
           name: "DOGE",
           user: {avatarUrl: 'images/avatar.png', verified : true},
           mediaUrl: 'images/nft.jpg',
           price: '1',
-          currency: 'ETH'
+          currency: 'ETH',
+          timeLeft: 10
         },
         {
           name: "BTC",
