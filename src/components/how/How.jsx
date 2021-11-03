@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import HowStep from './HowStep';
+import HowStep from './Step';
 import styles from './How.module.scss';
 import Button from "@mui/material/Button";
 

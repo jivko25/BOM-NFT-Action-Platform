@@ -1,4 +1,4 @@
-import styles from './HowStep.module.scss';
+import styles from './Step.module.scss';
 import { Grid } from "@mui/material";
 
 export default function HowStep({number, title = '',description = ''}){
