@@ -9,9 +9,9 @@
     // background-color: colors.$primary_main;
 }
 
-.number{
+.numberContainer{
     // background-color: #292560;
-    background-color: colors.$primary_main;
+    background-color: rgba(colors.$primary_main, 10%);
     text-align: center;
     line-height: 40px;
     font-size: 70px;
