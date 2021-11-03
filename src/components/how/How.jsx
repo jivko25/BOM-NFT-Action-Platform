@@ -16,11 +16,15 @@ export default function How({description = '', title ='', items = [], link = ''}
                 </div>
             </Grid>
             <Grid item xl = {5}>
-                {
-                    items.map((item, index)=> {
-                        return <Step title={item.title} description={item.description} number = {index+1} key={`${item.name}${index}`}/>
-                    })
-                }
+                {items.map((item, idx) => {
+                    return (
+                    <Step
+                        {...item}
+                        number={idx + 1}
+                        key={`${item.title}${idx + 1}`}
+                    />
+                    );
+                })}
             </Grid>
         </Grid>
     );
