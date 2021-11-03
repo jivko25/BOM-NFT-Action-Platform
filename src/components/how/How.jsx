@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import HowStep from './Step';
+import Step from './Step';
 import styles from './How.module.scss';
 import Button from "@mui/material/Button";
 
@@ -19,7 +19,7 @@ export default function How({description = '', title ='', items = [], link = ''}
                 {
                     items.map(item => {
                         number[0] = number[0] + 1;
-                        return <HowStep title={item.title} description={item.description} number = {number[0]}/>
+                        return <Step title={item.title} description={item.description} number = {number[0]}/>
                     })
                 }
             </Grid>
