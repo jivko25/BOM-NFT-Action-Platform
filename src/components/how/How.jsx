@@ -18,7 +18,7 @@ export default function How({description = '', title ='', items = [], link = ''}
             <Grid item xl = {5}>
                 {
                     items.map((item, index)=> {
-                        return <Step title={item.title} description={item.description} number = {index+1} key={`${item.name}_${index}`}/>
+                        return <Step title={item.title} description={item.description} number = {index+1} key={`${item.name}_${index+1}`}/>
                     })
                 }
             </Grid>
