@@ -6,11 +6,12 @@
     padding: 5%;
     margin-right: 0;
     width: 5%;
-    background-color: colors.$primary_main;
+    // background-color: colors.$primary_main;
 }
 
 .number{
-    background-color: #292560;
+    // background-color: #292560;
+    background-color: colors.$primary_main;
     text-align: center;
     line-height: 40px;
     font-size: 70px;
