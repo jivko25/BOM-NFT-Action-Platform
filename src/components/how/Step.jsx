@@ -3,7 +3,7 @@ import { Grid } from "@mui/material";
 
 export default function HowStep({number, title = '',description = ''}){
     return(
-        <Grid container className={styles.container} xs={10}>
+        <Grid container className={styles.container}>
             <Grid item className={styles.numberContainer} xl={5}>
                 <p>{number}</p>
             </Grid>
