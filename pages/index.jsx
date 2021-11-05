@@ -15,7 +15,7 @@ export default function Index() {
   return (
     <div>
       <Header/>
-      {/* <Featured items = {
+      <Featured items = {
         [
           {
             img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
@@ -66,28 +66,7 @@ export default function Index() {
             title: 'Bike',
           },
         ]
-      }></Featured> */}
-      <How 
-      title = {"This is title"} description= {"fweufhiqW HWNDui unwefui wI OEFU UIwe fuWF Iiwefn uiWFE fweufhiqW HWNDui unwefui wI OEFU UIwe fuWF Iiwefn uiWFE fweufhiqW HWNDui unwefui wI OEFU UIwe fuWF Iiwefn uiWFE fweufhiqW HWNDui unwefui wI OEFU UIwe fuWF Iiwefn uiWFE"} items = 
-      {[
-        {
-          number: "1",
-          description: "content contents content content content content contents content content content",
-          title: "Test"
-        },
-        {
-          number: "1",
-          description: "content contents content content content",
-          title: "Test"
-        },
-        {
-          number: "1",
-          description: "content contents content content content",
-          title: "Test"
-        }
-      ]} 
-      link = 'test'
-      />
+      }></Featured>
       <Footer/>
     </div>
   );
