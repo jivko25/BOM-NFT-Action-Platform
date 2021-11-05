@@ -18,52 +18,41 @@ export default function Index() {
       <Featured items = {
         [
           {
-            img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
+            img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=500&h=500',
             title: 'Breakfast',
+            row: 2,
+            cols: 3,
+            href: '/about'
           },
           {
-            img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
+            img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500&h=500',
             title: 'Burger',
+            href: '/about'
           },
           {
-            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
+            img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45?w=500&h=500',
             title: 'Camera',
+            href: '/about'
           },
           {
-            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
+            img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c?w=500&h=500',
             title: 'Coffee',
+            href: '/about'
           },
           {
-            img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
+            img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8?w=500&h=500',
             title: 'Hats',
+            href: '/about'
           },
           {
-            img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
+            img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=500&h=500',
             title: 'Honey',
+            href: '/about'
           },
           {
-            img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
+            img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6?w=500&h=500',
             title: 'Basketball',
-          },
-          {
-            img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-            title: 'Fern',
-          },
-          {
-            img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-            title: 'Mushrooms',
-          },
-          {
-            img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-            title: 'Tomato basil',
-          },
-          {
-            img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-            title: 'Sea star',
-          },
-          {
-            img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-            title: 'Bike',
+            href: '/about'
           },
         ]
       }></Featured>
