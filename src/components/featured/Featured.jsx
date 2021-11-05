@@ -19,15 +19,18 @@ export default function Featured({items = []}){
             <ImageListItem key={item.img} className ={styles.first_image}>
               <img
                 src={`${item.img}`}
-                srcSet={`${item.image}`}
+                srcSet={`${item.img}`}
                 loading="lazy"
                 onClick={() => handleClick(item.href)}
               />
+              {
+                console.log(item.img)
+              };
             </ImageListItem> :
             <ImageListItem key={item.img}>
               <img
                 src={`${item.img}`}
-                srcSet={`${item.image}`}
+                srcSet={`${item.img}`}
                 loading="lazy"
                 onClick={() => handleClick(item.href)}
                 className ={styles.image}
