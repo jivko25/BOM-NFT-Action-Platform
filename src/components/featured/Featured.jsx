@@ -1,43 +1,31 @@
-import styles from './Featured.module.scss';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import { Container } from '@mui/material';
-import { useRouter } from 'next/router'
+import { Container, ImageList, ImageListItem } from "@mui/material";
+import { useRouter } from "next/router";
+import styles from "./Featured.module.scss"
 
 export default function Featured({items = []}){
-    const router = useRouter()
 
-    const handleClick = (href) => {
-        router.push(href)
-      }
-
+    const router = useRouter();
+    const changeRoute = path => router.push(path);
+    
     return (
-      <Container>
-        <ImageList className={styles.wrapper}>
-          {items.map((item, index) => (
-            index == 0 ?
-            <ImageListItem key={item.img} className ={styles.first_image}>
-              <img
-                src={`${item.image}`}
-                srcSet={`${item.image}`}
-                loading="lazy"
-                onClick={() => handleClick(item.href)}
-              />
-              {
-                console.log(item)
-              };
-            </ImageListItem> :
-            <ImageListItem key={item.image}>
-              <img
-                src={`${item.image}`}
-                srcSet={`${item.image}`}
-                loading="lazy"
-                onClick={() => handleClick(item.href)}
-                className ={styles.image}
-              />
-            </ImageListItem>
-          ))}
-        </ImageList>
-      </Container>
-      );
+        <div className={styles.wrapper}>
+            <Container>
+                <ImageList
+                    cols={6}
+                    variant="quilted"
+                    gap={20}
+                >
+                {items.map(item => (
+                        <ImageListItem key={item.image} cols={item.cols || 1} rows={item.rows || 1}>
+                            <img 
+                                className={styles.image}
+                                src={item.image}
+                                onClick={()=>{changeRoute(item.image)}}
+                            />
+                        </ImageListItem>
+                ))}
+                </ImageList>
+            </Container>
+        </div>
+    )
 }
