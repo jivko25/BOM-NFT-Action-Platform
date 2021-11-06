@@ -1,0 +1,43 @@
+@use "../../styles/colors.scss";
+
+.wrapper_upper{
+    max-width: 20% !important;
+    background-color: rgba(colors.$primary_main, 10%);
+    border-radius: 2rem 2rem 0 0;
+}
+
+.number_upper{
+    background-color: rgba(colors.$primary_main, 20%);
+    border-radius: 2rem 0 0 0;
+}
+
+.wrapper_down{
+    max-width: 20% !important;
+    background-color: rgba(colors.$primary_main, 10%);
+    border-radius: 0 0 2rem 2rem;
+}
+
+.number_down{
+    background-color: rgba(colors.$primary_main, 20%);
+    border-radius: 0 0 0 2rem;
+}
+
+.wrapper{
+    max-width: 20% !important;
+    background-color: #2F1D81;
+}
+
+.number{
+    background-color: rgba(colors.$primary_main, 20%);
+}
+
+.content{
+    padding: 3%;
+    color: colors.$text_primary;
+}
+
+.id{
+    font-size: 45px;
+    margin: 0;
+    text-align: center;
+}
