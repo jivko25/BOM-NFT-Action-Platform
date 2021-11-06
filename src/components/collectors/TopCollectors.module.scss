@@ -1,0 +1,19 @@
+@use "../../styles/colors";
+
+.container {
+  margin-top: 1rem;
+}
+
+.title {
+  margin-left: 0.7rem !important;
+}
+
+.select {
+    margin-top: 1rem;
+}
+
+.collectorColumns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
