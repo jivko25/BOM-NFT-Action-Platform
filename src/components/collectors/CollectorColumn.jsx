@@ -9,6 +9,7 @@ export default function CollectorColumn({items = []}){
             {
                 items.map((item, index) => {
                     return <Collector 
+                    key={index}
                     name = {item.name} 
                     nftsCount = {item.nftsCount} 
                     avatar = {item.avatar} 

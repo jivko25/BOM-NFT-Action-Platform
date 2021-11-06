@@ -44,7 +44,7 @@ export default function TopCollectors({collectors = []}){
                 <Grid item className={styles.collectorColumns}>
                 {collectorChunks.map((chunk, idx) => {
                     return (
-                    <CollectorColumn items={chunk} />
+                    <CollectorColumn items={chunk} key={idx}/>
                 );
             })}
                  </Grid>
