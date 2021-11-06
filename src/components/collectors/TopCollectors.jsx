@@ -46,7 +46,7 @@ export default function TopCollectors({collectors = []}){
                     return (
                     <CollectorColumn items={chunk} key={idx}/>
                 );
-            })}
+                })}
                  </Grid>
             </Container>
           );
