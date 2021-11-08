@@ -13,6 +13,7 @@ import Footer from "../src/components/footer/Footer.jsx"
 import ProductImage from "../src/components/product/ProductImage"
 import ProductInfoTitle from "../src/components/product/ProductInfoTitle"
 import ProductInfoPrice from "../src/components/product/ProductInfoPrice"
+import ProductInfoStatus from "../src/components/product/ProductInfoStatus"
 
 
 
@@ -249,7 +250,8 @@ export default function Home() {
       <Auctions cards={auctions} /> */}
       {/* <ProductImage url="images/nft.jpg" /> */}
       {/* <ProductInfoTitle text={"Shallow Son"} /> */}
-      <ProductInfoPrice amount={3} currency={"ETH"} />
+      {/* <ProductInfoPrice amount={3} currency={"ETH"} /> */}
+      <ProductInfoStatus />
       <Footer />
     </>
   )
