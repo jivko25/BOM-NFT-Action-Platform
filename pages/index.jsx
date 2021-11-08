@@ -10,6 +10,7 @@ import TopCollectors from "../src/components/collectors/TopCollectors.jsx"
 import How from "../src/components/how/How.jsx"
 import Auctions from "../src/components/auctions/Auctions.jsx"
 import Footer from "../src/components/footer/Footer.jsx"
+import ProductImage from "../src/components/product/ProductImage"
 
 
 
@@ -239,11 +240,12 @@ export default function Home() {
   return (
     <>
       <Header />
-      <Featured items={items} />
+      {/* <Featured items={items} />
       <Trending cards={cards} />
       <TopCollectors collectors={collectors} />
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
-      <Auctions cards={auctions} />
+      <Auctions cards={auctions} /> */}
+      <ProductImage url="images/nft.jpg" />
       <Footer />
     </>
   )
