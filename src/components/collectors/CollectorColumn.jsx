@@ -15,7 +15,7 @@ export default function CollectorColumn({items = []}){
                     avatar = {item.avatar} 
                     verified = {item.verified} 
                     id = {item.id} 
-                    type={(index + 1) % 2 === 0 ? "light" : ""}/>
+                    type={(index + 1) % 2 == 0 ? "light" : ""}/>
                 })
             }
         </div>
