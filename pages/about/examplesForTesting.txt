@@ -125,3 +125,78 @@
               verified: true,
             }
           ]}/>
+
+          <TopCollectors collectors = {[
+    {
+      name: "Peter",
+      nftsCount: 12312,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "John",
+      nftsCount: 1111,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Steven",
+      nftsCount: 52,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Antonio Banderas",
+      nftsCount: 3,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Donald",
+      nftsCount: 12,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Peter",
+      nftsCount: 12312,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "John",
+      nftsCount: 1111,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Steven",
+      nftsCount: 52,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Antonio Banderas",
+      nftsCount: 3,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Donald",
+      nftsCount: 12,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Antonio Banderas",
+      nftsCount: 3,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+    {
+      name: "Donald",
+      nftsCount: 12,
+      avatar: "/images/avatar.png",
+      verified: true,
+    },
+  ]}/>
