@@ -15,6 +15,7 @@ import ProductInfoTitle from "../src/components/product/ProductInfoTitle"
 import ProductInfoPrice from "../src/components/product/ProductInfoPrice"
 import ProductInfoStatus from "../src/components/product/ProductInfoStatus"
 import ProductInfoLikes from "../src/components/product/ProductInfoLikes"
+import ProductInfoCreator from "../src/components/product/ProductInfoCreator"
 
 
 
@@ -252,7 +253,8 @@ export default function Home() {
       {/* <ProductImage url="images/nft.jpg" /> */}
       {/* <ProductInfoTitle text={"Shallow Son"} /> */}
       {/* <ProductInfoPrice amount={3} currency={"ETH"} /> */}
-      <ProductInfoLikes amount={6666} />
+      {/* <ProductInfoLikes amount={6666} /> */}
+      <ProductInfoCreator name="Donald" avatar="/images/avatar.png" verified={true}/>
       <Footer />
     </>
   )
