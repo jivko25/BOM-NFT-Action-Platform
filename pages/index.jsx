@@ -9,7 +9,7 @@ import Trending from "../src/components/trending/Trending.jsx"
 import TopCollectors from "../src/components/collectors/TopCollectors.jsx"
 import How from "../src/components/how/How.jsx"
 import Auctions from "../src/components/auctions/Auctions.jsx"
-import Footer from "../src/components/footer/footer.jsx"
+import Footer from "../src/components/footer/Footer.jsx"
 
 
 
@@ -104,7 +104,7 @@ export default function Home() {
     },
   ]
 
-  let collectros = [
+  let collectors = [
     {
       name: "Peter",
       nftsCount: 12312,
@@ -175,6 +175,8 @@ export default function Home() {
     }
   ]
 
+  collectors.sort((a, b) => b.nftsCount - a.nftsCount);
+
   let how = {
     title: "How it works",
     description: `Discover, collect, and sell extraordinary NFTs
@@ -239,7 +241,7 @@ export default function Home() {
       <Header />
       <Featured items={items} />
       <Trending cards={cards} />
-      <TopCollectors collectors={collectros} />
+      <TopCollectors collectors={collectors} />
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} />
       <Footer />
