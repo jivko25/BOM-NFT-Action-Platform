@@ -1,7 +1,12 @@
+@use "../../styles/colors.scss";
+
 .product-info-title {
     font-weight: normal;
+    max-width: 90%;
 }
 
 .title {
     font-weight: normal;
+    border-bottom: solid colors.$background_paper;
+    border-bottom-width: 8px;
 }
