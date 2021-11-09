@@ -28,6 +28,7 @@ export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
             <div className={styles.timer}>
                 { timeEnd != null & timeEnd > 0 ? (
                 <Countdown
+                onComplete= {() => {onTimeEnd}}
                 date={Date.now() + timeEnd * 1000}
                 intervalDelay={10}
                 precision={1}

@@ -1,4 +1,4 @@
-@use '../../styles/colors.scss';
+@use '../../styles/colors';
 
 .active {
     background-color: colors.$secondary_main !important;
@@ -16,6 +16,10 @@
     border-radius: 1rem 1rem 0 0;
     text-align: center;
     font-weight: bold;
+}
+
+.title{
+    position: static;
 }
 
 .timer {
