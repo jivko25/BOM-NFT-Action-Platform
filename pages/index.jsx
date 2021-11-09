@@ -258,7 +258,21 @@ export default function Home() {
       <ProductInfoLikes amount={6666} />
       <ProductInfoCreator name="Donald" avatar="/images/avatar.png" verified={true}/>
       <ProductInfoTimer timeEnd={10} onTimeEnd="Time end"/> */}
-      <ProductInfo title ='Shallow Son' creator='toadnft' price={3} currency='ETH' likes={1100} onTimeEnd='Time runs out' timeEnd={4224} isLive={true}/>
+      <ProductInfo title="John"
+    creator ={{
+      name:"George",
+      avatar:
+        "https://nft-auction.herokuapp.com/uploads/0xa6dbe6b4f8e2905c26e123ec6fd08a8f7200dbc1_64120a76f4.jpg",
+      verified: true,
+    }}
+    price={20}
+    currency="ETH"
+    likes={20}
+    onTimeEnd="Time runs out"
+    timeEnd="1970-01-02"
+    // timeEnd={50}
+    isLive={true}
+      />
       <Footer />
     </>
   )
