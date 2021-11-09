@@ -5,7 +5,7 @@ export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
 
     const Completionist = () => <p>{onTimeEnd}</p>;
 
-    const render = ({ hours, minutes, seconds, completed }) => {
+    const render = ({hours, minutes, seconds, completed }) => {
         if (completed) {
           // Render a complete state
           return <Completionist />;
@@ -18,7 +18,8 @@ export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
           );
         }
       };
-
+      const time = Date.parse(timeEnd)/1000;
+      console.log(time);
     return (
         <div 
             className={`${styles["product-info-timer"]} ${timeEnd && styles.active}`}>
@@ -29,7 +30,7 @@ export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
                 { timeEnd != null & timeEnd > 0 ? (
                 <Countdown
                 onComplete= {() => {onTimeEnd}}
-                date={Date.now() + timeEnd * 1000}
+                date={Date.now() + time}
                 intervalDelay={10}
                 precision={1}
                 renderer={render}
