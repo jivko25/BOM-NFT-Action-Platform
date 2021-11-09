@@ -17,6 +17,7 @@ import ProductInfoStatus from "../src/components/product/ProductInfoStatus"
 import ProductInfoLikes from "../src/components/product/ProductInfoLikes"
 import ProductInfoCreator from "../src/components/product/ProductInfoCreator"
 import ProductInfoTimer from "../src/components/product/ProductInfoTimer"
+import ProductInfo from "../src/components/product/ProductInfo"
 
 
 
@@ -251,12 +252,13 @@ export default function Home() {
       <TopCollectors collectors={collectors} />
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} /> */}
-      {/* <ProductImage url="images/nft.jpg" /> */}
-      {/* <ProductInfoTitle text={"Shallow Son"} /> */}
-      {/* <ProductInfoPrice amount={3} currency={"ETH"} /> */}
-      {/* <ProductInfoLikes amount={6666} /> */}
-      {/* <ProductInfoCreator name="Donald" avatar="/images/avatar.png" verified={true}/> */}
-      <ProductInfoTimer timeEnd={10} onTimeEnd="Time end"/>
+      {/* <ProductImage url="images/nft.jpg" />
+      <ProductInfoTitle text={"Shallow Son"} /> 
+      <ProductInfoPrice amount={3} currency={"ETH"} />
+      <ProductInfoLikes amount={6666} />
+      <ProductInfoCreator name="Donald" avatar="/images/avatar.png" verified={true}/>
+      <ProductInfoTimer timeEnd={10} onTimeEnd="Time end"/> */}
+      <ProductInfo title ='Shallow Son' creator='toadnft' price={3} currency='ETH' likes={1100} onTimeEnd='Time runs out' timeEnd={4224} isLive={true}/>
       <Footer />
     </>
   )
