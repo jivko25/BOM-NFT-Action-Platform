@@ -1,4 +1,5 @@
-import { Grid, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
+import { Grid} from "@mui/material";
 import ProductInfoCreator from "./ProductInfoCreator";
 import ProductInfoLikes from "./ProductInfoLikes";
 import ProductInfoPrice from "./ProductInfoPrice";
