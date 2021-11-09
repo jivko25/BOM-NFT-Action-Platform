@@ -12,14 +12,14 @@ import styles from './ProductInfo.module.scss';
 
 export default function ProductInfo({title = '', creator, price = 0, currency = '', likes = 0, onTimeEnd = '', timeEnd, isLive = false}){
     return(
-        <Grid container className={styles["product-info"]} xl={12}>
-            <Grid item xl={5}>
+        <Grid container className={styles["product-info"]}>
+            <Grid item xs={5}>
                 <ProductImage url="images/nft.jpg" />
             </Grid>
-            <Grid item xl={7}>
-                <Stack>
+            <Grid item xs={7}>
+                <Stack className={styles.stats}>
                     <ProductInfoTitle text={title} /> 
-                    <Grid container direction="row" className={styles.stats}>
+                    <Grid container direction="row" className={styles.price_status_likes}>
                         <Grid item xs={isLive ? 9 : 10}>
                             <ProductInfoPrice amount={price} currency={currency} />
                         </Grid>
@@ -33,10 +33,10 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                         </Grid>
                     </Grid>
                     <Grid container className={styles.creator_timer}>
-                        <Grid item xl={7}>
+                        <Grid item xs={7}>
                             <ProductInfoCreator name={creator.name} avatar={creator.avatar} verified={creator.verified}/>
                         </Grid>
-                        <Grid item xl={5}>
+                        <Grid item xs={5}>
                             <ProductInfoTimer timeEnd={timeEnd} onTimeEnd={onTimeEnd}/>
                         </Grid>
                     </Grid>
