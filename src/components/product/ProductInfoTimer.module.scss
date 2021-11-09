@@ -1,0 +1,28 @@
+@use '../../styles/colors.scss';
+
+.active {
+    background-color: colors.$secondary_main !important;
+}
+
+.product-info-timer{
+    background-color: colors.$background_paper;
+    color: colors.$background_paper;
+    max-width: 15%;
+    border-radius: 1rem;
+}
+
+.header{
+    background-color: rgba(colors.$background_default, 10%);
+    border-radius: 1rem 1rem 0 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.timer {
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    line-height: 2rem;
+    padding-top: 0px;
+    padding-bottom: 0.1rem;
+}
