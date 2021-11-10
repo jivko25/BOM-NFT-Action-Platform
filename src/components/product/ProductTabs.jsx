@@ -21,13 +21,6 @@ export default function ProductTabs({text = '', bids = []}) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const date = parseISO('2021-10-22T08:29:23.382Z');
-  // const result = formatDistance(
-  //   Date.now(),
-  //   date,
-  //   { includeSeconds: true }
-  // )
-  // console.log(result);
   return (
     <div className={styles["product-tabs"]}> 
     <Box xs={{ width: '100%', typography: 'body1' }}>
