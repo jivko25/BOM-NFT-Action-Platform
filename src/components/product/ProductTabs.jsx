@@ -34,20 +34,20 @@ export default function ProductTabs({text = '', bids = []}) {
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Item One" value="details" />
-            <Tab label="Item Two" value="bids" />
+            <Tab label="Details" value="details" className={styles["tab-details"]}/>
+            <Tab label="Bids" value="bids"  className={styles["tab-bids"]} />
           </TabList>
         </Box>
-        <TabPanel value="details" className={styles["tab-details"]}>
+        <TabPanel value="details">
             <p>{text}</p>
         </TabPanel>
-        <TabPanel value="bids" className={styles["tab-bids"]}>
+        <TabPanel value="bids">
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableBody>
           {
-          bids.sort((a, b) => b.amount - a.amount).map((user, index) => (
-            <TableRow key={index} className={`table-row-${index}`}>
+          bids.sort((a, b) => b.amount - a.amount).map((user, i) => (
+            <TableRow key={i} className={`table-row-${i}`}>
               <TableCell align="right">
                 <User name = {user.user.name} verified = {user.user.verified} avatar = {user.user.avatar}/>
               </TableCell>
