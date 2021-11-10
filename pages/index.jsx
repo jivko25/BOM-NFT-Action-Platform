@@ -21,6 +21,7 @@ import ProductInfo from "../src/components/product/ProductInfo"
 import ProductTabs from "../src/components/product/ProductTabs"
 import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
 import ProductActions from "../src/components/product/ProductActions"
+import ProductContainer from "../src/components/product/ProductContainer"
 
 
 
@@ -289,15 +290,47 @@ export default function Home() {
         },
       ]}
       /> */}
-      <ProductActions
+      {/* <ProductActions
       isLive={true}
       currency="ETH"
       buyAmount={50}
       bidAmount={9}
       onBuy={() => {}}
       onBid={() => {}}
+      /> */}
+      <ProductContainer 
+          name="Ergonomic Concrete Tuna"
+          owner={{
+            name: "Justen_King18",
+            verified:true,
+            avatar:"https://nft-auction.herokuapp.com/uploads/thumbnail_0x7d9debcf75a71bbb5c533804c9845d313fe3f6aa_ec98dd79b9.jpg"
+          }}
+          price={20}
+          currency="ETH"
+          likes={25}
+          auction_end="2022-09-02T20:43:19.149Z"
+          details="asdasdads"
+          isLive={true}
+          source={{
+            url: "https://nft-auction.herokuapp.com/uploads/thumbnail_0x7d9debcf75a71bbb5c533804c9845d313fe3f6aa_ec98dd79b9.jpg"
+          }}
+          bids= {[
+            {
+              user: { avatar: "/images/avatar.png", name: "hrisi", verified: true },
+              amount: 30,
+              date: "2021-10-22T08:29:23.382Z",
+            },
+            {
+              user: { avatar: "/images/avatar.png", name: "maxi", verified: true },
+              amount: 1000,
+              date: "2021-11-10T08:29:23.382Z",
+            },
+          ]}
+          bidAmount={1}
+          onBuy={() => {}}
+          onBid={() => {}}
       />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
