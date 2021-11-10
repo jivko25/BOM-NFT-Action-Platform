@@ -18,7 +18,7 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                 <ProductImage url="images/nft.jpg" />
             </Grid> */}
             <Grid item 
-            xs={10}
+            xs={9}
             >
                 <Stack className={styles.stats}>
                     <ProductInfoTitle text={title} /> 
