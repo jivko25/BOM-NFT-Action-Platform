@@ -12,7 +12,8 @@ import styles from './ProductInfo.module.scss';
 
 export default function ProductInfo({title = '', creator, price = 0, currency = '', likes = 0, onTimeEnd = '', timeEnd, isLive = false}){
     return(
-        <Grid container className={styles["product-info"]}>
+        <div className={styles["product-info"]}>
+        <Grid container >
             <Grid item xs={5}>
                 <ProductImage url="images/nft.jpg" />
             </Grid>
@@ -43,5 +44,6 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                 </Stack>
             </Grid>
         </Grid>
+        </div>
     );
 }
