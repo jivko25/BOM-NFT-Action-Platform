@@ -20,6 +20,7 @@ import ProductInfoTimer from "../src/components/product/ProductInfoTimer"
 import ProductInfo from "../src/components/product/ProductInfo"
 import ProductTabs from "../src/components/product/ProductTabs"
 import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
+import ProductActions from "../src/components/product/ProductActions"
 
 
 
@@ -274,7 +275,7 @@ export default function Home() {
     timeEnd={50}
     isLive={true}
       /> */}
-      <ProductTabs text = {"Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. "}
+      {/* <ProductTabs text = {"Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. "}
       bids= {[
         {
           user: { avatar: "/images/avatar.png", name: "hrisi", verified: true },
@@ -287,6 +288,14 @@ export default function Home() {
           date: "2021-11-10T08:29:23.382Z",
         },
       ]}
+      /> */}
+      <ProductActions
+      isLive={true}
+      currency="ETH"
+      buyAmount={50}
+      bidAmount={9}
+      onBuy={() => {}}
+      onBid={() => {}}
       />
       <Footer />
     </>
