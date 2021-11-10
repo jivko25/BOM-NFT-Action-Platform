@@ -18,6 +18,8 @@ import ProductInfoLikes from "../src/components/product/ProductInfoLikes"
 import ProductInfoCreator from "../src/components/product/ProductInfoCreator"
 import ProductInfoTimer from "../src/components/product/ProductInfoTimer"
 import ProductInfo from "../src/components/product/ProductInfo"
+import ProductTabs from "../src/components/product/ProductTabs"
+import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
 
 
 
@@ -258,7 +260,7 @@ export default function Home() {
       <ProductInfoLikes amount={6666} />
       <ProductInfoCreator name="Donald" avatar="/images/avatar.png" verified={true}/>
       <ProductInfoTimer timeEnd={10} onTimeEnd="Time end"/> */}
-      <ProductInfo title="John"
+      {/* <ProductInfo title="John"
     creator ={{
       name:"George",
       avatar:
@@ -269,9 +271,22 @@ export default function Home() {
     currency="ETH"
     likes={20}
     onTimeEnd="Time runs out"
-    timeEnd="1970-01-02"
-    // timeEnd={50}
+    timeEnd={50}
     isLive={true}
+      /> */}
+      <ProductTabs text = {"Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. "}
+      bids= {[
+        {
+          user: { avatar: "/images/avatar.png", name: "hrisi", verified: true },
+          amount: 30,
+          date: "2021-10-22T08:29:23.382Z",
+        },
+        {
+          user: { avatar: "/images/avatar.png", name: "maxi", verified: true },
+          amount: 1000,
+          date: "2021-11-10T08:29:23.382Z",
+        },
+      ]}
       />
       <Footer />
     </>
