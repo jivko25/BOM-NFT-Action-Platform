@@ -12,7 +12,7 @@ export default function Product(){
     // console.log(item.owner.username);
 
     return(
-        <>
+        <div style={{position : 'relative'}}>
         <Header/>
         {/* <ProductContainer 
           name={item.name}
@@ -77,6 +77,6 @@ export default function Product(){
           onBid={() => {}}
       />
         <Footer/>
-        </>
+        </div>
     );
 }
