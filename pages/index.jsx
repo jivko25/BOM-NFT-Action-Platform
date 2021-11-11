@@ -1,7 +1,7 @@
 import dataFeatured from "../data/featured.json"
 import dataTrending from "../data/trending.json"
 import dataUsers from "../data/users.json"
-import dataNfts from "../data/nfts.json"
+// import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
 import Header from "../src/components/header/Header.jsx"
 import Featured from "../src/components/featured/Featured.jsx"
@@ -32,12 +32,12 @@ export default function Home() {
   const [topCollectors, setTopCollectors] = useState([]);
   const [auctionsCards, setAuctionsCards] = useState([]);
 
-  useEffect(() => {
-    setFeaturedCards(dataFeatured)
-    setTrendingCards(dataTrending)
-    setTopCollectors(dataUsers)
-    setAuctionsCards(dataNfts)
-  }, []);
+  // useEffect(() => {
+  //   setFeaturedCards(dataFeatured)
+  //   setTrendingCards(dataTrending)
+  //   setTopCollectors(dataUsers)
+  //   setAuctionsCards(dataNfts)
+  // }, []);
 
   let items = [
     {
