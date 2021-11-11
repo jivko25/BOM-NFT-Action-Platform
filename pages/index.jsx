@@ -22,6 +22,7 @@ import ProductTabs from "../src/components/product/ProductTabs"
 import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
 import ProductActions from "../src/components/product/ProductActions"
 import ProductContainer from "../src/components/product/ProductContainer"
+import { Link } from "@mui/material"
 
 
 
@@ -298,7 +299,7 @@ export default function Home() {
       onBuy={() => {}}
       onBid={() => {}}
       /> */}
-      <ProductContainer 
+      {/* <ProductContainer 
           name="Ergonomic Concrete Tuna"
           owner={{
             name: "Justen_King18",
@@ -329,8 +330,11 @@ export default function Home() {
           bidAmount={1}
           onBuy={() => {}}
           onBid={() => {}}
-      />
+      /> */}
       {/* <Footer /> */}
+      <Link href="/product/1">
+        Product
+      </Link>
     </>
   )
 }
