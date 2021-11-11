@@ -1,10 +1,11 @@
 import Footer from "../../../src/components/footer/Footer";
 import Header from "../../../src/components/header/Header";
 import ProductContainer from "../../../src/components/product/ProductContainer";
+import { useRouter } from 'next/router'
 
 export default function Product(){
-    // const router = useRouter()
-    // const { id } = router.query
+    const router = useRouter()
+    const { id } = router.query
 
     return(
         <>
