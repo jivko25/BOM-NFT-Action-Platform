@@ -1,9 +1,23 @@
+@use '../../styles/colors.scss';
 
 .hero{
     position: static;
 }
 
 .text{
-    position: static;
+    position: relative;
     text-align: center;
+    margin-top: 10%;
+    font-weight: bold;
+    padding-top: 3%;
+    text-transform: uppercase;
+}
+
+.background{
+    position: absolute;
+    top: 9%;
+    height: 30%;
+    background-color: colors.$primary_main;
+    width: 100%;
+    z-index: -1;
 }
