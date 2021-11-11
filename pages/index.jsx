@@ -23,6 +23,7 @@ import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
 import ProductActions from "../src/components/product/ProductActions"
 import ProductContainer from "../src/components/product/ProductContainer"
 import { Link } from "@mui/material"
+import Hero from "../src/components/hero/Hero"
 
 
 
@@ -332,9 +333,10 @@ export default function Home() {
           onBid={() => {}}
       /> */}
       {/* <Footer /> */}
-      <Link href="/product/1">
+      {/* <Link href="/product/1">
         Product
-      </Link>
+      </Link> */}
+      <Hero text="Lorem Ipsum 123"/>
     </>
   )
 }
