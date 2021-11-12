@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, TextField, Typography } from '@mui/material';
+import { Grid, InputBase, TextField, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -74,7 +74,9 @@ export default function ProfileCollectionFilters({filters}){
                 </Grid>
                 <Grid item xs={3}>
                     {/* Search */}
-                        <TextField variant="standard" className={styles["MuiInputAdornment-standard"]}/>
+                    <InputBase
+                            startAdornment={<SearchIcon/>}
+                        />
                 </Grid>
             </Grid>
         </div>
