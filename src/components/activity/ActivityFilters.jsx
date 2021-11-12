@@ -1,4 +1,4 @@
-import { FormControl, Grid, InputBase, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, Grid, InputBase, InputLabel, Link, MenuItem, Select, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import styles from './ActivityFilters.module.scss';
 import { useState } from 'react';
@@ -76,7 +76,6 @@ export default function ActivityFilters({filters}){
                         />
                 </Grid>
             </Grid>
-            <Link>test</Link>
         </div>
     );
 }
