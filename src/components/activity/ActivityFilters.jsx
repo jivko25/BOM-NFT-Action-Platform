@@ -37,8 +37,8 @@ export default function ActivityFilters({filters}){
                             color={'primary'}
                             >
                             {
-                                filters.sort.map((item) => {
-                                    return <MenuItem value={item.value}>{item.label}</MenuItem>
+                                filters.sort.map((item, index) => {
+                                    return <MenuItem value={item.value} key={index}>{item.label}</MenuItem>
                                 })
                             }
                             </Select>
@@ -60,8 +60,8 @@ export default function ActivityFilters({filters}){
                             color={'primary'}
                             >
                             {
-                                filters.type.map((item) => {
-                                    return <MenuItem value={item.value}>{item.label}</MenuItem>
+                                filters.type.map((item, index) => {
+                                    return <MenuItem value={item.value} key={index}>{item.label}</MenuItem>
                                 })
                             }
                             </Select>
