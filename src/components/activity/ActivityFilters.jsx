@@ -1,27 +1,22 @@
+import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Box } from '@mui/system';
+import styles from './ActivityFilters.module.scss';
 import { useState } from 'react';
-import { Grid, InputBase, TextField, Typography } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import styles from './ProfileCollectionFilters.module.scss';
 
-export default function ProfileCollectionFilters({filters}){
+export default function ActivityFilters({filters}){
     const [sortBy, setSortBy] = useState('');
-    const [range, setRange] = useState('');
+    const [type, setType] = useState('');
 
     const handleChangeSort = (event) => {
         setSortBy(event.target.value);
     };
 
-    const handleChangeRange = (event) => {
-        setRange(event.target.value);
+    const handleChangeType = (event) => {
+        setType(event.target.value);
     };
 
     return(
-        <div className={styles["profile-collection-filters"]}>
+        <div className={styles["activity-filters"]}>
             <Grid container spacing={2}>
                 {/* <Grid item xs={5}>
                     <Typography variant={'h2'}>Collection</Typography>
@@ -50,21 +45,21 @@ export default function ProfileCollectionFilters({filters}){
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
-                    {/* Price range */}
+                    {/* Type */}
                     <Box>
                         <FormControl fullWidth>
-                            <InputLabel id="select-label">Price range</InputLabel>
+                            <InputLabel id="select-label">Type</InputLabel>
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={range}
-                            label="Price range"
-                            onChange={handleChangeRange}
+                            value={type}
+                            label="Type"
+                            onChange={handleChangeType}
                             variant={'outlined'}
                             color={'primary'}
                             >
                             {
-                                filters.price.map((item) => {
+                                filters.type.map((item) => {
                                     return <MenuItem value={item.value}>{item.label}</MenuItem>
                                 })
                             }
@@ -74,9 +69,10 @@ export default function ProfileCollectionFilters({filters}){
                 </Grid>
                 <Grid item xs={4}>
                     {/* Search */}
-                    <InputBase
+                    {/* <InputBase
                             startAdornment={<SearchIcon/>}
-                        />
+                        /> */}
+                        <TextField className={styles["MuiInputAdornment-standard"]}/>
                 </Grid>
             </Grid>
         </div>
