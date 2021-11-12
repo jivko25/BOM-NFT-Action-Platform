@@ -1,12 +1,9 @@
 @use '../../styles/colors.scss';
 
-.activity-filters{
+.activity-list-item{
     margin: auto;
     margin-top: 3%;
     width: 50%;
-}
-
-.input{
     background-color: colors.$background_paper;
-    border-radius: 2rem;
+    border-radius: 1rem;
 }
