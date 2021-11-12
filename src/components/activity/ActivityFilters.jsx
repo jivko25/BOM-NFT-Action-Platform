@@ -1,7 +1,8 @@
-import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, Grid, InputBase, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import styles from './ActivityFilters.module.scss';
 import { useState } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function ActivityFilters({filters}){
     const [sortBy, setSortBy] = useState('');
@@ -69,10 +70,10 @@ export default function ActivityFilters({filters}){
                 </Grid>
                 <Grid item xs={4}>
                     {/* Search */}
-                    {/* <InputBase
-                            startAdornment={<SearchIcon/>}
-                        /> */}
-                        <TextField className={styles["MuiInputAdornment-standard"]}/>
+                    <TextField
+                        label={<SearchIcon/>}
+                        className={styles.input}
+                        />
                 </Grid>
             </Grid>
         </div>
