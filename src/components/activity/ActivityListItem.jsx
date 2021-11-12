@@ -33,6 +33,8 @@ export default function ActivityListItem({created_at, user, nft, type = "like"})
                 </Grid>
             </Grid>
             <Link href=''>test</Link>
+            <link href=''></link>
+            <a href=''>test</a>
         </div>
     );
 }
