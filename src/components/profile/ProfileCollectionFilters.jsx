@@ -23,10 +23,10 @@ export default function ProfileCollectionFilters({filters}){
     return(
         <div className={styles["profile-collection-filters"]}>
             <Grid container spacing={2}>
-                <Grid item xs={5}>
+                {/* <Grid item xs={5}>
                     <Typography variant={'h2'}>Collection</Typography>
-                </Grid>
-                <Grid item xs={2}>
+                </Grid> */}
+                <Grid item xs={4}>
                     {/* Sort by */}
                     <Box>
                         <FormControl fullWidth>
@@ -49,7 +49,7 @@ export default function ProfileCollectionFilters({filters}){
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={4}>
                     {/* Price range */}
                     <Box>
                         <FormControl fullWidth>
@@ -72,7 +72,7 @@ export default function ProfileCollectionFilters({filters}){
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                     {/* Search */}
                     <InputBase
                             startAdornment={<SearchIcon/>}

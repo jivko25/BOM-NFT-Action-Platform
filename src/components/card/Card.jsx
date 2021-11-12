@@ -30,6 +30,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '', user, price =
     return(
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
         <CardHeader 
+            // avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
             avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
         <CardMedia 
             className={styles.media}
