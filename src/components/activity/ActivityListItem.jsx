@@ -2,6 +2,7 @@ import { Grid, Link } from '@mui/material';
 import styles from './ActivityListItem.module.scss';
 import Avatar from '../avatar/Avatar';
 import { formatDistance, parseISO } from 'date-fns';
+// import { Link } from "react-router-dom";
 
 export default function ActivityListItem({created_at, user, nft, type = "like"}){
     return(
@@ -32,7 +33,9 @@ export default function ActivityListItem({created_at, user, nft, type = "like"})
                      </p>
                 </Grid>
             </Grid>
-            <Link href=''>test</Link>
+            <Link to="/">{nft.name}{user.name}</Link>
+            <Link to="/">{nft.name}</Link>
+            <Link to="/">{user.name}</Link>
             <link href=''></link>
             <a href=''>test</a>
         </div>
