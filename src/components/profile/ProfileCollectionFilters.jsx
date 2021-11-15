@@ -75,7 +75,6 @@ export default function ProfileCollectionFilters({filters}){
                         />
                 </Grid>
             </Grid>
-            <Stack></Stack>
         </div>
     );
 }

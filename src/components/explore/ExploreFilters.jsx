@@ -1,11 +1,6 @@
 import { useState } from 'react';
-import { Grid, InputBase, TextField, Typography } from '@mui/material';
+import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Box, Stack} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import styles from './ExploreFilters.module.scss';
 
 export default function ExploreFilters({filters}){
@@ -74,11 +69,13 @@ export default function ExploreFilters({filters}){
                 </Grid>
                 <Grid item xs={4}>
                     {/* Search */}
-                    <InputBase
-                            startAdornment={<SearchIcon/>}
+                    <TextField
+                        label={<SearchIcon/>}
+                        className={styles["MuiInputAdornment-standard"]}
                         />
                 </Grid>
             </Grid>
+            <Stack></Stack>
         </div>
     );
 }
