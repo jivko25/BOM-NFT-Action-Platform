@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Box, Stack} from '@mui/material';
+import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Box, Stack, InputAdornment} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ExploreFilters.module.scss';
 
@@ -76,6 +76,7 @@ export default function ExploreFilters({filters}){
                 </Grid>
             </Grid>
             <Stack></Stack>
+            <InputAdornment></InputAdornment>
         </div>
     );
 }
