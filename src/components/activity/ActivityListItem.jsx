@@ -34,11 +34,6 @@ export default function ActivityListItem({created_at, user, nft, type = "like"})
                      </p>
                 </Grid>
             </Grid>
-            <Link href="/">{nft.name}{user.name}</Link>
-            <Link href="/">{nft.name}</Link>
-            <Link href="/">{user.name}</Link>
-            <link href=''></link>
-            <a href=''>test</a>
         </div>
     );
 }
