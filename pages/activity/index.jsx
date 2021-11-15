@@ -4,12 +4,13 @@ import ActivityListItem from '../../src/components/activity/ActivityListItem';
 import Footer from '../../src/components/footer/Footer';
 import Header from '../../src/components/header/Header';
 import Hero from '../../src/components/hero/Hero';
+// import activityData from '../../data/activity.js';
 
 export default function Activity() {
     return (
       <>
       <Header/>
-      <Hero text="activity"></Hero>
+      <Hero text="Activity"></Hero>
       <ActivityFilters filters={
           {
             sort: [
