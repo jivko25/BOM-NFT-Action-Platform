@@ -1,5 +1,5 @@
 module.exports = {
   env: {
-    apiUrl: 'my-value',
+    apiUrl: 'https://nft-auction.herokuapp.com',
   },
 }
