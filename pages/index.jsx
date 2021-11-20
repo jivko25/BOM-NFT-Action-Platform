@@ -1,5 +1,5 @@
 // import dataFeatured from "../data/featured.json"
-import dataTrending from "../data/trending.json"
+// import dataTrending from "../data/trending.json"
 import dataUsers from "../data/users.json"
 import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
@@ -30,19 +30,27 @@ import Description from "../src/components/description/Description"
 
 export default function Home() {
   const [featuredCards, setFeaturedCards] = useState([]);
-  const [trendingCards, setTrendingCards] = useState([]);
+  const [trendingItems, setTrendingItems] = useState([]);
+  const [trendingFilters, setTrendingFilters] = useState([]);
   const [topCollectors, setTopCollectors] = useState([]);
   const [auctionsCards, setAuctionsCards] = useState([]);
 
   useEffect(() => {
     fetch(`${process.env.apiUrl}/featured`)
-                        .then(data => data.json())
+                        .then(res => res.json())
                         .then(data => {
                           data.nfts[0].cols = 3;
                           data.nfts[0].rows = 2;
-                          setFeaturedCards(data.nfts)
+                          setFeaturedCards(data.nfts);
                         });
-    setTrendingCards(dataTrending)
+    fetch(`${process.env.apiUrl}/trending`)
+                        .then(res => res.json())
+                        .then(data => {
+                          setTrendingItems(data.nfts);
+                          console.log(data.nfts[0].owner.avatar.url);
+                          console.log(data.nfts[0].owner);
+                          setTrendingFilters(data.filters.sort);
+                        })
     setTopCollectors(dataUsers)
     setAuctionsCards(dataNfts)
   }, []);
@@ -261,7 +269,7 @@ export default function Home() {
     <div style={{position : 'relative'}}>
       <Header />
       <Featured items={featuredCards} />
-      <Trending cards={cards} />
+      <Trending cards={trendingItems} filters={trendingFilters} />
       <TopCollectors collectors={collectors} />
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} />
