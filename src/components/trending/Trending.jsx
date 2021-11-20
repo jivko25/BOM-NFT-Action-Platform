@@ -6,10 +6,8 @@ import Select from '@mui/material/Select';
 import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 
-const options = ["Today", "This week", "This month"];
-
-export default function Trending({cards = []}){
-        const [timeOption, setTimeOption] = useState(options[0]);
+export default function Trending({cards = [], filters = []}){
+        const [timeOption, setTimeOption] = useState();
 
         return (
             <Container className={styles.container} maxWidth="xl">
@@ -23,8 +21,8 @@ export default function Trending({cards = []}){
                       onChange={(event) => {
                         setTimeOption(event.target.value)
                       }}>
-                          {options.map(option => {
-                                return <MenuItem key = {option} value={option}>{option}</MenuItem>
+                          {filters.map(filter => {
+                                return <MenuItem key = {filter.value} value={filter.value}>{filter.label}</MenuItem>
                           })
                           }
                       </Select>
@@ -35,7 +33,7 @@ export default function Trending({cards = []}){
                     {(
                         cards.map(card => {
                             return   <Grid item xs={3} key={card.name}>
-                                        <Card {...card} />
+                                        <Card name = {card.name} likes = {card.likes} mediaUrl = {card.mediaUrl} user = {card.owner} price = {card.price} currency = {card.currency} timeLeft = {card.timeLeft} />
                                     </Grid >
                     }))}
                 </Grid>
