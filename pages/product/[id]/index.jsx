@@ -2,13 +2,13 @@ import Footer from "../../../src/components/footer/Footer";
 import Header from "../../../src/components/header/Header";
 import ProductContainer from "../../../src/components/product/ProductContainer";
 import { useRouter } from 'next/router'
-import nfts from './nfts.json';
+// import nfts from './nfts.json';
 
 export default function Product(){
     const router = useRouter()
     const { id } = router.query
-    const findItem = nfts.filter(item => item.id == id);
-    const item = findItem[0];
+    // const findItem = nfts.filter(item => item.id == id);
+    // const item = findItem[0];
     // console.log(item.owner.username);
 
     return(

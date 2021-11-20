@@ -1,7 +1,7 @@
-import dataFeatured from "../data/featured.json"
+// import dataFeatured from "../data/featured.json"
 import dataTrending from "../data/trending.json"
 import dataUsers from "../data/users.json"
-// import dataNfts from "../data/nfts.json"
+import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
 import Header from "../src/components/header/Header.jsx"
 import Featured from "../src/components/featured/Featured.jsx"
@@ -34,12 +34,18 @@ export default function Home() {
   const [topCollectors, setTopCollectors] = useState([]);
   const [auctionsCards, setAuctionsCards] = useState([]);
 
-  // useEffect(() => {
-  //   setFeaturedCards(dataFeatured)
-  //   setTrendingCards(dataTrending)
-  //   setTopCollectors(dataUsers)
-  //   setAuctionsCards(dataNfts)
-  // }, []);
+  useEffect(() => {
+    fetch(`${process.env.apiUrl}/featured`)
+                        .then(data => data.json())
+                        .then(data => {
+                          data.nfts[0].cols = 3;
+                          data.nfts[0].rows = 2;
+                          setFeaturedCards(data.nfts)
+                        });
+    setTrendingCards(dataTrending)
+    setTopCollectors(dataUsers)
+    setAuctionsCards(dataNfts)
+  }, []);
 
   let items = [
     {
@@ -254,89 +260,12 @@ export default function Home() {
   return (
     <div style={{position : 'relative'}}>
       <Header />
-      <Featured items={items} />
+      <Featured items={featuredCards} />
       <Trending cards={cards} />
       <TopCollectors collectors={collectors} />
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} />
-      {/* <ProductImage url="images/nft.jpg" />
-      <ProductInfoTitle text={"Shallow Son"} /> 
-      <ProductInfoPrice amount={3} currency={"ETH"} />
-      <ProductInfoLikes amount={6666} />
-      <ProductInfoCreator name="Donald" avatar="/images/avatar.png" verified={true}/>
-      <ProductInfoTimer timeEnd={10} onTimeEnd="Time end"/> */}
-      {/* <ProductInfo title="John"
-    creator ={{
-      name:"George",
-      avatar:
-        "https://nft-auction.herokuapp.com/uploads/0xa6dbe6b4f8e2905c26e123ec6fd08a8f7200dbc1_64120a76f4.jpg",
-      verified: true,
-    }}
-    price={20}
-    currency="ETH"
-    likes={20}
-    onTimeEnd="Time runs out"
-    timeEnd={50}
-    isLive={true}
-      /> */}
-      {/* <ProductTabs text = {"Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. Test test test. "}
-      bids= {[
-        {
-          user: { avatar: "/images/avatar.png", name: "hrisi", verified: true },
-          amount: 30,
-          date: "2021-10-22T08:29:23.382Z",
-        },
-        {
-          user: { avatar: "/images/avatar.png", name: "maxi", verified: true },
-          amount: 1000,
-          date: "2021-11-10T08:29:23.382Z",
-        },
-      ]}
-      /> */}
-      {/* <ProductActions
-      isLive={true}
-      currency="ETH"
-      buyAmount={50}
-      bidAmount={9}
-      onBuy={() => {}}
-      onBid={() => {}}
-      /> */}
-      {/* <ProductContainer 
-          name="Ergonomic Concrete Tuna"
-          owner={{
-            name: "Justen_King18",
-            verified:true,
-            avatar:"https://nft-auction.herokuapp.com/uploads/thumbnail_0x7d9debcf75a71bbb5c533804c9845d313fe3f6aa_ec98dd79b9.jpg"
-          }}
-          price={20}
-          currency="ETH"
-          likes={25}
-          auction_end="2022-09-02T20:43:19.149Z"
-          details="asdasdads"
-          isLive={true}
-          source={{
-            url: "https://nft-auction.herokuapp.com/uploads/thumbnail_0x7d9debcf75a71bbb5c533804c9845d313fe3f6aa_ec98dd79b9.jpg"
-          }}
-          bids= {[
-            {
-              user: { avatar: "/images/avatar.png", name: "hrisi", verified: true },
-              amount: 30,
-              date: "2021-10-22T08:29:23.382Z",
-            },
-            {
-              user: { avatar: "/images/avatar.png", name: "maxi", verified: true },
-              amount: 1000,
-              date: "2021-11-10T08:29:23.382Z",
-            },
-          ]}
-          bidAmount={1}
-          onBuy={() => {}}
-          onBid={() => {}}
-      /> */}
       <Footer />
-      {/* <Hero text="Lorem Ipsum 123"/>
-      <Description text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-      image="https://nft-auction.herokuapp.com/uploads/0xa6dbe6b4f8e2905c26e123ec6fd08a8f7200dbc1_64120a76f4.jpg"/> */}
     </div>
   )
 }
