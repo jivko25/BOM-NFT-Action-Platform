@@ -37,6 +37,10 @@ export default function Trending({cards = [], filters = []}){
                                     </Grid >
                     }))}
                 </Grid>
+                <div className={styles["MuiCard-root"]}>sth</div>
+                <div className={styles["MuiCard-root"]}>sth</div>
+                <div className={styles["MuiCard-root"]}>sth</div>
+                <div className={styles["MuiCard-root"]}>sth</div>
             </Container>
           );
 }
