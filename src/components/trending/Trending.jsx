@@ -32,15 +32,11 @@ export default function Trending({cards = [], filters = []}){
                 <Grid container spacing={3}>
                     {(
                         cards.map(card => {
-                            return   <Grid item xs={3} key={card.name}>
+                            return   <Grid item xs={3} key={card.name} className={styles["MuiCard-root"]}>
                                         <Card name = {card.name} likes = {card.likes} mediaUrl = {card.mediaUrl} user = {card.owner} price = {card.price} currency = {card.currency} timeLeft = {card.timeLeft} />
                                     </Grid >
                     }))}
                 </Grid>
-                <div className={styles["MuiCard-root"]}>sth</div>
-                <div className={styles["MuiCard-root"]}>sth</div>
-                <div className={styles["MuiCard-root"]}>sth</div>
-                <div className={styles["MuiCard-root"]}>sth</div>
             </Container>
           );
 }
