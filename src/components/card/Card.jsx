@@ -10,7 +10,9 @@ import Avatar from '../avatar/Avatar';
 import millify from 'millify';
 import Countdown from 'react-countdown';
 
-export default function Card({name = '', likes = 0, mediaUrl = '', user, price = '', currency = '', timeLeft}){
+export default function Card({name = '', likes = 0, mediaUrl = '', 
+                              user = {avatarUrl: '/images/avatar.png',verified: false}, 
+                              price = '', currency = '', timeLeft}){
     const Completionist = () => <span>Time runs out!</span>;
 
     const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -28,6 +30,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '', user, price =
       };
 
     return(
+    <div>
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
         <CardHeader 
             // avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
@@ -56,5 +59,6 @@ export default function Card({name = '', likes = 0, mediaUrl = '', user, price =
                 variant="outlined" />
         </CardActions>
     </CardM>
+    </div>
     );
 }

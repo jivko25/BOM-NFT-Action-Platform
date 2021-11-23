@@ -43,6 +43,9 @@ export default function Home() {
                           data.nfts[0].rows = 2;
                           setFeaturedCards(data.nfts);
                         });
+  }, []);
+
+  useEffect(() => {
     fetch(`${process.env.apiUrl}/trending`)
                         .then(res => res.json())
                         .then(data => {
@@ -53,7 +56,7 @@ export default function Home() {
                         })
     setTopCollectors(dataUsers)
     setAuctionsCards(dataNfts)
-  }, []);
+  }, [])
 
   let items = [
     {

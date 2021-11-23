@@ -11,18 +11,6 @@ export default function Trending({cards = [], filters = []}){
 
         return (
             <Container className={styles.container} maxWidth="xl">
-                <div className={["MuiCard-root"]}>
-                <p>test</p>
-                </div>
-                <div className={["MuiCard-root"]}>
-                <p>test</p>
-                </div>
-                <div className={["MuiCard-root"]}>
-                <p>test</p>
-                </div>
-                <div className={["MuiCard-root"]}>
-                <p>test</p>
-                </div>
                 <Grid container spacing={12}>
                     <Grid item xs={10}>
                         <h1>Trending</h1>
@@ -43,9 +31,14 @@ export default function Trending({cards = [], filters = []}){
                
                 <Grid container spacing={3}>
                     {(
-                        cards.map(card => {
-                            return  <Grid item xs={3} key={card.name}>
-                                        <Card name = {card.name} likes = {card.likes} mediaUrl = {card.mediaUrl} user = {card.owner} price = {card.price} currency = {card.currency} timeLeft = {card.timeLeft} />
+                        cards.map((card, key) => {
+                            return  <Grid item xs={3} key={key}>
+                                        {/* <Card name = {card.name} likes = {card.likes} mediaUrl = {card.mediaUrl} user = {card.owner} price = {card.price} currency = {card.currency} timeLeft = {card.timeLeft} /> */}
+                                        <Card
+                                        {...card}
+                                        mediaUrl={card.source.url}
+                                        user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
+                                        />
                                     </Grid >
                     }))}
                 </Grid>
