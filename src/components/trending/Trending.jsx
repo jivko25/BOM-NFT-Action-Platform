@@ -29,18 +29,18 @@ export default function Trending({cards = [], filters = []}){
                     </Grid >
                 </Grid>
                
-                <Grid container spacing={3}>
-                    {(
-                        cards.map((card, key) => {
-                            return  <Grid item xs={3} key={key}>
-                                        {/* <Card name = {card.name} likes = {card.likes} mediaUrl = {card.mediaUrl} user = {card.owner} price = {card.price} currency = {card.currency} timeLeft = {card.timeLeft} /> */}
-                                        <Card
-                                        {...card}
-                                        mediaUrl={card.source.url}
-                                        user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
-                                        />
-                                    </Grid >
-                    }))}
+                <Grid container spacing={1} justifyContent="center">
+                    {cards.map((card, key) => {
+                        return (
+                        <Grid key={key} item xs={12} sm={3}>
+                            <Card
+                            {...card}
+                            mediaUrl={card.source.url}
+                            user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
+                            />
+                        </Grid>
+                        )
+                    })}
                 </Grid>
             </Container>
           );
