@@ -45,17 +45,12 @@ export default function Home() {
                         });
   }, []);
 
-  useEffect(() => {
-    fetch(`${process.env.apiUrl}/trending`)
-                        .then(res => res.json())
-                        .then(data => {
-                          setTrendingItems(data.nfts);
-                          console.log(data.nfts[0].owner.avatar.url);
-                          console.log(data.nfts[0].owner);
-                          setTrendingFilters(data.filters.sort);
-                        })
-    setTopCollectors(dataUsers)
-    setAuctionsCards(dataNfts)
+  useEffect(async () => {
+    const dataTrending = await fetch(process.env.apiUrl + '/trending')
+    .then((res) => res.json());
+
+    setTrendingItems(dataTrending?.nfts)
+    setTrendingFilters(dataTrending?.filters?.sort)
   }, [])
 
   let items = [
