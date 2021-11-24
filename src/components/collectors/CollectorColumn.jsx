@@ -12,7 +12,7 @@ export default function CollectorColumn({items = []}){
                     key={index}
                     name = {item.name} 
                     nftsCount = {item.nftsCount} 
-                    avatar = {item.avatar} 
+                    avatar = {item.avatar.url} 
                     verified = {item.verified} 
                     id = {item.id} 
                     type={(index + 1) % 2 == 0 ? "light" : ""}/>

@@ -10,12 +10,11 @@ import CollectorColumn from "./CollectorColumn";
 import _ from "lodash";
 import { chunk } from "lodash";
 
-const options = ["Today", "This week", "This month"];
 
-export default function TopCollectors({collectors = []}){
-        const [timeOption, setTimeOption] = useState(options[0]);
+export default function TopCollectors({collectors = [], filters = []}){
+        const [timeOption, setTimeOption] = useState();
 
-        const res = collectors.sort((a, b) => b.nftsCount - a.nftsCount).map((element, idx) => ({
+        const res = collectors.map((element, idx) => ({
             ...element,
             id: idx + 1,
           }));
@@ -34,8 +33,8 @@ export default function TopCollectors({collectors = []}){
                       onChange={(event) => {
                         setTimeOption(event.target.value)
                       }}>
-                          {options.map(option => {
-                                return <MenuItem key = {option} value={option}>{option}</MenuItem>
+                          {filters.map(option => {
+                                return <MenuItem key = {option.label} value={option.value}>{option.label}</MenuItem>
                           })
                           }
                       </Select>

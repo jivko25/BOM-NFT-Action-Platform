@@ -1,6 +1,6 @@
 // import dataFeatured from "../data/featured.json"
 // import dataTrending from "../data/trending.json"
-import dataUsers from "../data/users.json"
+// import dataUsers from "../data/users.json"
 import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
 import Header from "../src/components/header/Header.jsx"
@@ -32,8 +32,9 @@ export default function Home() {
   const [featuredCards, setFeaturedCards] = useState([]);
   const [trendingItems, setTrendingItems] = useState([]);
   const [trendingFilters, setTrendingFilters] = useState([]);
-  const [topCollectors, setTopCollectors] = useState([]);
   const [auctionsCards, setAuctionsCards] = useState([]);
+  const [collectors, setCollectors] = useState([]);
+  const [collectorFilters, setCollectorFilters] = useState([]);
 
   useEffect(() => {
     fetch(`${process.env.apiUrl}/featured`)
@@ -53,156 +54,16 @@ export default function Home() {
     setTrendingFilters(dataTrending?.filters?.sort)
   }, [])
 
-  let items = [
-    {
-      image:
-        "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=500&h=500",
-      title: "Breakfast",
-      rows: 2,
-      cols: 3,
-      href: "/about",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=500&h=500",
-      title: "Burger",
-      href: "/about",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1522770179533-24471fcdba45?w=500&h=500",
-      title: "Camera",
-      href: "/about",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c?w=500&h=500",
-      title: "Coffee",
-      href: "/about",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1533827432537-70133748f5c8?w=500&h=500",
-      title: "Hats",
-      href: "/about",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=500&h=500",
-      title: "Honey",
-      href: "/about",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6?w=500&h=500",
-      title: "Basketball",
-      href: "/about",
-    },
-  ]
+  useEffect(async () => {
+    const dataCollectors = await fetch(process.env.apiUrl + '/top-collectors')
+    .then(res => res.json())
+    .then(data => {
+      setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
+      setCollectorFilters(data.filters.sort);
+    });
+  })
 
-  let cards = [
-    {
-      name: "Clock",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 12.2,
-      currency: "ETH",
-    },
-    {
-      name: "Riddles",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 10.1,
-      currency: "ETH",
-    },
-    {
-      name: "Wandering Flame",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 5.5,
-      currency: "ETH",
-    },
-    {
-      name: "Glorious Curtain",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 0.1,
-      currency: "ETH",
-    },
-  ]
-
-  let collectors = [
-    {
-      name: "Peter",
-      nftsCount: 12312,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "John",
-      nftsCount: 1111,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "Steven",
-      nftsCount: 52,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "Antonio Banderas",
-      nftsCount: 3,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    },
-    {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    }, {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    }, {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    }, {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    }, {
-      name: "Donald",
-      nftsCount: 12,
-      avatar: "/images/avatar.png",
-      verified: true,
-    }
-  ]
-
-  collectors.sort((a, b) => b.nftsCount - a.nftsCount);
+  // collectors.sort((a, b) => b.nftsCount - a.nftsCount);
 
   let how = {
     title: "How it works",
@@ -268,7 +129,7 @@ export default function Home() {
       <Header />
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} />
-      <TopCollectors collectors={collectors} />
+      <TopCollectors collectors={collectors} filters={collectorFilters}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} />
       <Footer />
