@@ -6,10 +6,9 @@ import Select from '@mui/material/Select';
 import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 
-const options = ["Today", "This week", "This month"];
 
-export default function Auctions({cards = []}){
-        const [timeOption, setTimeOption] = useState(options[0]);
+export default function Auctions({cards = [], filters = []}){
+        const [timeOption, setTimeOption] = useState();
 
         return (
             <Container className={styles.container} maxWidth="xl">
@@ -23,8 +22,8 @@ export default function Auctions({cards = []}){
                       onChange={(event) => {
                         setTimeOption(event.target.value)
                       }}>
-                          {options.map(option => {
-                                return <MenuItem key = {option} value={option}>{option}</MenuItem>
+                          {filters.map(option => {
+                                return <MenuItem key = {option.label} value={option.value}>{option.label}</MenuItem>
                           })
                           }
                       </Select>
@@ -32,12 +31,17 @@ export default function Auctions({cards = []}){
                 </Grid>
                
                 <Grid container spacing={3}>
-                    {(
-                        cards.filter(card => card.timeLeft > 0).map(card => {
-                            return   <Grid item xs={3} key={card.name}>
-                                        <Card {...card} />
-                                    </Grid >
-                    }))}
+                    {cards.map((card, key) => {
+                        return (
+                            <Grid key={key} item xs={12} sm={3}>
+                                <Card className={styles.item}
+                                {...card}
+                                mediaUrl={card.source.url}
+                                user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
+                                />
+                            </Grid>
+                            )
+                        })}
                 </Grid>
             </Container>
           );

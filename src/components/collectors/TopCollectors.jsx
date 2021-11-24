@@ -33,7 +33,7 @@ export default function TopCollectors({collectors = [], filters = []}){
                       onChange={(event) => {
                         setTimeOption(event.target.value)
                       }}>
-                          {filters.map(option => {
+                          {filters.map((option) => {
                                 return <MenuItem key = {option.label} value={option.value}>{option.label}</MenuItem>
                           })
                           }

@@ -1,6 +1,7 @@
 // import dataFeatured from "../data/featured.json"
 // import dataTrending from "../data/trending.json"
 // import dataUsers from "../data/users.json"
+import {timeInSeconds} from '../src/helpers/timeConvertor.js';
 import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
 import Header from "../src/components/header/Header.jsx"
@@ -25,6 +26,7 @@ import ProductContainer from "../src/components/product/ProductContainer"
 import { Link } from "@mui/material"
 import Hero from "../src/components/hero/Hero"
 import Description from "../src/components/description/Description"
+import { formatDistance, parseISO } from 'date-fns';
 
 
 
@@ -32,9 +34,11 @@ export default function Home() {
   const [featuredCards, setFeaturedCards] = useState([]);
   const [trendingItems, setTrendingItems] = useState([]);
   const [trendingFilters, setTrendingFilters] = useState([]);
-  const [auctionsCards, setAuctionsCards] = useState([]);
   const [collectors, setCollectors] = useState([]);
   const [collectorFilters, setCollectorFilters] = useState([]);
+  const [auctions, setAuctions] = useState([]);
+  const [auctionFilters, setAuctionFilters] = useState([]);
+
 
   useEffect(() => {
     fetch(`${process.env.apiUrl}/featured`)
@@ -55,15 +59,30 @@ export default function Home() {
   }, [])
 
   useEffect(async () => {
-    const dataCollectors = await fetch(process.env.apiUrl + '/top-collectors')
+    await fetch(process.env.apiUrl + '/top-collectors')
     .then(res => res.json())
     .then(data => {
       setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
       setCollectorFilters(data.filters.sort);
     });
-  })
+  }, [])
 
-  // collectors.sort((a, b) => b.nftsCount - a.nftsCount);
+  useEffect(async () => {
+    await fetch(process.env.apiUrl + '/live-auctions')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.nfts);
+      setAuctions(data.nfts);
+      setAuctionFilters(data.filters.price)
+      // console.log(formatDistance(
+      //             Date.now(),
+      //             parseISO("2021-10-22T08:29:10.359Z"),
+      //             { addSuffix: true }
+      //           ));
+      console.log(timeInSeconds("2021-10-22T08:29:10.359Z"));
+    })
+  }, [])
+
 
   let how = {
     title: "How it works",
@@ -90,40 +109,6 @@ export default function Home() {
 
   }
 
-  let auctions = [
-    {
-      name: "Something",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 12.2,
-      currency: "ETH",
-      timeLeft: 3.6e6
-    },
-    {
-      name: "Riddles",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 10.1,
-      currency: "ETH",
-      timeLeft: 3.6e6
-    },
-    {
-      name: "Wandering Flame",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 5.5,
-      currency: "ETH",
-      timeLeft: 3.6e6
-    },
-    {
-      name: "Glorious Curtain",
-      user: { avatarUrl: "images/avatar.png", verified: true },
-      mediaUrl: "images/nft.jpg",
-      price: 0.1,
-      currency: "ETH",
-      timeLeft: 3.6e6
-    }]
-
   return (
     <div style={{position : 'relative'}}>
       <Header />
@@ -131,7 +116,7 @@ export default function Home() {
       <Trending cards={trendingItems} filters={trendingFilters} />
       <TopCollectors collectors={collectors} filters={collectorFilters}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
-      <Auctions cards={auctions} />
+      <Auctions cards={auctions} filters={auctionFilters} />
       <Footer />
     </div>
   )
