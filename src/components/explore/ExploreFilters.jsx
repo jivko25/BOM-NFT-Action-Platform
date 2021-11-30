@@ -3,15 +3,15 @@ import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ExploreFilters.module.scss';
 
-export default function ExploreFilters({filters}){
+export default function ExploreFilters({sort, price}){
     const [sortBy, setSortBy] = useState('');
-    const [price, setPrice] = useState('');
+    const [priceBy, setPrice] = useState('');
 
     const handleChangeSort = (event) => {
         setSortBy(event.target.value);
     };
 
-    const handleChangePrice = (event) => {
+    const handleChangePriceBy = (event) => {
         setPrice(event.target.value);
     };
 
@@ -36,7 +36,7 @@ export default function ExploreFilters({filters}){
                             color={'primary'}
                             >
                             {
-                                filters.sort.map((item) => {
+                                sort.map((item) => {
                                     return <MenuItem value={item.value}>{item.label}</MenuItem>
                                 })
                             }
@@ -52,14 +52,14 @@ export default function ExploreFilters({filters}){
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={price}
+                            value={priceBy}
                             label="Price range"
-                            onChange={handleChangePrice}
+                            onChange={handleChangePriceBy}
                             variant={'outlined'}
                             color={'primary'}
                             >
                             {
-                                filters.price.map((item) => {
+                                price.map((item) => {
                                     return <MenuItem value={item.value}>{item.label}</MenuItem>
                                 })
                             }
