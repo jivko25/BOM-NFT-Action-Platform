@@ -1,5 +1,6 @@
 import styles from "./ProductInfoTimer.module.scss"
 import Countdown from 'react-countdown';
+import {timeInSeconds} from '../../helpers/timeConvertor.js';
 
 export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
 

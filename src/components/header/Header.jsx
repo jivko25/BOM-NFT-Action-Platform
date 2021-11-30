@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Logo from '../logo/Logo.jsx'
 import InputBase from '@mui/material/InputBase';
 import styles from './Header.module.scss';
+import Link from 'next/link';
 
 function Header(){
     return (
@@ -22,9 +23,9 @@ function Header(){
                         </InputBase>
                     </Grid>
                     <Grid item>
-                        <Button variant="text" color="inherit">Home</Button>
-                        <Button variant="text" color="inherit">Activity</Button>
-                        <Button variant="contained">Explore</Button>
+                        <Link href='/'><Button variant="text" color="inherit">Home</Button></Link>
+                        <Link href='/activity'><Button variant="text" color="inherit">Activity</Button></Link>
+                        <Link href='/explore'><Button variant="contained">Explore</Button></Link>
                     </Grid>
                 </Grid>
             </div>
