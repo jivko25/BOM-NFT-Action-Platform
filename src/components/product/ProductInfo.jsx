@@ -40,7 +40,10 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                             <ProductInfoCreator name={creator?.username} avatar={creator?.avatar.url} verified={creator?.verified}/>
                         </Grid>
                         <Grid item xs={5}>
+                            {timeEnd > 0 ? 
                             <ProductInfoTimer timeEnd={timeEnd} onTimeEnd={onTimeEnd}/>
+                            : null
+                            }
                         </Grid>
                     </Grid>
                 </Stack>
