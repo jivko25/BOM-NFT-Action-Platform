@@ -17,8 +17,8 @@ export default function Product(){
           .then(res => res.json())
           .then(data => {
             // console.log(isFirstAfterSecondDate('2022-11-10T08:29:23.382Z', '2021-11-10T08:29:23.382Z'))
-            data.endTime = timeInSeconds(data.auction_end);
-            console.log(data.source.url);
+            // data.endTime = timeInSeconds(data.auction_end);
+            // console.log(data.source.url);
             setProduct(data)
           });
     }, [id])
