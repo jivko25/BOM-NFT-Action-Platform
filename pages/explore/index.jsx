@@ -4,7 +4,7 @@ import ExploreFilters from "../../src/components/explore/ExploreFilters";
 import ExploreTitle from "../../src/components/explore/ExploreTitle";
 import Footer from "../../src/components/footer/Footer";
 import Header from "../../src/components/header/Header";
-import nfts from "../../data/nfts.json";
+// import nfts from "../../data/nfts.json";
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
 
@@ -13,7 +13,7 @@ export default function Explore(){
     const [nftFilters, setNftFilters] = useState([]);
 
     useEffect(async () => {
-      const data = await fetch(process.env.apiUrl + '/trending')
+      const data = await fetch(process.env.apiUrl + '/explore')
       .then((res) => res.json());
   
       setNfts(data?.nfts)
