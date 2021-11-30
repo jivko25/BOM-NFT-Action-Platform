@@ -37,7 +37,7 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                     </Grid>
                     <Grid container className={styles.creator_timer}>
                         <Grid item xs={7}>
-                            <ProductInfoCreator name={creator.name} avatar={creator.avatar} verified={creator.verified}/>
+                            <ProductInfoCreator name={creator?.username} avatar={creator?.avatar.url} verified={creator?.verified}/>
                         </Grid>
                         <Grid item xs={5}>
                             <ProductInfoTimer timeEnd={timeEnd} onTimeEnd={onTimeEnd}/>

@@ -1,4 +1,4 @@
-import { formatDistance, parseISO, intervalToDuration , compareAsc} from 'date-fns';
+import { formatDistance, parseISO, intervalToDuration , compareAsc, isAfter} from 'date-fns';
 
 export function timeInSeconds(date){
     let res = 0;
@@ -18,10 +18,12 @@ export function timeInSeconds(date){
 
     res = res + timeObject.seconds;
 
-    if(compareAsc(parseISO(date), Date.now())){
-        return res * -1;
-    }
-
-
+    // if(compareAsc(parseISO(date), Date.now())){
+    //     return res * -1;
+    // }
     return res;
+}
+
+export function isFirstAfterSecondDate(first_date, second_date){
+    return isAfter(parseISO(first_date), parseISO(second_date))
 }
