@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import ActivityFilters from '../../src/components/activity/ActivityFilters';
 import ActivityList from '../../src/components/activity/ActivityList';
 import ActivityListItem from '../../src/components/activity/ActivityListItem';
@@ -7,8 +8,20 @@ import Hero from '../../src/components/hero/Hero';
 // import activityData from '../../data/activity.js';
 
 export default function Activity() {
+  const [activity, setActivity] = useState([]);
+  const [activityFilters, setActivityFilters] = useState([]);
+
+  useEffect(async () => {
+      await fetch(`${process.env.apiUrl}/activities`)
+        .then(res => res.json())
+        .then(data => {
+          setActivity(data.activities);
+          setActivityFilters(data.filters);
+        })
+  }, [])
+
     return (
-      <>
+      <div style={{position : 'relative'}}>
       <Header/>
       <Hero text="Activity"></Hero>
       <ActivityFilters filters={
@@ -28,78 +41,8 @@ export default function Activity() {
             ],
           }      
       }/>
-      {/* <ActivityListItem
-      user={
-        {
-            avatar: {
-              url: "/images/avatar.png",
-            },
-            confirmed: false,
-            name: "Antonio Banderas",
-          }      
-      }
-      nft={
-        {
-            name: "BTC",
-            owner: {
-              username: "John Travolta",
-              avatar: {
-                url: "/images/avatar.png",
-              },
-              confirmed: true,     
-            }
-        }
-        }
-        type="buy"
-        created_at="2021-10-22T08:29:23.382Z"
-      /> */}
-      <ActivityList items={
-        [
-          {
-            created_at: "2021-10-22T08:29:23.382Z",
-            user: {
-              avatar: {
-                url: "/images/avatar.png",
-              },
-              confirmed: true,
-              name: "Antonio Banderas",
-            },
-            nft: {
-              name: "BTC",
-              owner: {
-                username: "John Travolta",
-                avatar: {
-                  url: "/images/avatar.png",
-                },
-                confirmed: true,
-              },
-            },
-            type: "buy",
-          },
-          {
-            created_at: "2021-10-22T08:29:23.382Z",
-            user: {
-              avatar: {
-                url: "/images/avatar.png",
-              },
-              confirmed: false,
-              name: "Steven Seagal",
-            },
-            nft: {
-              name: "BTC",
-              owner: {
-                username: "John Wick",
-                avatar: {
-                  url: "/images/avatar.png",
-                },
-                confirmed: true,
-              },
-            },
-            type: "buy",
-          },
-        ]    
-      }/>
+      <ActivityList items={activity}/>
       <Footer/>
-      </>
+      </div>
     );
   }
