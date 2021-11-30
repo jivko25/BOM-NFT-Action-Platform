@@ -21,7 +21,7 @@ export default function ProductContainer({name, owner, price, currency, likes, a
                         currency={currency}
                         likes={likes}
                         onTimeEnd="Time runs out"
-                        timeEnd={timeEnd}
+                        // timeEnd={timeEnd}
                         isLive={isLive}
                         />
                     <ProductTabs text={details} bids={bids}/>
