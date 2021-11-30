@@ -5,20 +5,21 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
 import { timeInSeconds } from "../../../src/helpers/timeConvertor";
 import {parseISO, isAfter} from 'date-fns';
+import { ColorLensTwoTone } from "@mui/icons-material";
 // import nfts from './nfts.json';
 
 export default function Product(){
     const router = useRouter()
     const { id } = router.query
     const [product, setProduct] = useState([]);
+    console.log(id)
 
     useEffect(async () => {
       await fetch(`${process.env.apiUrl}/nfts/${id}`)
           .then(res => res.json())
           .then(data => {
-            // console.log(isFirstAfterSecondDate('2022-11-10T08:29:23.382Z', '2021-11-10T08:29:23.382Z'))
-            // data.endTime = timeInSeconds(data.auction_end);
-            // console.log(data.source.url);
+            // console.log(new Date(data.auction_end).getTime() - Date.now())
+            data.endTime = (new Date(data.auction_end).getTime() - Date.now())/1000;
             setProduct(data)
           });
     }, [id])
@@ -32,8 +33,8 @@ export default function Product(){
     return(
         <div style={{position : 'relative'}}>
         <Header/>
-        <ProductContainer {...product} owner={product?.owner}/>
-        {/* <ProductContainer 
+        {/* <ProductContainer {...product} owner={product?.owner}/> */}
+        <ProductContainer 
           name={product.name}
           // owner={{
           //   username: "Justen_King18",
@@ -47,14 +48,14 @@ export default function Product(){
           likes={product.likes}
           auction_end={product.auction_end}
           details={product.details}
-          timeEnd={product.endTime}
+          timeEnd={Number((new Date(product.auction_end).getTime() - Date.now())/1000)}
           isLive={isAfter(parseISO(product.auction_end), Date.now())}
           source={product.source}
           bids= {product.bids}
           bidAmount={1}
           onBuy={() => {}}
           onBid={() => {}}
-      /> */}
+      />
         <Footer/>
         </div>
     );

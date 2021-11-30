@@ -2,7 +2,7 @@ import styles from "./ProductInfoTimer.module.scss"
 import Countdown from 'react-countdown';
 // import {timeInSeconds} from '../../helpers/timeConvertor.js';
 
-export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
+export default function ProductInfoTimer({timeEnd=0 , onTimeEnd}){
 
     const Completionist = () => <p>{onTimeEnd}</p>;
 
@@ -28,7 +28,7 @@ export default function ProductInfoTimer({timeEnd=null, onTimeEnd}){
                 <p className={styles.title}>Ends in</p>
             </div>
             <div className={styles.timer}>
-                { timeEnd != null & timeEnd > 0 ? (
+                { timeEnd != null ? (
                 <Countdown
                 onComplete= {() => {onTimeEnd}}
                 date={Date.now() + timeEnd * 1000}

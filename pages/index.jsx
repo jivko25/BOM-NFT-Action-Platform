@@ -71,7 +71,6 @@ export default function Home() {
     await fetch(process.env.apiUrl + '/live-auctions')
     .then(res => res.json())
     .then(data => {
-      console.log(data.nfts);
       setAuctions(data.nfts);
       setAuctionFilters(data.filters.price)
       // console.log(formatDistance(
@@ -79,7 +78,6 @@ export default function Home() {
       //             parseISO("2021-10-22T08:29:10.359Z"),
       //             { addSuffix: true }
       //           ));
-      console.log(timeInSeconds("2021-10-22T08:29:10.359Z"));
     })
   }, [])
 

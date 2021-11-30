@@ -15,7 +15,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
                               price = '', currency = '', timeLeft}){
     const Completionist = () => <span>Time runs out!</span>;
 
-    const renderer = ({ hours, minutes, seconds, completed }) => {
+    const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
           // Render a complete state
           return <Completionist />;
@@ -23,7 +23,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
           // Render a countdown
           return (
             <span>
-              {hours}:{minutes}:{seconds}
+              {days}:{hours}:{minutes}:{seconds}
             </span>
           );
         }
