@@ -24,7 +24,7 @@ export default function Explore(){
     return(
         <div style={{position:'relative'}}>
         <Header/>
-        <Grid container direction="column" spacing={3} style={{"margin-top": "30px"}}>
+        <Grid container direction="column" spacing={3} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} }>
             <Grid item xs={8}>
                 <Grid container>
                     <Grid item xs={4}>
@@ -39,7 +39,7 @@ export default function Explore(){
                 </Grid>
             </Grid>
             <Grid item>
-                    <Grid container>
+                    <Grid container >
                         {
                             nfts.map((item, index) => {  
                                    return <Link href={`/product/${item.id}`}>
@@ -64,9 +64,6 @@ export default function Explore(){
                     </Grid>
             </Grid>
         </Grid>
-        <Container maxWidth={"xl"}>
-                    
-                </Container>
         <Footer/>
         </div>
     );

@@ -47,7 +47,6 @@ export default function Trending({cards = [], filters = []}){
                             mediaUrl={card.source.url}
                             user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
                             />
-                            <a ></a>
                         </Grid>
                             </Link>
                         )

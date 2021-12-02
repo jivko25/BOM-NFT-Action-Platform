@@ -18,9 +18,6 @@ export default function ExploreFilters({sort, price}){
     return(
         <div className={styles["explore-filters"]}>
             <Grid container spacing={2}>
-                {/* <Grid item xs={5}>
-                    <Typography variant={'h2'}>Collection</Typography>
-                </Grid> */}
                 <Grid item xs={4}>
                     {/* Sort by */}
                     <Box>
@@ -75,8 +72,6 @@ export default function ExploreFilters({sort, price}){
                         />
                 </Grid>
             </Grid>
-            <Stack></Stack>
-            <InputAdornment></InputAdornment>
         </div>
     );
 }

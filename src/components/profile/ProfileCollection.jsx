@@ -2,6 +2,7 @@ import { Container, Grid, Typography } from '@mui/material';
 import ProfileCollectionFilters from './ProfileCollectionFilters';
 import styles from './ProfileCollection.module.scss';
 import Card from '../card/Card';
+import Link from 'next/link';
 
 export default function ProfileCollection({user, filters, items}){
     return(
@@ -19,10 +20,18 @@ export default function ProfileCollection({user, filters, items}){
                 </Grid>
                 <Grid container>
                     {
-                        items.map(item => {
-                            return <Grid item xs={3}>
-                                <Card name = {item.name} likes = {item.likes}  mediaUrl = {item.source.formats.thumbnail.url}  user={user}  price = {item.price}  currency = {item.currency} timeLeft={50}/>
+                        items?.map((item, key) => {
+                            return (
+                                <Link href={`/product/${item.id}`}>
+                            <Grid key={key} item xs={12} sm={3}>
+                                <Card
+                                {...item}
+                                mediaUrl={item.source.url}
+                                user={{avatarUrl: item.owner.avatar.url, verified: item.owner.verified}}
+                                />
                             </Grid>
+                                </Link>
+                            )
                         })
                     }
                 </Grid>
