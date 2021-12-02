@@ -4,24 +4,21 @@ import styles from './ActivityFilters.module.scss';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function ActivityFilters({filters}){
+export default function ActivityFilters({sort, type}){
     const [sortBy, setSortBy] = useState('');
-    const [type, setType] = useState('');
+    const [typeBy, setType] = useState('');
 
     const handleChangeSort = (event) => {
         setSortBy(event.target.value);
     };
 
-    const handleChangeType = (event) => {
+    const handleChangeTypeBy = (event) => {
         setType(event.target.value);
     };
 
     return(
         <div className={styles["activity-filters"]}>
             <Grid container spacing={2}>
-                {/* <Grid item xs={5}>
-                    <Typography variant={'h2'}>Collection</Typography>
-                </Grid> */}
                 <Grid item xs={4}>
                     {/* Sort by */}
                     <Box>
@@ -37,7 +34,7 @@ export default function ActivityFilters({filters}){
                             color={'primary'}
                             >
                             {
-                                filters.sort.map((item, index) => {
+                                sort.map((item, index) => {
                                     return <MenuItem value={item.value} key={index}>{item.label}</MenuItem>
                                 })
                             }
@@ -53,14 +50,14 @@ export default function ActivityFilters({filters}){
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={type}
+                            value={typeBy}
                             label="Type"
-                            onChange={handleChangeType}
+                            onChange={handleChangeTypeBy}
                             variant={'outlined'}
                             color={'primary'}
                             >
                             {
-                                filters.type.map((item, index) => {
+                                type.map((item, index) => {
                                     return <MenuItem value={item.value} key={index}>{item.label}</MenuItem>
                                 })
                             }

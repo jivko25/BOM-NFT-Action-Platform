@@ -40,8 +40,8 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
             component="img"
             image={mediaUrl}
             /> 
-        {timeLeft != null ? <div className={styles.badge}>⚫ Live</div> : null}
-        {timeLeft != null ? <div className={styles.countdown}><Countdown
+        {timeLeft > 0 ? <div className={styles.badge}>⚫ Live</div> : null}
+        {timeLeft > 0 ? <div className={styles.countdown}><Countdown
     date={Date.now() + timeLeft * 1000}
     intervalDelay={10}
     precision={1}
