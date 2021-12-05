@@ -18,9 +18,8 @@ export default function Index(){
     const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState('');
 
     useEffect(async () => {
-      // await fetch(process.env.apiUrl + '/users/' + id + '?' +
-      // (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''))
-      await fetch(`${process.env.apiUrl}/users/${id}`)
+      await fetch(process.env.apiUrl + '/users/' + id + '?' +
+      (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''))
               .then(res => res.json())
               .then(data => {
                   setProfile(data.user);
