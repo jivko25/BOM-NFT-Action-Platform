@@ -8,7 +8,7 @@ import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 
 
-export default function Auctions({cards = [], filters = []}){
+export default function Auctions({cards = [], filters = [], onChangeFilterValue, filterValue}){
         const [timeOption, setTimeOption] = useState();
 
         return (
@@ -19,10 +19,8 @@ export default function Auctions({cards = [], filters = []}){
                     </Grid >
                     <Grid item xs={2}>
                       <Select className={styles.select} label="Age"
-                      value={timeOption}
-                      onChange={(event) => {
-                        setTimeOption(event.target.value)
-                      }}>
+                      value={filterValue}
+                      onChange={onChangeFilterValue}>
                           {filters.map(option => {
                                 return <MenuItem key = {option.label} value={option.value}>{option.label}</MenuItem>
                           })

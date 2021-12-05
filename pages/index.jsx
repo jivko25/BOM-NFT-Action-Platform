@@ -75,15 +75,17 @@ export default function Home() {
   //Auctions
   const [auctions, setAuctions] = useState([]);
   const [auctionFilters, setAuctionFilters] = useState([]);
+  const [auctionFilterValue, setAuctionFilterValue] = useState([]);
 
   useEffect(async () => {
-    await fetch(process.env.apiUrl + '/live-auctions')
+    await fetch(process.env.apiUrl + '/live-auctions'
+      + (auctionFilterValue != "" ? `?sort=${auctionFilterValue}` : ''))
     .then(res => res.json())
     .then(data => {
       setAuctions(data.nfts);
       setAuctionFilters(data.filters.price)
     })
-  }, [])
+  }, [auctionFilterValue])
 
 
 
@@ -122,7 +124,7 @@ export default function Home() {
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
-      <Auctions cards={auctions} filters={auctionFilters} />
+      <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
       <Footer />
     </div>
   )
