@@ -31,14 +31,8 @@ import { formatDistance, parseISO } from 'date-fns';
 
 
 export default function Home() {
+  //Featured
   const [featuredCards, setFeaturedCards] = useState([]);
-  const [trendingItems, setTrendingItems] = useState([]);
-  const [trendingFilters, setTrendingFilters] = useState([]);
-  const [collectors, setCollectors] = useState([]);
-  const [collectorFilters, setCollectorFilters] = useState([]);
-  const [auctions, setAuctions] = useState([]);
-  const [auctionFilters, setAuctionFilters] = useState([]);
-
 
   useEffect(() => {
     fetch(`${process.env.apiUrl}/featured`)
@@ -50,13 +44,22 @@ export default function Home() {
                         });
   }, []);
 
-  useEffect(async () => {
-    const dataTrending = await fetch(process.env.apiUrl + '/trending')
-    .then((res) => res.json());
+  //Trending
+  const [trendingItems, setTrendingItems] = useState([]);
+  const [trendingFilters, setTrendingFilters] = useState([]);
+  const [trendingFilterValue, setTrendingFilterValue] = useState('');
 
+  useEffect(async () => {
+    const dataTrending = await fetch(process.env.apiUrl + '/trending'
+    + (trendingFilterValue != "" ? `?sort=${trendingFilterValue}` : ''))
+    .then((res) => res.json());
     setTrendingItems(dataTrending?.nfts)
     setTrendingFilters(dataTrending?.filters?.sort)
-  }, [])
+  }, [trendingFilterValue])
+
+  //Collectors
+  const [collectors, setCollectors] = useState([]);
+  const [collectorFilters, setCollectorFilters] = useState([]);
 
   useEffect(async () => {
     await fetch(process.env.apiUrl + '/top-collectors')
@@ -67,21 +70,24 @@ export default function Home() {
     });
   }, [])
 
+  //Auctions
+  const [auctions, setAuctions] = useState([]);
+  const [auctionFilters, setAuctionFilters] = useState([]);
+
   useEffect(async () => {
     await fetch(process.env.apiUrl + '/live-auctions')
     .then(res => res.json())
     .then(data => {
       setAuctions(data.nfts);
       setAuctionFilters(data.filters.price)
-      // console.log(formatDistance(
-      //             Date.now(),
-      //             parseISO("2021-10-22T08:29:10.359Z"),
-      //             { addSuffix: true }
-      //           ));
     })
   }, [])
 
 
+
+
+
+  //ToDo add how data from data file
   let how = {
     title: "How it works",
     description: `Discover, collect, and sell extraordinary NFTs
@@ -111,7 +117,7 @@ export default function Home() {
     <div style={{position : 'relative'}}>
       <Header />
       <Featured items={featuredCards} />
-      <Trending cards={trendingItems} filters={trendingFilters} />
+      <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} />
