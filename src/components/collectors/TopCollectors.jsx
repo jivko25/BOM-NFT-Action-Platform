@@ -11,7 +11,7 @@ import _ from "lodash";
 import { chunk } from "lodash";
 
 
-export default function TopCollectors({collectors = [], filters = []}){
+export default function TopCollectors({collectors = [], filters = [], onChangeFilterValue, filterValue}){
         const [timeOption, setTimeOption] = useState();
 
         const res = collectors.map((element, idx) => ({
@@ -30,10 +30,8 @@ export default function TopCollectors({collectors = [], filters = []}){
                     </Grid >
                     <Grid item xs={2}>
                       <Select className={styles.select} label="Age"
-                      value={timeOption}
-                      onChange={(event) => {
-                        setTimeOption(event.target.value)
-                      }}>
+                      value={filterValue}
+                      onChange={onChangeFilterValue}>
                           {filters.map((option) => {
                                 return <MenuItem key = {option.label} value={option.value}>{option.label}</MenuItem>
                           })
