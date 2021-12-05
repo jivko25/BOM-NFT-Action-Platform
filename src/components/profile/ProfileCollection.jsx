@@ -4,7 +4,7 @@ import styles from './ProfileCollection.module.scss';
 import Card from '../card/Card';
 import Link from 'next/link';
 
-export default function ProfileCollection({user, filters, items}){
+export default function ProfileCollection({user, filters, items, sortFilterValue, priceFilterValue, onChangeSortFilterValue, onChangePriceFilterValue}){
     return(
         <div className={styles['profile-collection']}>
             <Grid container>
@@ -15,7 +15,7 @@ export default function ProfileCollection({user, filters, items}){
                         </Typography>
                     </Grid>
                     <Grid item xs={9}>
-                        <ProfileCollectionFilters sort={filters?.sort} price={filters?.price}/>
+                        <ProfileCollectionFilters sort={filters?.sort} price={filters?.price} sortFilterValue={sortFilterValue} priceFilterValue={priceFilterValue} onChangeSortFilterValue={onChangeSortFilterValue} onChangePriceFilterValue={onChangePriceFilterValue}/>
                     </Grid>
                 </Grid>
                 <Grid container>

@@ -3,7 +3,7 @@ import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ProfileCollectionFilters.module.scss';
 
-export default function ProfileCollectionFilters({sort, price}){
+export default function ProfileCollectionFilters({sort, price, sortFilterValue, priceFilterValue, onChangeSortFilterValue, onChangePriceFilterValue}){
     const [sortBy, setSortBy] = useState('');
     const [range, setRange] = useState('');
     
@@ -29,9 +29,9 @@ export default function ProfileCollectionFilters({sort, price}){
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={sortBy}
+                            value={sortFilterValue}
                             label="Sort by"
-                            onChange={handleChangeSort}
+                            onChange={onChangeSortFilterValue}
                             variant={'outlined'}
                             color={'primary'}
                             >
@@ -52,9 +52,9 @@ export default function ProfileCollectionFilters({sort, price}){
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={range}
+                            value={priceFilterValue}
                             label="Price range"
-                            onChange={handleChangeRange}
+                            onChange={onChangePriceFilterValue}
                             variant={'outlined'}
                             color={'primary'}
                             >
