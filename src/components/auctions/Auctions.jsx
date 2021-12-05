@@ -5,6 +5,7 @@ import Card from "../card/Card"
 import Select from '@mui/material/Select';
 import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
+import Link from 'next/link';
 
 
 export default function Auctions({cards = [], filters = []}){
@@ -33,13 +34,16 @@ export default function Auctions({cards = [], filters = []}){
                 <Grid container spacing={3}>
                     {cards.map((card, key) => {
                         return (
+                            <Link href={`/product/${card.id}`}>
                             <Grid key={key} item xs={12} sm={3}>
                                 <Card className={styles.item}
                                 {...card}
                                 mediaUrl={card.source.url}
                                 user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
+                                ownerId = {card.owner.id}
                                 />
                             </Grid>
+                            </Link>
                             )
                         })}
                 </Grid>

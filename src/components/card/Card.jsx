@@ -9,10 +9,11 @@ import styles from './Card.module.scss';
 import Avatar from '../avatar/Avatar';
 import millify from 'millify';
 import Countdown from 'react-countdown';
+import Link from 'next/link';
 
 export default function Card({name = '', likes = 0, mediaUrl = '', 
                               user = {avatarUrl: '/images/avatar.png',verified: false}, 
-                              price = '', currency = '', timeLeft}){
+                              price = '', currency = '', timeLeft, ownerId}){
     const Completionist = () => <span>Time runs out!</span>;
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -32,9 +33,11 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
     return(
     <div>
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
+        <Link href={`/profile/${ownerId}`}>
         <CardHeader 
             // avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
             avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
+        </Link>
         <CardMedia 
             className={styles.media}
             component="img"

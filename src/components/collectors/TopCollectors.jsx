@@ -16,6 +16,7 @@ export default function TopCollectors({collectors = [], filters = []}){
 
         const res = collectors.map((element, idx) => ({
             ...element,
+            profileId : element.id,
             id: idx + 1,
           }));
 

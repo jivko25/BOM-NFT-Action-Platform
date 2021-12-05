@@ -11,19 +11,25 @@ export default function Index(){
     const router = useRouter()
     const { id } = router.query;
     const [profile, setProfile] = useState();
-    const [profileFilters, setProfileFilters ] = useState([]);
+    const [profileFilters, setProfileFilters] = useState([]);
+    const [profileFiltersSort, setProfileFiltersSort ] = useState([]);
+    const [profileFiltersPrice, setProfileFiltersPrice ] = useState([]);
 
     useEffect(async () => {
         await fetch(`${process.env.apiUrl}/users/${id}`)
               .then(res => res.json())
               .then(data => {
-                  console.log(`${process.env.apiUrl}/users/${id}`);
+                  // console.log(`${process.env.apiUrl}/users/${id}`);
                   setProfile(data.user);
                   setProfileFilters(data.filters);
+                  // console.log(data.filters["sort"]);
+                  setProfileFiltersSort(data?.filters.sort);
+                  setProfileFiltersPrice(data?.filters.price);
+              })
+              .catch(error => {
+                console.log(error.message);
               });
     }, [id])
-    
-    
     return(
       <div style={{position:'relative'}}>
     {/* {id == undefined ? <div><p>loading...</p></div> : 
@@ -35,26 +41,10 @@ export default function Index(){
     avatar={profile?.avatar.url}
     />
     <ProfileCollection 
+    // sort={profileFiltersSort} price={profileFiltersPrice}
     filters = {{
-        sort: [
-          { label: "Date (Ascending)", value: 1 },
-          { label: "Date (Descending)", value: 2 },
-          { label: "Name (Ascending)", value: 3 },
-          { label: "Name (Descending)", value: 4 },
-          { label: "Price (Ascending)", value: 5 },
-          { label: "Price (Descending)", value: 6 },
-        ],
-        price: [
-          { label: "0 - 0.01 ETH", value: 7 },
-          {
-            label: "0.01 - 0.04 ETH",
-            value: 8,
-          },
-          {
-            label: "0.04 - 0.07 ETH",
-            value: 9,
-          },
-        ],
+        sort: profileFiltersSort,
+        price: profileFiltersPrice
       }
     }
     user = {{avatarUrl : profile?.avatar.url, verified : profile?.verified}}

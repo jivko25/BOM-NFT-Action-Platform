@@ -12,15 +12,19 @@ export default function Explore(){
     const [nfts, setNfts] = useState([]);
     const [nftSortFilter, setNftSortFilter] = useState([]);
     const [nftPriceFilter, setNftPriceFilter] = useState([]);
+    const [priceFilterValue, setPriceFilterValue] = useState('');
+    const [sortFilterValue, setSortFilterValue] = useState('');
 
     useEffect(async () => {
-      const data = await fetch(process.env.apiUrl + '/explore')
+      const data = await fetch(process.env.apiUrl + '/explore' + '?' +
+      (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (priceFilterValue != "" ? `price=${priceFilterValue}` : ''))
       .then((res) => res.json());
-  
+        console.log(process.env.apiUrl + '/explore' + '?' +
+        (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (priceFilterValue != "" ? `price=${priceFilterValue}` : ''));
       setNfts(data?.nfts)
       setNftSortFilter(data?.filters.sort);
       setNftPriceFilter(data?.filters.price);
-    }, [])
+    }, [priceFilterValue, sortFilterValue])
     return(
         <div style={{position:'relative'}}>
         <Header/>
@@ -34,6 +38,12 @@ export default function Explore(){
                         <ExploreFilters 
                         sort={nftSortFilter}
                         price={nftPriceFilter}
+                        onPriceFilterChange={((e) => {
+                            setPriceFilterValue(e.target.value)
+                            console.log(priceFilterValue);
+                        })}
+                        onSortFilterChange={(e) => setSortFilterValue(e.target.value)}
+                        onPriceFilterChange={(e) => setPriceFilterValue(e.target.value)}
                         />
                     </Grid>
                 </Grid>
@@ -56,6 +66,7 @@ export default function Explore(){
                                             price = {item.price}  
                                             currency = {item.currency} 
                                             timeLeft={(new Date(item.auction_end).getTime() - Date.now())/1000}
+                                            ownerId = {item.owner.id}
                                             />
                                         </Grid>
                                       </Link>
