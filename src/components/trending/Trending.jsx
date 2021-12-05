@@ -8,7 +8,7 @@ import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 
-export default function Trending({cards = [], filters = []}){
+export default function Trending({cards = [], filters = [], filterValue, onChangeFilterValue}){
         const [timeOption, setTimeOption] = useState();
         // const router = useRouter();
         // const changeRoute = path => router.push(path);
@@ -24,11 +24,11 @@ export default function Trending({cards = [], filters = []}){
                         <h1>Trending</h1>
                     </Grid >
                     <Grid item xs={2}>
-                      <Select className={styles.select} label="Age"
-                      value={timeOption}
-                      onChange={(event) => {
-                        setTimeOption(event.target.value)
-                      }}>
+                      <Select 
+                      className={styles.select} 
+                      label="Age"
+                      value={filterValue}
+                      onChange={onChangeFilterValue}>
                           {filters.map(filter => {
                                 return <MenuItem key = {filter.value} value={filter.value}>{filter.label}</MenuItem>
                           })
