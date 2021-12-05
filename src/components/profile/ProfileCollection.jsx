@@ -15,7 +15,7 @@ export default function ProfileCollection({user, filters, items}){
                         </Typography>
                     </Grid>
                     <Grid item xs={9}>
-                        <ProfileCollectionFilters filters={filters}/>
+                        <ProfileCollectionFilters sort={filters?.sort} price={filters?.price}/>
                     </Grid>
                 </Grid>
                 <Grid container>
@@ -27,7 +27,8 @@ export default function ProfileCollection({user, filters, items}){
                                 <Card
                                 {...item}
                                 mediaUrl={item.source.url}
-                                user={{avatarUrl: item.owner.avatar.url, verified: item.owner.verified}}
+                                user={{avatarUrl: item.owner.avatar.url, verified: item.owner.verified, id: item.owner.id}}
+                                ownerId = {item.owner.id}
                                 />
                             </Grid>
                                 </Link>

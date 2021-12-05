@@ -15,6 +15,7 @@ export default function CollectorColumn({items = []}){
                     avatar = {item.avatar.url} 
                     verified = {item.verified} 
                     id = {item.id} 
+                    profileId = {item.profileId}
                     type={(index + 1) % 2 == 0 ? "light" : ""}/>
                 })
             }

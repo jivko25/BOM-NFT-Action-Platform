@@ -3,10 +3,10 @@ import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ProfileCollectionFilters.module.scss';
 
-export default function ProfileCollectionFilters({filters}){
+export default function ProfileCollectionFilters({sort, price}){
     const [sortBy, setSortBy] = useState('');
     const [range, setRange] = useState('');
-
+    
     const handleChangeSort = (event) => {
         setSortBy(event.target.value);
     };
@@ -36,7 +36,7 @@ export default function ProfileCollectionFilters({filters}){
                             color={'primary'}
                             >
                             {
-                                filters.sort.map((item) => {
+                                sort?.map((item) => {
                                     return <MenuItem value={item.value}>{item.label}</MenuItem>
                                 })
                             }
@@ -59,7 +59,7 @@ export default function ProfileCollectionFilters({filters}){
                             color={'primary'}
                             >
                             {
-                                filters.price.map((item) => {
+                                price?.map((item) => {
                                     return <MenuItem value={item.value}>{item.label}</MenuItem>
                                 })
                             }

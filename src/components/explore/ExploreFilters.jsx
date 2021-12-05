@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Box, Stack, InputAdornment} from '@mui/material';
+import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, InputLabel, Box, Stack, InputAdornment, onPriceFilterChange, onSortFilterChange} from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ExploreFilters.module.scss';
 
-export default function ExploreFilters({sort, price}){
+export default function ExploreFilters({sort, price, onPriceFilterChange, onSortFilterChange}){
     const [sortBy, setSortBy] = useState('');
     const [priceBy, setPrice] = useState('');
 
@@ -13,7 +13,10 @@ export default function ExploreFilters({sort, price}){
 
     const handleChangePriceBy = (event) => {
         setPrice(event.target.value);
+        // onPriceFilterChange(sortBy);
     };
+
+    
 
     return(
         <div className={styles["explore-filters"]}>
@@ -28,7 +31,7 @@ export default function ExploreFilters({sort, price}){
                             id="select"
                             value={sortBy}
                             label="Sort by"
-                            onChange={handleChangeSort}
+                            onChange={onSortFilterChange}
                             variant={'outlined'}
                             color={'primary'}
                             >
@@ -51,7 +54,7 @@ export default function ExploreFilters({sort, price}){
                             id="select"
                             value={priceBy}
                             label="Price range"
-                            onChange={handleChangePriceBy}
+                            onChange={onPriceFilterChange}
                             variant={'outlined'}
                             color={'primary'}
                             >
