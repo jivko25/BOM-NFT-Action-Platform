@@ -14,22 +14,23 @@ export default function Index(){
     const [profileFilters, setProfileFilters] = useState([]);
     const [profileFiltersSort, setProfileFiltersSort ] = useState([]);
     const [profileFiltersPrice, setProfileFiltersPrice ] = useState([]);
+    const [profileFiltersSortValue, setProfileFiltersSortValue ] = useState('');
+    const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState('');
 
     useEffect(async () => {
-        await fetch(`${process.env.apiUrl}/users/${id}`)
+      await fetch(process.env.apiUrl + '/users/' + id + '?' +
+      (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''))
               .then(res => res.json())
               .then(data => {
-                  // console.log(`${process.env.apiUrl}/users/${id}`);
                   setProfile(data.user);
                   setProfileFilters(data.filters);
-                  // console.log(data.filters["sort"]);
                   setProfileFiltersSort(data?.filters.sort);
                   setProfileFiltersPrice(data?.filters.price);
               })
               .catch(error => {
                 console.log(error.message);
               });
-    }, [id])
+    }, [profileFiltersSortValue, profileFiltersPriceValue])
     return(
       <div style={{position:'relative'}}>
     {/* {id == undefined ? <div><p>loading...</p></div> : 
@@ -49,6 +50,10 @@ export default function Index(){
     }
     user = {{avatarUrl : profile?.avatar.url, verified : profile?.verified}}
     items = {profile?.nfts}    
+    sortFilterValue = {profileFiltersSortValue}
+    priceFilterValue = {profileFiltersPriceValue}
+    onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}
+    onChangePriceFilterValue = {(e) => setProfileFiltersPriceValue(e.target.value)}
     />
 
     <Footer/>
