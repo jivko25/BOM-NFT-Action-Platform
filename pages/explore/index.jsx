@@ -44,6 +44,8 @@ export default function Explore(){
                         })}
                         onSortFilterChange={(e) => setSortFilterValue(e.target.value)}
                         onPriceFilterChange={(e) => setPriceFilterValue(e.target.value)}
+                        sortValue={sortFilterValue}
+                        priceValue = {priceFilterValue}
                         />
                     </Grid>
                 </Grid>

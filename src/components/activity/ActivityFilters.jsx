@@ -4,7 +4,7 @@ import styles from './ActivityFilters.module.scss';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function ActivityFilters({sort, type}){
+export default function ActivityFilters({sort, type, onSortFilterChange, onTypeFilterChange, sortValue, typeValue}){
     const [sortBy, setSortBy] = useState('');
     const [typeBy, setType] = useState('');
 
@@ -27,9 +27,9 @@ export default function ActivityFilters({sort, type}){
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={sortBy}
+                            value={sortValue}
                             label="Sort by"
-                            onChange={handleChangeSort}
+                            onChange={onSortFilterChange}
                             variant={'outlined'}
                             color={'primary'}
                             >
@@ -50,9 +50,9 @@ export default function ActivityFilters({sort, type}){
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={typeBy}
+                            value={typeValue}
                             label="Type"
-                            onChange={handleChangeTypeBy}
+                            onChange={onTypeFilterChange}
                             variant={'outlined'}
                             color={'primary'}
                             >

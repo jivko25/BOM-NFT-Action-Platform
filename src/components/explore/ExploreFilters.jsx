@@ -3,7 +3,7 @@ import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ExploreFilters.module.scss';
 
-export default function ExploreFilters({sort, price, onPriceFilterChange, onSortFilterChange}){
+export default function ExploreFilters({sort, price, onPriceFilterChange, onSortFilterChange, sortValue, priceValue}){
     const [sortBy, setSortBy] = useState('');
     const [priceBy, setPrice] = useState('');
 
@@ -29,7 +29,7 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={sortBy}
+                            value={sortValue}
                             label="Sort by"
                             onChange={onSortFilterChange}
                             variant={'outlined'}
@@ -52,7 +52,7 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
                             <Select
                             labelId="select-label"
                             id="select"
-                            value={priceBy}
+                            value={priceValue}
                             label="Price range"
                             onChange={onPriceFilterChange}
                             variant={'outlined'}
