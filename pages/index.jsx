@@ -60,15 +60,17 @@ export default function Home() {
   //Collectors
   const [collectors, setCollectors] = useState([]);
   const [collectorFilters, setCollectorFilters] = useState([]);
+  const [collectorFilterValue, setCollectorFilterValue] = useState('')
 
   useEffect(async () => {
-    await fetch(process.env.apiUrl + '/top-collectors')
+    await fetch(process.env.apiUrl + '/top-collectors'
+      + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : ''))
     .then(res => res.json())
     .then(data => {
       setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
       setCollectorFilters(data.filters.sort);
     });
-  }, [])
+  }, [collectorFilterValue])
 
   //Auctions
   const [auctions, setAuctions] = useState([]);
@@ -118,7 +120,7 @@ export default function Home() {
       <Header />
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
-      <TopCollectors collectors={collectors} filters={collectorFilters}/>
+      <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} />
       <Footer />
