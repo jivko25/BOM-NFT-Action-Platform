@@ -34,6 +34,8 @@ export default function Product(){
         <div style={{position : 'relative'}}>
         <Header/>
         {/* <ProductContainer {...product} owner={product?.owner}/> */}
+        //TODO fix Live chip position
+        //TODO make responsive design
         <ProductContainer 
           name={product.name}
           // owner={{

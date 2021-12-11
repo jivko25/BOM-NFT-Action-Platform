@@ -33,16 +33,15 @@ export default function Index(){
     }, [profileFiltersSortValue, profileFiltersPriceValue])
     return(
       <div style={{position:'relative'}}>
-    {/* {id == undefined ? <div><p>loading...</p></div> : 
-    <div> */}
     <Header/>
     <ProfileHero image={profile?.avatar.backgroundUrl}/>
     <ProfileUser 
     {...profile}
     avatar={profile?.avatar.url}
     />
+    //TODO fix space between cards
+    //TODO fix filter
     <ProfileCollection 
-    // sort={profileFiltersSort} price={profileFiltersPrice}
     filters = {{
         sort: profileFiltersSort,
         price: profileFiltersPrice
@@ -57,8 +56,6 @@ export default function Index(){
     />
 
     <Footer/>
-    {/* </div>
-  } */}
     </div>
     );
 }

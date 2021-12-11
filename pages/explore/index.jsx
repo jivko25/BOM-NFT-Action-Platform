@@ -50,6 +50,7 @@ export default function Explore(){
                     </Grid>
                 </Grid>
             </Grid>
+            //TODO fix spaces between cards
             <Grid item>
                     <Grid container >
                         {
