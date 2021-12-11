@@ -47,7 +47,7 @@ export default function Home() {
   //Trending
   const [trendingItems, setTrendingItems] = useState([]);
   const [trendingFilters, setTrendingFilters] = useState([]);
-  const [trendingFilterValue, setTrendingFilterValue] = useState('');
+  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
 
   useEffect(async () => {
     const dataTrending = await fetch(process.env.apiUrl + '/trending'
@@ -60,7 +60,7 @@ export default function Home() {
   //Collectors
   const [collectors, setCollectors] = useState([]);
   const [collectorFilters, setCollectorFilters] = useState([]);
-  const [collectorFilterValue, setCollectorFilterValue] = useState('')
+  const [collectorFilterValue, setCollectorFilterValue] = useState('asc')
 
   useEffect(async () => {
     await fetch(process.env.apiUrl + '/top-collectors'
@@ -75,7 +75,7 @@ export default function Home() {
   //Auctions
   const [auctions, setAuctions] = useState([]);
   const [auctionFilters, setAuctionFilters] = useState([]);
-  const [auctionFilterValue, setAuctionFilterValue] = useState([]);
+  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
 
   useEffect(async () => {
     await fetch(process.env.apiUrl + '/live-auctions'
@@ -91,7 +91,7 @@ export default function Home() {
 
 
 
-  //ToDo add how data from data file
+  //TODO Add how data from data file
   let how = {
     title: "How it works",
     description: `Discover, collect, and sell extraordinary NFTs

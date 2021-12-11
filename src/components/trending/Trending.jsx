@@ -20,10 +20,10 @@ export default function Trending({cards = [], filters = [], filterValue, onChang
         return (
             <Container className={styles.container} maxWidth="xl" >
                 <Grid container spacing={12}>
-                    <Grid item xs={10}>
+                    <Grid item xs={6} sm={6} md={6} xl={9}>
                         <h1>Trending</h1>
                     </Grid >
-                    <Grid item xs={2}>
+                    <Grid item xs={6} sm={6} md={6} xl={3}>
                       <Select 
                       className={styles.select} 
                       label="Age"
@@ -40,8 +40,8 @@ export default function Trending({cards = [], filters = [], filterValue, onChang
                 <Grid container spacing={1} justifyContent="center">
                     {cards.map((card, key) => {
                         return (
-                            <Link href={`/product/${card.id}`}>
-                        <Grid key={key} item xs={12} sm={3}>
+                            <Link href={`/product/${card.id}`} key={card.id}>
+                        <Grid item xs={12} sm={6} md={4} xl={3}>
                             <Card
                             {...card}
                             mediaUrl={card.source.url}
