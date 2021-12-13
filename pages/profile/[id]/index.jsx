@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 
 export default function Index(){
     const router = useRouter()
-    const { id } = router.query;
+    const id = router.query.id;
     const [profile, setProfile] = useState();
     const [profileFilters, setProfileFilters] = useState([]);
     const [profileFiltersSort, setProfileFiltersSort ] = useState([]);
@@ -22,6 +22,8 @@ export default function Index(){
       (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''))
               .then(res => res.json())
               .then(data => {
+                  console.log(process.env.apiUrl + '/users/' + id + '?' +
+                  (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''));
                   setProfile(data.user);
                   setProfileFilters(data.filters);
                   setProfileFiltersSort(data?.filters.sort);
