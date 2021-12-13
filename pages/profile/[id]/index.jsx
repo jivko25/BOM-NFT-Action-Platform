@@ -33,6 +33,8 @@ export default function Index(){
                 console.log(error.message);
               });
     }, [id, profileFiltersSortValue, profileFiltersPriceValue])
+    //TODO fix space between cards
+    //TODO fix filter
     return(
       <div style={{position:'relative'}}>
     <Header/>
@@ -41,8 +43,6 @@ export default function Index(){
     {...profile}
     avatar={profile?.avatar.url}
     />
-    //TODO fix space between cards
-    //TODO fix filter
     <ProfileCollection 
     filters = {{
         sort: profileFiltersSort,

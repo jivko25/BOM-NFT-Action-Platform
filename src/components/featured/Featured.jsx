@@ -4,15 +4,7 @@ import styles from "./Featured.module.scss"
 import Link from 'next/link';
 
 
-export default function Featured({items = []}){
-
-    // const router = useRouter();
-    // const changeRoute = path => router.push(path);
-
-    // const handleClick = (id) => {
-    //     router.push(`localhost:3000/product/${id}`)
-    // }
-    
+export default function Featured({items = []}){    
     return (
         <div className={styles.wrapper}>
             <Container>
