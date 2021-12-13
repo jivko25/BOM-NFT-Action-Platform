@@ -32,7 +32,7 @@ export default function Index(){
               .catch(error => {
                 console.log(error.message);
               });
-    }, [profileFiltersSortValue, profileFiltersPriceValue])
+    }, [id, profileFiltersSortValue, profileFiltersPriceValue])
     return(
       <div style={{position:'relative'}}>
     <Header/>
