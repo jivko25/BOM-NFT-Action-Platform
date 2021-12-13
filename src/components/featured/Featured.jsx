@@ -1,7 +1,7 @@
 import { Container, ImageList, ImageListItem } from "@mui/material";
 import { useRouter } from "next/router";
 import styles from "./Featured.module.scss"
-import Link from 'next/link'
+import Link from 'next/link';
 
 
 export default function Featured({items = []}){
