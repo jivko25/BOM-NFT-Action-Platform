@@ -6,12 +6,12 @@ import Link from 'next/link';
 
 export default function Featured({items = []}){
 
-    const router = useRouter();
-    const changeRoute = path => router.push(path);
+    // const router = useRouter();
+    // const changeRoute = path => router.push(path);
 
-    const handleClick = (id) => {
-        router.push(`localhost:3000/product/${id}`)
-    }
+    // const handleClick = (id) => {
+    //     router.push(`localhost:3000/product/${id}`)
+    // }
     
     return (
         <div className={styles.wrapper}>
