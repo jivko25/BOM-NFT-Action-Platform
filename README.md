@@ -7,7 +7,7 @@ npm i
 npm run dev
 ```
 
-See the demo of the project: https://bom-nft-auction-platform-frutj3c3a-jivko25.vercel.app/
+See the demo of the project: https://bom-nft-auction-platform-fq3ndl40l-jivko25.vercel.app/
 
 ## 😏 Some tips
 
