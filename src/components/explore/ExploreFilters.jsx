@@ -4,19 +4,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import styles from './ExploreFilters.module.scss';
 
 export default function ExploreFilters({sort, price, onPriceFilterChange, onSortFilterChange, sortValue, priceValue}){
-    const [sortBy, setSortBy] = useState('');
-    const [priceBy, setPrice] = useState('');
-
-    const handleChangeSort = (event) => {
-        setSortBy(event.target.value);
-    };
-
-    const handleChangePriceBy = (event) => {
-        setPrice(event.target.value);
-        // onPriceFilterChange(sortBy);
-    };
-
-    
 
     return(
         <div className={styles["explore-filters"]}>
@@ -60,7 +47,7 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
                             >
                             {
                                 price.map((item) => {
-                                    return <MenuItem value={item.value}>{item.label}</MenuItem>
+                                    return <MenuItem key={item.label} value={item.value}>{item.label}</MenuItem>
                                 })
                             }
                             </Select>

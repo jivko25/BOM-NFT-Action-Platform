@@ -32,8 +32,8 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
                 <Grid container spacing={3}>
                     {cards.map((card, key) => {
                         return (
-                            <Link href={`/product/${card.id}`}>
-                            <Grid key={key} item xs={12} sm={3}>
+                            <Link href={`/product/${card.id}`} key={card.id}>
+                            <Grid item xs={12} sm={3}>
                                 <Card className={styles.item}
                                 {...card}
                                 mediaUrl={card.source.url}

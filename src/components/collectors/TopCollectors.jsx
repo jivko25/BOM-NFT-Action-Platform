@@ -25,13 +25,20 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
         return (
             <Container className={styles.container} maxWidth="xl">
                 <Grid container spacing={12}>
-                    <Grid item xs={10}>
+                    <Grid item xs={9}>
                         <h1>Top Collectors</h1>
                     </Grid >
-                    <Grid item xs={2}>
-                      <Select className={styles.select} label="Age"
+                    <Grid item xs={3}>
+                      <Select 
+                      className={styles.select}
+                      labelId="select-label"
+                      id="select"
                       value={filterValue}
-                      onChange={onChangeFilterValue}>
+                      label="Select"
+                      onChange={onChangeFilterValue}
+                      variant={'outlined'}
+                      color={'primary'}
+                      >
                           {filters.map((option) => {
                                 return <MenuItem key = {option.label} value={option.value}>{option.label}</MenuItem>
                           })
@@ -40,11 +47,17 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
                     </Grid >
                 </Grid>
                 <Grid item className={styles.collectorColumns}>
+                    {/* <Grid container> */}
+                      
                 {collectorChunks.map((chunk, idx) => {
                     return (
-                    <CollectorColumn items={chunk} key={idx}/>
+                        // <Grid item xs={12}>
+
+                            <CollectorColumn items={chunk} key={idx}/>
+                        // </Grid>
                 );
                 })}
+                {/* </Grid> */}
                  </Grid>
             </Container>
           );

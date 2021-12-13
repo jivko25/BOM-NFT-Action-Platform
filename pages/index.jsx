@@ -47,7 +47,7 @@ export default function Home() {
   //Trending
   const [trendingItems, setTrendingItems] = useState([]);
   const [trendingFilters, setTrendingFilters] = useState([]);
-  const [trendingFilterValue, setTrendingFilterValue] = useState('');
+  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
 
   useEffect(async () => {
     const dataTrending = await fetch(process.env.apiUrl + '/trending'
@@ -60,7 +60,7 @@ export default function Home() {
   //Collectors
   const [collectors, setCollectors] = useState([]);
   const [collectorFilters, setCollectorFilters] = useState([]);
-  const [collectorFilterValue, setCollectorFilterValue] = useState('')
+  const [collectorFilterValue, setCollectorFilterValue] = useState('asc')
 
   useEffect(async () => {
     await fetch(process.env.apiUrl + '/top-collectors'
@@ -75,7 +75,7 @@ export default function Home() {
   //Auctions
   const [auctions, setAuctions] = useState([]);
   const [auctionFilters, setAuctionFilters] = useState([]);
-  const [auctionFilterValue, setAuctionFilterValue] = useState([]);
+  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
 
   useEffect(async () => {
     await fetch(process.env.apiUrl + '/live-auctions'
@@ -91,7 +91,7 @@ export default function Home() {
 
 
 
-  //ToDo add how data from data file
+  //TODO Add how data from data file
   let how = {
     title: "How it works",
     description: `Discover, collect, and sell extraordinary NFTs
@@ -119,12 +119,21 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative'}}>
+      //TODO make Header responsive
+      //TODO add Menu component(mobile)
       <Header />
+      //TODO make Featured responsive
       <Featured items={featuredCards} />
+      //TODO fix filters position
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
+      //TODO fix filters position
+      //TODO make Collectors responsive
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
+      //TODO make How component responsive
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
+      //TODO fix filters position
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
+      //TODO make Footer responsive
       <Footer />
     </div>
   )
