@@ -48,7 +48,7 @@ function Header(){
                     component={Grid}
                     item
                     sm={3} 
-                    display={{ xs: "none", md: "block" }}>
+                    display={{ xs: "none", sm: "block" }}>
                     <Grid item className={styles.logoContainer}>
                         <Logo />
                     </Grid>

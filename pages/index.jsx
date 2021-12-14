@@ -116,24 +116,24 @@ export default function Home() {
     link: "https://app.boom.dev/"
 
   }
+  //TODO make Header responsive
+  //TODO add Menu component(mobile)
+  //TODO make Featured responsive
+  //TODO fix filters position
+  //TODO fix filters position
+  //TODO make Collectors responsive
+  //TODO make How component responsive
+  //TODO fix filters position
+  //TODO make Footer responsive
 
   return (
     <div style={{position : 'relative'}}>
-      //TODO make Header responsive
-      //TODO add Menu component(mobile)
       <Header />
-      //TODO make Featured responsive
       <Featured items={featuredCards} />
-      //TODO fix filters position
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
-      //TODO fix filters position
-      //TODO make Collectors responsive
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
-      //TODO make How component responsive
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
-      //TODO fix filters position
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
-      //TODO make Footer responsive
       <Footer />
     </div>
   )
