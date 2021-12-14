@@ -12,7 +12,6 @@ import { chunk } from "lodash";
 
 
 export default function TopCollectors({collectors = [], filters = [], onChangeFilterValue, filterValue}){
-        const [timeOption, setTimeOption] = useState();
 
         const res = collectors.map((element, idx) => ({
             ...element,
@@ -25,10 +24,10 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
         return (
             <Container className={styles.container} maxWidth="xl">
                 <Grid container spacing={12}>
-                    <Grid item xs={9}>
+                    <Grid item xs={6} sm={6} md={6} xl={9}>
                         <h1>Top Collectors</h1>
                     </Grid >
-                    <Grid item xs={3}>
+                    <Grid item xs={6} sm={6} md={6} xl={3}>
                       <Select 
                       className={styles.select}
                       labelId="select-label"

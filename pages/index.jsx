@@ -114,16 +114,10 @@ export default function Home() {
       },
     ],
     link: "https://app.boom.dev/"
-
   }
-  //TODO make Header responsive
-  //TODO add Menu component(mobile)
-  //TODO make Featured responsive
-  //TODO fix filters position
-  //TODO fix filters position
+
   //TODO make Collectors responsive
   //TODO make How component responsive
-  //TODO fix filters position
   //TODO make Footer responsive
 
   return (

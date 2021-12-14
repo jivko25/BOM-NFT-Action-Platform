@@ -14,10 +14,10 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
         return (
             <Container className={styles.container} maxWidth="xl">
                 <Grid container spacing={12}>
-                    <Grid item xs={10}>
+                    <Grid item xs={6} sm={6} md={6} xl={9}>
                         <h1>Live Auctions</h1>
                     </Grid >
-                    <Grid item xs={2}>
+                    <Grid item xs={6} sm={6} md={6} xl={3}>
                       <Select className={styles.select} label="Age"
                       value={filterValue}
                       onChange={onChangeFilterValue}>
@@ -28,12 +28,12 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
                       </Select>
                     </Grid >
                 </Grid>
-               
-                <Grid container spacing={3}>
-                    {cards.map((card, key) => {
+                        
+                <Grid container spacing={1} justifyContent="center">
+                    {cards.map((card) => {
                         return (
                             <Link href={`/product/${card.id}`} key={card.id}>
-                            <Grid item xs={12} sm={3}>
+                            <Grid item xs={7} sm={6} md={4} xl={3}>
                                 <Card className={styles.item}
                                 {...card}
                                 mediaUrl={card.source.url}
