@@ -1,38 +1,39 @@
 @use "../../styles/colors.scss";
 
 .wrapper_upper{
-    // max-width: 20% !important;
     background-color: rgba(colors.$primary_main, 10%);
     border-radius: 2rem 2rem 0 0;
 }
 
 .number_upper{
+    min-width: 70px;
     background-color: rgba(colors.$primary_main, 20%);
     border-radius: 2rem 0 0 0;
 }
 
 .wrapper_down{
-    // max-width: 20% !important;
     background-color: rgba(colors.$primary_main, 10%);
     border-radius: 0 0 2rem 2rem;
 }
 
 .number_down{
+    min-width: 70px;
     background-color: rgba(colors.$primary_main, 20%);
     border-radius: 0 0 0 2rem;
 }
 
 .wrapper{
-    // max-width: 20% !important;
     background-color: #2F1D81;
 }
 
 .number{
+    min-width: 70px;
     background-color: rgba(colors.$primary_main, 20%);
 }
 
 .content{
     padding: 3%;
+    max-width: 300px;
     color: colors.$text_primary;
 }
 

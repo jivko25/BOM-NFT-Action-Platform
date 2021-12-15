@@ -46,17 +46,17 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
                     </Grid >
                 </Grid>
                 <Grid item className={styles.collectorColumns}>
-                    {/* <Grid container> */}
+                    <Grid container spacing={4} justifyContent={"center"}>
                       
                 {collectorChunks.map((chunk, idx) => {
                     return (
-                        // <Grid item xs={12}>
+                        <Grid item xs={10} md={5} xl={3}>
 
                             <CollectorColumn items={chunk} key={idx}/>
-                        // </Grid>
+                        </Grid>
                 );
                 })}
-                {/* </Grid> */}
+                </Grid>
                  </Grid>
             </Container>
           );

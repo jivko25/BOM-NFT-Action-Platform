@@ -116,7 +116,6 @@ export default function Home() {
     link: "https://app.boom.dev/"
   }
 
-  //TODO make Collectors responsive
   //TODO make How component responsive
   //TODO make Footer responsive
 
