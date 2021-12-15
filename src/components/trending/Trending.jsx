@@ -9,14 +9,7 @@ import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 
 export default function Trending({cards = [], filters = [], filterValue, onChangeFilterValue}){
-        const [timeOption, setTimeOption] = useState();
-        // const router = useRouter();
-        // const changeRoute = path => router.push(path);
-
-        // const handleClick = (id) => {
-        //     router.push(`localhost:3000/product/${id}`)
-        // }
-
+    
         return (
             <Container className={styles.container} maxWidth="xl" >
                 <Grid container spacing={12}>
@@ -38,10 +31,10 @@ export default function Trending({cards = [], filters = [], filterValue, onChang
                 </Grid>
                
                 <Grid container spacing={1} justifyContent="center">
-                    {cards.map((card, key) => {
+                    {cards.map((card) => {
                         return (
                             <Link href={`/product/${card.id}`} key={card.id}>
-                        <Grid item xs={12} sm={6} md={4} xl={3}>
+                        <Grid item xs={7} sm={6} md={4} xl={3}>
                             <Card
                             {...card}
                             mediaUrl={card.source.url}
