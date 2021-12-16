@@ -118,7 +118,7 @@ export default function Home() {
 
 
   return (
-    <div style={{position : 'relative'}}>
+    <div style={{position : 'relative', overflow : "hidden"}}>
       <Header />
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
