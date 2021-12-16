@@ -6,6 +6,7 @@ import Select from '@mui/material/Select';
 import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import Link from 'next/link';
+import Spacer from '../spacer/Spacer';
 
 
 export default function Auctions({cards = [], filters = [], onChangeFilterValue, filterValue}){
@@ -28,7 +29,7 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
                       </Select>
                     </Grid >
                 </Grid>
-                        
+                {cards.length > 0 ?
                 <Grid container spacing={1} justifyContent="center">
                     {cards.map((card) => {
                         return (
@@ -45,6 +46,9 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
                             )
                         })}
                 </Grid>
+                :
+                <Spacer/>
+                }
             </Container>
           );
 }

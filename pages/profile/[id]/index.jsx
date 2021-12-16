@@ -5,6 +5,7 @@ import ProfileCollection from "../../../src/components/profile/ProfileCollection
 import Footer from "../../../src/components/footer/Footer";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
+import Spacer from "../../../src/components/spacer/Spacer";
 
 
 export default function Index(){
@@ -56,7 +57,6 @@ export default function Index(){
     onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}
     onChangePriceFilterValue = {(e) => setProfileFiltersPriceValue(e.target.value)}
     />
-
     <Footer/>
     </div>
     );
