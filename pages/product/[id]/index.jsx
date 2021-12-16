@@ -30,12 +30,12 @@ export default function Product(){
     //   avatar: product.owner.avatar['url']
     // }
 
+    //TODO fix Live chip position
+    //TODO make responsive design
     return(
         <div style={{position : 'relative'}}>
         <Header/>
         {/* <ProductContainer {...product} owner={product?.owner}/> */}
-        //TODO fix Live chip position
-        //TODO make responsive design
         <ProductContainer 
           name={product.name}
           // owner={{

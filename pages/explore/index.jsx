@@ -31,11 +31,11 @@ export default function Explore(){
         <Header/>
         <Grid container direction="column" spacing={3} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} }>
             <Grid item xs={8}>
-                <Grid container>
-                    <Grid item xs={4}>
+                <Grid container spacing={4}>
+                    <Grid item xs={12} lg={4}>
                     <ExploreTitle text = "Explore"/>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} lg={8}>
                         <ExploreFilters 
                         sort={nftSortFilter}
                         price={nftPriceFilter}
@@ -56,7 +56,7 @@ export default function Explore(){
                         {
                             nfts.map((item, index) => {  
                                    return <Link href={`/product/${item.id}`}>
-                                            <Grid item xs={3} key={index}>
+                                            <Grid item xs={3} key={index} xs={11} sm={6} md={4} xl={3}>
                                             <Card name = {item.name} 
                                             likes = {item.likes}  
                                             mediaUrl = {item.source.url}  
