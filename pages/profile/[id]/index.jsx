@@ -34,30 +34,29 @@ export default function Index(){
                 console.log(error.message);
               });
     }, [id, profileFiltersSortValue, profileFiltersPriceValue])
-    //TODO fix space between cards
-    //TODO fix filter
+
     return(
       <div style={{position:'relative', overflow : "hidden"}}>
-    <Header/>
-    <ProfileHero image={profile?.avatar.backgroundUrl}/>
-    <ProfileUser 
-    {...profile}
-    avatar={profile?.avatar.url}
-    />
-    <ProfileCollection 
-    filters = {{
-        sort: profileFiltersSort,
-        price: profileFiltersPrice
-      }
-    }
-    user = {{avatarUrl : profile?.avatar.url, verified : profile?.verified}}
-    items = {profile?.nfts}    
-    sortFilterValue = {profileFiltersSortValue}
-    priceFilterValue = {profileFiltersPriceValue}
-    onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}
-    onChangePriceFilterValue = {(e) => setProfileFiltersPriceValue(e.target.value)}
-    />
-    <Footer/>
-    </div>
-    );
+        <Header/>
+        <ProfileHero image={profile?.avatar.backgroundUrl}/>
+        <ProfileUser 
+        {...profile}
+        avatar={profile?.avatar.url}
+        />
+        <ProfileCollection 
+        filters = {{
+            sort: profileFiltersSort,
+            price: profileFiltersPrice
+          }
+        }
+        user = {{avatarUrl : profile?.avatar.url, verified : profile?.verified}}
+        items = {profile?.nfts}    
+        sortFilterValue = {profileFiltersSortValue}
+        priceFilterValue = {profileFiltersPriceValue}
+        onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}
+        onChangePriceFilterValue = {(e) => setProfileFiltersPriceValue(e.target.value)}
+        />
+        <Footer/>
+      </div>
+      );
 }

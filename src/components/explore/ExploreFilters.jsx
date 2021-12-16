@@ -7,8 +7,8 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
 
     return(
         <div className={styles["explore-filters"]}>
-            <Grid container spacing={2}>
-                <Grid item xs={4}>
+            <Grid container spacing={2} justifyContent={"center"}>
+                <Grid item xs={10} lg={3}>
                     {/* Sort by */}
                     <Box>
                         <FormControl fullWidth>
@@ -31,7 +31,7 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={10} lg={3}>
                     {/* Price range */}
                     <Box>
                         <FormControl fullWidth>
@@ -54,11 +54,12 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={10} lg={3}>
                     {/* Search */}
                     <TextField
                         label={<SearchIcon/>}
                         className={styles["MuiInputAdornment-standard"]}
+                        fullWidth
                         />
                 </Grid>
             </Grid>
