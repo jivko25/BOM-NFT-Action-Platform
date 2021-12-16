@@ -27,7 +27,7 @@ export default function Explore(){
     }, [priceFilterValue, sortFilterValue])
     //TODO fix spaces between cards
     return(
-        <div style={{position:'relative'}}>
+        <div style={{position:'relative', overflow : "hidden"}}>
         <Header/>
         <Grid container direction="column" spacing={3} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} }>
             <Grid item xs={8}>
