@@ -18,8 +18,8 @@ export default function ActivityFilters({sort, type, onSortFilterChange, onTypeF
 
     return(
         <div className={styles["activity-filters"]}>
-            <Grid container spacing={2}>
-                <Grid item xs={4}>
+            <Grid container spacing={2} justifyContent={"center"}>
+                <Grid item xs={10} lg={3}>
                     {/* Sort by */}
                     <Box>
                         <FormControl fullWidth>
@@ -42,7 +42,7 @@ export default function ActivityFilters({sort, type, onSortFilterChange, onTypeF
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={10} lg={3}>
                     {/* Type */}
                     <Box>
                         <FormControl fullWidth>
@@ -65,11 +65,12 @@ export default function ActivityFilters({sort, type, onSortFilterChange, onTypeF
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={10} lg={3}>
                     {/* Search */}
                     <TextField
                         label={<SearchIcon/>}
                         className={styles.input}
+                        fullWidth
                         />
                 </Grid>
             </Grid>

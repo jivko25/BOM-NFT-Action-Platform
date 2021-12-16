@@ -7,3 +7,9 @@
     background-color: colors.$background_paper;
     border-radius: 1rem;
 }
+
+.avatar{
+        display: grid;
+        justify-content: center;
+        align-content: center;
+}

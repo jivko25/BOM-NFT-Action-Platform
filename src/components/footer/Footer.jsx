@@ -19,14 +19,17 @@ export default function Footer(){
             <Grid item xs={8} md={4}>
                 <Grid container spacing={4}>
                     <Grid item xs={6}>
-                <Button className={styles.policy}>Privacy Policy</Button>
-
+                        <Button className={styles.policy}>Privacy Policy</Button>
                     </Grid>
                     <Grid item xs={6}>
-                <Button className={styles.policy}>Cookie Policy</Button>
-
+                        <Button className={styles.policy}>Cookie Policy</Button>
                     </Grid>
                 </Grid>
+            </Grid>
+            <Grid item xs={12}>
+            <Box display={{xs:"inline", md:"none"}}>
+                <p className={styles.copyright}>Bum all rights reserved 2021</p>
+            </Box>
             </Grid>
         </Grid>
     );
