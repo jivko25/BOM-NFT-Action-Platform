@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Container } from "@mui/material";
 import { Grid} from "@mui/material";
 import ProductInfoCreator from "./ProductInfoCreator";
 import ProductInfoLikes from "./ProductInfoLikes";
@@ -18,30 +18,34 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                 <ProductImage url="images/nft.jpg" />
             </Grid> */}
             <Grid item 
-            xs={9}
+            xs={12} lg={9}
             >
                 <Stack className={styles.stats}>
                     <ProductInfoTitle text={title} /> 
-                    <Grid container direction="row" className={styles.price_status_likes}>
-                        <Grid item xs={isLive ? 9 : 10}>
+                    <Grid container direction="row" className={styles.price_status_likes} justifyContent={"center"}>
+                        <Grid item xs={isLive ? 7 : 8}>
                             <ProductInfoPrice amount={price} currency={currency} />
                         </Grid>
                         {isLive ?
-                        <Grid item xs={1}>
+                        <Grid item xs={2}>
                             <ProductInfoStatus/>
                         </Grid>
                         : null}
-                        <Grid item xs={1}>
+                        <Grid item xs={2}>
                             <ProductInfoLikes amount={likes} />
                         </Grid>
                     </Grid>
-                    <Grid container className={styles.creator_timer}>
-                        <Grid item xs={7}>
-                            <ProductInfoCreator name={creator?.username} avatar={creator?.avatar.url} verified={creator?.verified} ownerId={creator?.id}/>
+                    <Grid container className={styles.creator_timer} spacing={5}>
+                        <Grid item xs={12} md={6} maxWidth={"700px"} justifyContent={"center"}>
+                            {/* <Container> */}
+                                <ProductInfoCreator name={creator?.username} avatar={creator?.avatar.url} verified={creator?.verified} ownerId={creator?.id}/>
+                            {/* </Container> */}
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={12} md={6} maxWidth={"700px"}>
                             {timeEnd > 0 ? 
-                            <ProductInfoTimer timeEnd={timeEnd} onTimeEnd={onTimeEnd}/>
+                            // <Container>
+                                <ProductInfoTimer timeEnd={timeEnd} onTimeEnd={onTimeEnd}/>
+                            // </Container>
                             : null
                             }
                         </Grid>
