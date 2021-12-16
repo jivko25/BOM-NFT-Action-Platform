@@ -12,7 +12,6 @@ export default function Activity() {
   const [sortFilterValue, setSortFilterValue] = useState('');
   const [typeFilterValue, setTypeFilterValue] = useState('');
 
-
   useEffect(async () => {
         await fetch(process.env.apiUrl + '/activities' + '?' +
         (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (typeFilterValue != "" ? `type=${typeFilterValue}` : ''))

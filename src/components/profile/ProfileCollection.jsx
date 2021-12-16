@@ -3,6 +3,7 @@ import ProfileCollectionFilters from './ProfileCollectionFilters';
 import styles from './ProfileCollection.module.scss';
 import Card from '../card/Card';
 import Link from 'next/link';
+import Spacer from '../spacer/Spacer';
 
 export default function ProfileCollection({user, filters, items, sortFilterValue, priceFilterValue, onChangeSortFilterValue, onChangePriceFilterValue}){
     return(
@@ -18,6 +19,7 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
                         <ProfileCollectionFilters sort={filters?.sort} price={filters?.price} sortFilterValue={sortFilterValue} priceFilterValue={priceFilterValue} onChangeSortFilterValue={onChangeSortFilterValue} onChangePriceFilterValue={onChangePriceFilterValue}/>
                     </Grid>
                 </Grid>
+                {items?.length > 0 ? 
                 <Grid container>
                     {
                         items?.map((item, key) => {
@@ -36,6 +38,11 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
                         })
                     }
                 </Grid>
+                :
+                <Container style={{"marginTop" : "50px"}}>
+                <Spacer/>
+                </Container>
+                }
             </Grid>
         </div>
     );

@@ -9,6 +9,7 @@ import React, { useState } from "react"
 import CollectorColumn from "./CollectorColumn";
 import _ from "lodash";
 import { chunk } from "lodash";
+import Spacer from "../spacer/Spacer";
 
 
 export default function TopCollectors({collectors = [], filters = [], onChangeFilterValue, filterValue}){
@@ -45,6 +46,7 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
                       </Select>
                     </Grid >
                 </Grid>
+                {collectors.length > 0 ?
                 <Grid item className={styles.collectorColumns}>
                     <Grid container spacing={4} justifyContent={"center"}>
                       
@@ -58,6 +60,9 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
                 })}
                 </Grid>
                  </Grid>
+                 :
+                 <Spacer item="Collectors"/>
+                }
             </Container>
           );
 }

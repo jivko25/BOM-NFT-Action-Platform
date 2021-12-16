@@ -7,6 +7,8 @@ npm i
 npm run dev
 ```
 
+See the demo of the project: https://bom-nft-auction-platform.vercel.app/
+
 ## 😏 Some tips
 
 - Use the colors from the `src/styles/colors.scss` file

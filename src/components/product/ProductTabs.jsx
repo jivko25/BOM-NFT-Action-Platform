@@ -14,6 +14,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { formatDistance, parseISO } from 'date-fns';
+import Spacer from '../spacer/Spacer';
 
 export default function ProductTabs({text = '', bids = []}) {
   const [value, setValue] = React.useState('details');
@@ -35,12 +36,13 @@ export default function ProductTabs({text = '', bids = []}) {
             <p>{text}</p>
         </TabPanel>
         <TabPanel value="bids">
+          {bids.length > 0 ?
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableBody>
           {
-          bids.sort((a, b) => b.amount - a.amount).map((user, i) => (
-            <TableRow key={i} className={`table-row-${i}`}>
+            bids.sort((a, b) => b.amount - a.amount).map((user, i) => (
+              <TableRow key={i} className={`table-row-${i}`}>
               <TableCell align="right">
                 <User name = {user.user.name} verified = {user.user.verified} avatar = {user.user.avatar}/>
               </TableCell>
@@ -50,13 +52,16 @@ export default function ProductTabs({text = '', bids = []}) {
                   Date.now(),
                   parseISO(user.date),
                   { includeSeconds: true }
-                )
+                  )
               }</TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
             </TableContainer>
+            :
+            <Spacer item="Bids" variant="h2"/>
+        }
         </TabPanel>
       </TabContext>
     </Box>
