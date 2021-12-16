@@ -33,7 +33,7 @@ export default function Product(){
     //TODO fix Live chip position
     //TODO make responsive design
     return(
-        <div style={{position : 'relative'}}>
+        <div style={{position : 'relative', overflow : "hidden"}}>
         <Header/>
         {/* <ProductContainer {...product} owner={product?.owner}/> */}
         <ProductContainer 

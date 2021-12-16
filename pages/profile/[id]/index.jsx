@@ -37,7 +37,7 @@ export default function Index(){
     //TODO fix space between cards
     //TODO fix filter
     return(
-      <div style={{position:'relative'}}>
+      <div style={{position:'relative', overflow : "hidden"}}>
     <Header/>
     <ProfileHero image={profile?.avatar.backgroundUrl}/>
     <ProfileUser 
