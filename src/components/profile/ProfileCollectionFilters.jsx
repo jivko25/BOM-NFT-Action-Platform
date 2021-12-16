@@ -17,11 +17,8 @@ export default function ProfileCollectionFilters({sort, price, sortFilterValue, 
 
     return(
         <div className={styles["profile-collection-filters"]}>
-            <Grid container spacing={2}>
-                {/* <Grid item xs={5}>
-                    <Typography variant={'h2'}>Collection</Typography>
-                </Grid> */}
-                <Grid item xs={4}>
+            <Grid container spacing={2} justifyContent={"center"}>
+                <Grid item xs={10} lg={3}>
                     {/* Sort by */}
                     <Box>
                         <FormControl fullWidth>
@@ -44,7 +41,7 @@ export default function ProfileCollectionFilters({sort, price, sortFilterValue, 
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={10} lg={3}>
                     {/* Price range */}
                     <Box>
                         <FormControl fullWidth>
@@ -67,11 +64,12 @@ export default function ProfileCollectionFilters({sort, price, sortFilterValue, 
                         </FormControl>
                     </Box>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={10} lg={3}>
                     {/* Search */}
                     <TextField
                         label={<SearchIcon/>}
                         className={styles["MuiInputAdornment-standard"]}
+                        fullWidth
                         />
                 </Grid>
             </Grid>

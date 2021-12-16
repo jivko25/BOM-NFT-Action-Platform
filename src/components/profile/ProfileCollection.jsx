@@ -10,12 +10,7 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
         <div className={styles['profile-collection']}>
             <Grid container>
                 <Grid container>
-                    <Grid item xs={3}>
-                        <Typography variant={'h3'}>
-                            Collection
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={12}>
                         <ProfileCollectionFilters sort={filters?.sort} price={filters?.price} sortFilterValue={sortFilterValue} priceFilterValue={priceFilterValue} onChangeSortFilterValue={onChangeSortFilterValue} onChangePriceFilterValue={onChangePriceFilterValue}/>
                     </Grid>
                 </Grid>
@@ -25,7 +20,7 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
                         items?.map((item, key) => {
                             return (
                                 <Link href={`/product/${item.id}`}>
-                            <Grid key={key} item xs={12} sm={3}>
+                            <Grid key={key} item xs={11} sm={6} md={4} xl={3}>
                                 <Card
                                 {...item}
                                 mediaUrl={item.source.url}
@@ -39,7 +34,7 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
                     }
                 </Grid>
                 :
-                <Container style={{"marginTop" : "50px"}}>
+                <Container className={styles.spacer}>
                 <Spacer/>
                 </Container>
                 }

@@ -24,7 +24,7 @@ export default function Activity() {
   }, [sortFilterValue, typeFilterValue])
 
     return (
-      <div style={{position : 'relative'}}>
+      <div style={{position : 'relative', overflow : "hidden"}}>
       <Header/>
       <Hero text="Activity"></Hero>
       <ActivityFilters 
