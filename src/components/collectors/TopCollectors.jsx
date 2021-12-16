@@ -23,11 +23,11 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
 
         return (
             <Container className={styles.container} maxWidth="xl">
-                <Grid container spacing={12}>
-                    <Grid item xs={6} sm={6} md={6} xl={9}>
+                <Grid container spacing={1} justifyContent={"center"}>
+                    <Grid item xs={12} sm={6} md={6} xl={9}>
                         <h1>Top Collectors</h1>
                     </Grid >
-                    <Grid item xs={6} sm={6} md={6} xl={3}>
+                    <Grid item xs={12} sm={6} md={6} xl={3}>
                       <Select 
                       className={styles.select}
                       labelId="select-label"
