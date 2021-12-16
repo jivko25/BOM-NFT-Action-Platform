@@ -16,6 +16,15 @@
     text-align: left;
 }
 
+@media (max-width: 1200px) {
+    .infoDiv {
+        position: relative;
+        top: 20%;
+        padding-left: 10%;
+        text-align: center;
+    }
+  }
+
 .infoDiv h1 {
     font-size: 50px;
 }
