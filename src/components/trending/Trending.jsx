@@ -34,7 +34,7 @@ export default function Trending({cards = [], filters = [], filterValue, onChang
                     {cards.map((card) => {
                         return (
                             <Link href={`/product/${card.id}`} key={card.id}>
-                        <Grid item xs={7} sm={6} md={4} xl={3}>
+                        <Grid item xs={11} sm={6} md={4} xl={3}>
                             <Card
                             {...card}
                             mediaUrl={card.source.url}

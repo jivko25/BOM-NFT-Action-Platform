@@ -29,7 +29,7 @@ export default function Product(){
     //   verified: product.owner['verified'],
     //   avatar: product.owner.avatar['url']
     // }
-    
+
     //TODO fix Live chip position
     //TODO make responsive design
     return(

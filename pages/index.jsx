@@ -116,8 +116,6 @@ export default function Home() {
     link: "https://app.boom.dev/"
   }
 
-  //TODO make How component responsive
-  //TODO make Footer responsive
 
   return (
     <div style={{position : 'relative'}}>

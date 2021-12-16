@@ -5,6 +5,14 @@
     max-width: 90%;
 }
 
+@media (max-width: 1200px) {
+    .product-info-title {
+        font-weight: normal;
+        min-width: 100%;
+        text-align: center;
+    }
+  }
+
 .title {
     font-weight: normal;
     border-bottom: solid colors.$background_paper;
