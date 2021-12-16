@@ -25,6 +25,7 @@ export default function Explore(){
       setNftSortFilter(data?.filters.sort);
       setNftPriceFilter(data?.filters.price);
     }, [priceFilterValue, sortFilterValue])
+    //TODO fix spaces between cards
     return(
         <div style={{position:'relative'}}>
         <Header/>
@@ -50,7 +51,6 @@ export default function Explore(){
                     </Grid>
                 </Grid>
             </Grid>
-            //TODO fix spaces between cards
             <Grid item>
                     <Grid container >
                         {
