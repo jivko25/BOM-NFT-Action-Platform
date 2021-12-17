@@ -27,6 +27,7 @@ import { Link } from "@mui/material"
 import Hero from "../src/components/hero/Hero"
 import Description from "../src/components/description/Description"
 import { formatDistance, parseISO } from 'date-fns';
+import NotFound from '../src/components/404/NotFound.jsx';
 
 
 

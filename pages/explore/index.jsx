@@ -57,7 +57,7 @@ export default function Explore(){
                         {
                             nfts.map((item, index) => {  
                                 return <Link href={`/product/${item.id}`}>
-                                            <Grid item xs={3} key={index} xs={11} sm={6} md={4} xl={3}>
+                                            <Grid item xs={3} key={index} xs={11} md={6} xl={3}>
                                             <Card name = {item.name} 
                                             likes = {item.likes}  
                                             mediaUrl = {item.source.url}  

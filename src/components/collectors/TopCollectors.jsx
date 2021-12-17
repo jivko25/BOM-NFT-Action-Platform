@@ -52,8 +52,7 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
                       
                 {collectorChunks.map((chunk, idx) => {
                     return (
-                        <Grid item xs={10} md={5} xl={3}>
-
+                        <Grid item xs={10} md={5} xl={3} key={idx}>
                             <CollectorColumn items={chunk} key={idx}/>
                         </Grid>
                 );

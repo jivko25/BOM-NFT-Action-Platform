@@ -35,14 +35,14 @@ export default function Trending({cards = [], filters = [], filterValue, onChang
                     {cards.map((card) => {
                         return (
                             <Link href={`/product/${card.id}`} key={card.id}>
-                        <Grid item xs={11} sm={6} md={4} xl={3}>
-                            <Card
-                            {...card}
-                            mediaUrl={card.source.url}
-                            user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
-                            ownerId = {card.owner.id}
-                            />
-                        </Grid>
+                                <Grid item xs={11} md={6} xl={3}>
+                                    <Card
+                                    {...card}
+                                    mediaUrl={card.source.url}
+                                    user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
+                                    ownerId = {card.owner.id}
+                                    />
+                                </Grid>
                             </Link>
                         )
                     })}

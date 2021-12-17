@@ -19,7 +19,7 @@ export default function How({description = '', title ='', items = [], link = ''}
                 <Grid container spacing={5} justifyContent={"center"}>
                 {
                     items.map((item, index)=> {
-                        return <Grid item xs = {10} lg={12}>
+                        return <Grid item xs = {10} lg={12} key={index}>
                             <Step title={item.title} description={item.description} number = {index+1} key={`${item.name}_${index+1}`}/>
                         </Grid>
                     })
