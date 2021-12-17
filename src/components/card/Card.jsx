@@ -35,9 +35,9 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
         <Link href={`/profile/${ownerId}`}>
         <CardHeader 
-            // avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
             avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
         </Link>
+        <div>
         <CardMedia 
             className={styles.media}
             component="img"
@@ -45,11 +45,12 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
             /> 
         {timeLeft > 0 ? <div className={styles.badge}>⚫ Live</div> : null}
         {timeLeft > 0 ? <div className={styles.countdown}><Countdown
-    date={Date.now() + timeLeft * 1000}
-    intervalDelay={10}
-    precision={1}
-    renderer={renderer}/>
-    </div> : null}
+        date={Date.now() + timeLeft * 1000}
+        intervalDelay={10}
+        precision={1}
+        renderer={renderer}/>
+        </div> : null}
+        </div>
         <CardActions disableSpacing sx={{ padding: '0.25rem 1rem 1.375rem 1rem' }}>
                 <div className={styles.cardAction}>
                     <span className={styles.title}>{name}</span>
