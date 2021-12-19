@@ -28,15 +28,87 @@ import Hero from "../src/components/hero/Hero"
 import Description from "../src/components/description/Description"
 import { formatDistance, parseISO } from 'date-fns';
 import NotFound from '../src/components/404/NotFound.jsx';
+import axios from 'axios';
 
 
 
 export default function Home() {
-  //Featured
+  //useStates
   const [featuredCards, setFeaturedCards] = useState([]);
 
+  const [trendingItems, setTrendingItems] = useState([]);
+  const [trendingFilters, setTrendingFilters] = useState([]);
+  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
+
+  const [collectors, setCollectors] = useState([]);
+  const [collectorFilters, setCollectorFilters] = useState([]);
+  const [collectorFilterValue, setCollectorFilterValue] = useState('asc');
+
+  const [auctions, setAuctions] = useState([]);
+  const [auctionFilters, setAuctionFilters] = useState([]);
+  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
+  //Urls
+  const featuredUrl = `${process.env.apiUrl}/featured`;
+
+  const trendingUrl = process.env.apiUrl + '/trending'
+  + (trendingFilterValue != "" ? `?sort=${trendingFilterValue}` : '');
+
+  const collectorUrl = process.env.apiUrl + '/top-collectors'
+  + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : '');
+
+  const auctionUrl = process.env.apiUrl + '/live-auctions'
+  + (auctionFilterValue != "" ? `?sort=${auctionFilterValue}` : '');
+
+  const fetchDataForFirstTime = () => {
+    const getFeatured = axios.get(featuredUrl);
+    const getTrending = axios.get(trendingUrl);
+    const getCollectors = axios.get(collectorUrl);
+    const getAuctions = axios.get(auctionUrl);
+
+    axios.all([getFeatured, getTrending, getCollectors, getAuctions]).then(
+      axios.spread((...data) => {
+        const dataFeatured = data[0].data.nfts;
+        const dataTrending = data[1].data.nfts;
+        const dataCollectors = data[2].data.users;
+        const dataAuctions = data[3].data.nfts;
+
+        console.log(dataAuctions);
+
+        const dataTrendingFilters = data[1].data.filters.sort;
+        const dataCollectorsFilters = data[2].data.filters.sort;
+        const dataAuctionsFilters = data[3].data.filters.price;
+
+        dataFeatured[0].cols = 3;
+        dataFeatured[0].rows = 2;
+        setFeaturedCards(dataFeatured);
+
+        setTrendingItems(dataTrending);
+        setTrendingFilters(dataTrendingFilters)
+
+        setCollectors(dataCollectors.sort((a, b) => b.nftsCount - a.nftsCount));
+        setCollectorFilters(dataCollectorsFilters);
+
+        setAuctions(dataAuctions);
+        setAuctionFilters(dataAuctionsFilters)
+      })
+    )
+  }
+
+  useEffect(() => fetchDataForFirstTime(), []);
+
+
+  const firstUpdateFeatured = useRef(true);
+  const firstUpdateTrending = useRef(true);
+  const firstUpdateCollectors = useRef(true);
+  const firstUpdateAuctions = useRef(true);
+  //Featured
+
   useEffect(() => {
-    fetch(`${process.env.apiUrl}/featured`)
+    if (firstUpdateFeatured.current) {
+      firstUpdateFeatured.current = false;
+      return;
+    }
+    fetch(featuredUrl)
                         .then(res => res.json())
                         .then(data => {
                           data.nfts[0].cols = 3;
@@ -46,26 +118,26 @@ export default function Home() {
   }, []);
 
   //Trending
-  const [trendingItems, setTrendingItems] = useState([]);
-  const [trendingFilters, setTrendingFilters] = useState([]);
-  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
 
   useEffect(async () => {
-    const dataTrending = await fetch(process.env.apiUrl + '/trending'
-    + (trendingFilterValue != "" ? `?sort=${trendingFilterValue}` : ''))
+    if (firstUpdateTrending.current) {
+      firstUpdateTrending.current = false;
+      return;
+    }
+    const dataTrending = await fetch(trendingUrl)
     .then((res) => res.json());
     setTrendingItems(dataTrending?.nfts)
     setTrendingFilters(dataTrending?.filters?.sort)
   }, [trendingFilterValue])
 
   //Collectors
-  const [collectors, setCollectors] = useState([]);
-  const [collectorFilters, setCollectorFilters] = useState([]);
-  const [collectorFilterValue, setCollectorFilterValue] = useState('asc')
 
   useEffect(async () => {
-    await fetch(process.env.apiUrl + '/top-collectors'
-      + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : ''))
+    if (firstUpdateCollectors.current) {
+      firstUpdateCollectors.current = false;
+      return;
+    }
+    await fetch(collectorUrl)
     .then(res => res.json())
     .then(data => {
       setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
@@ -74,13 +146,13 @@ export default function Home() {
   }, [collectorFilterValue])
 
   //Auctions
-  const [auctions, setAuctions] = useState([]);
-  const [auctionFilters, setAuctionFilters] = useState([]);
-  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
 
   useEffect(async () => {
-    await fetch(process.env.apiUrl + '/live-auctions'
-      + (auctionFilterValue != "" ? `?sort=${auctionFilterValue}` : ''))
+    if (firstUpdateAuctions.current) {
+      firstUpdateAuctions.current = false;
+      return;
+    }
+    await fetch(auctionUrl)
     .then(res => res.json())
     .then(data => {
       setAuctions(data.nfts);
