@@ -3,10 +3,7 @@ import Header from "../../../src/components/header/Header";
 import ProductContainer from "../../../src/components/product/ProductContainer";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
-import { timeInSeconds } from "../../../src/helpers/timeConvertor";
 import {parseISO, isAfter} from 'date-fns';
-import { ColorLensTwoTone } from "@mui/icons-material";
-// import nfts from './nfts.json';
 
 export default function Product(){
     const router = useRouter()
@@ -18,31 +15,16 @@ export default function Product(){
       await fetch(`${process.env.apiUrl}/nfts/${id}`)
           .then(res => res.json())
           .then(data => {
-            // console.log(new Date(data.auction_end).getTime() - Date.now())
             data.endTime = (new Date(data.auction_end).getTime() - Date.now())/1000;
             setProduct(data)
           });
     }, [id])
 
-    // const owner = {
-    //   name: product.owner["username"],
-    //   verified: product.owner['verified'],
-    //   avatar: product.owner.avatar['url']
-    // }
 
-    //TODO fix Live chip position
-    //TODO make responsive design
     return(
         <div style={{position : 'relative', overflow : "hidden"}}>
-        <Header/>
-        {/* <ProductContainer {...product} owner={product?.owner}/> */}
         <ProductContainer 
           name={product.name}
-          // owner={{
-          //   username: "Justen_King18",
-          //   verified:true,
-          //   avatar:"https://nft-auction.herokuapp.com/uploads/thumbnail_0x7d9debcf75a71bbb5c533804c9845d313fe3f6aa_ec98dd79b9.jpg"
-          // }}
           owner={product.owner}
 
           price={product.price}
@@ -58,7 +40,6 @@ export default function Product(){
           onBuy={() => {}}
           onBid={() => {}}
       />
-        <Footer/>
         </div>
     );
 }

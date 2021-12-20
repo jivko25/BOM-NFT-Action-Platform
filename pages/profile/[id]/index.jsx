@@ -37,7 +37,6 @@ export default function Index(){
 
     return(
       <div style={{position:'relative', overflow : "hidden"}}>
-        <Header/>
         <ProfileHero image={profile?.avatar.backgroundUrl}/>
         <ProfileUser 
         {...profile}
@@ -56,7 +55,6 @@ export default function Index(){
         onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}
         onChangePriceFilterValue = {(e) => setProfileFiltersPriceValue(e.target.value)}
         />
-        <Footer/>
       </div>
       );
 }

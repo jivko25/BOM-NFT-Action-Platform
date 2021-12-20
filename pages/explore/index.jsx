@@ -1,10 +1,7 @@
-import { Container, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Card from "../../src/components/card/Card";
 import ExploreFilters from "../../src/components/explore/ExploreFilters";
 import ExploreTitle from "../../src/components/explore/ExploreTitle";
-import Footer from "../../src/components/footer/Footer";
-import Header from "../../src/components/header/Header";
-// import nfts from "../../data/nfts.json";
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import Spacer from "../../src/components/spacer/Spacer";
@@ -28,7 +25,6 @@ export default function Explore(){
     }, [priceFilterValue, sortFilterValue])
     return(
         <div style={{position:'relative', overflow : "hidden"}}>
-        <Header/>
         <Grid container direction="column" spacing={3} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} }>
             <Grid item xs={12}>
                 <Grid container spacing={4}>
@@ -82,7 +78,6 @@ export default function Explore(){
             <Spacer/>
             }
         </Grid>
-        <Footer/>
         </div>
     );
 }

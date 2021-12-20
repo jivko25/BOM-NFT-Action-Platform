@@ -1,34 +1,14 @@
-// import dataFeatured from "../data/featured.json"
-// import dataTrending from "../data/trending.json"
-// import dataUsers from "../data/users.json"
-import {timeInSeconds} from '../src/helpers/timeConvertor.js';
-import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
 import Header from "../src/components/header/Header.jsx"
-import Featured from "../src/components/featured/Featured.jsx"
-import Trending from "../src/components/trending/Trending.jsx"
-import TopCollectors from "../src/components/collectors/TopCollectors.jsx"
+import {Featured} from "../src/components/featured/Featured.jsx"
+import {Trending} from "../src/components/trending/Trending.jsx"
+import {TopCollectors} from "../src/components/collectors/TopCollectors.jsx"
 import How from "../src/components/how/How.jsx"
-import Auctions from "../src/components/auctions/Auctions.jsx"
+import {Auctions} from "../src/components/auctions/Auctions.jsx"
 import Footer from "../src/components/footer/Footer.jsx"
-import ProductImage from "../src/components/product/ProductImage"
-import ProductInfoTitle from "../src/components/product/ProductInfoTitle"
-import ProductInfoPrice from "../src/components/product/ProductInfoPrice"
-import ProductInfoStatus from "../src/components/product/ProductInfoStatus"
-import ProductInfoLikes from "../src/components/product/ProductInfoLikes"
-import ProductInfoCreator from "../src/components/product/ProductInfoCreator"
-import ProductInfoTimer from "../src/components/product/ProductInfoTimer"
-import ProductInfo from "../src/components/product/ProductInfo"
-import ProductTabs from "../src/components/product/ProductTabs"
-import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
-import ProductActions from "../src/components/product/ProductActions"
-import ProductContainer from "../src/components/product/ProductContainer"
-import { Link } from "@mui/material"
-import Hero from "../src/components/hero/Hero"
-import Description from "../src/components/description/Description"
-import { formatDistance, parseISO } from 'date-fns';
-import NotFound from '../src/components/404/NotFound.jsx';
 import axios from 'axios';
+import PrivacyPolicy from "../src/components/policy/PrivacyPolicy.jsx"
+import CookiesPolicy from "../src/components/cookies/CookiesPolicy.jsx"
 
 
 
@@ -47,6 +27,7 @@ export default function Home() {
   const [auctions, setAuctions] = useState([]);
   const [auctionFilters, setAuctionFilters] = useState([]);
   const [auctionFilterValue, setAuctionFilterValue] = useState(1);
+
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
 
@@ -95,7 +76,6 @@ export default function Home() {
   }
 
   useEffect(() => fetchDataForFirstTime(), []);
-
 
   const firstUpdateFeatured = useRef(true);
   const firstUpdateTrending = useRef(true);
@@ -192,13 +172,11 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Header />
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
-      <Footer />
     </div>
   )
 }
