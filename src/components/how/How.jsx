@@ -16,7 +16,7 @@ export default function How({description = '', title ='', items = [], link = ''}
                 </div>
             </Grid>
             <Grid item xs = {12} lg = {5}>
-                <Grid container spacing={5} justifyContent={"center"}>
+                <Grid container spacing={8} justifyContent={"center"}>
                 {
                     items.map((item, index)=> {
                         return <Grid item xs = {10} lg={12} key={index}>
