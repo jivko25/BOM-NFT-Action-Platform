@@ -1,6 +1,6 @@
 @use '../../styles/colors.scss';
 
-.login-wrapper{
+.register-wrapper{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -9,15 +9,22 @@
     margin: auto;
     max-width: 400px;
     width: 100%;
-    max-height: 350px;
-    height: 100%;
+    max-height: auto;
+    // height: 100%;
     background-color: colors.$background_paper;
     border-radius: 1rem;
     padding: 2rem;
     justify-items: center; 
 }
 
-.register{
+@media (max-width: 500px) {
+    .register-wrapper{
+        max-width: 90%;
+        width: 100%;
+    }
+}
+
+.login{
     text-align: center;
     padding-top: 1rem;
 }

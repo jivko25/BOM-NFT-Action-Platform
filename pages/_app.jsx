@@ -24,7 +24,7 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        {[`/login`].includes(appProps.router.pathname) ?
+        {[`/login`].includes(appProps.router.pathname) || [`/register`].includes(appProps.router.pathname) ?
         <Component {...pageProps}/>
         :
         <Layout>
