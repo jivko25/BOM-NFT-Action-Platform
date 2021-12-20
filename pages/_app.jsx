@@ -19,7 +19,7 @@ export default function MyApp(props) {
       <Head>
         <title>BOM NFT Auction</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link rel="icon" type="image/x-icon" href='https://cdn-icons-png.flaticon.com/512/4826/4826313.png'></link>
+        <link rel="icon" href="../assets/images/favicon.png" type="image/png"/>
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}

@@ -17,7 +17,8 @@ export default function User({name = '', info = '', avatar = '', size = 55, veri
                 <Avatar url={avatar} size={size} verified={verified}/>
               </Grid>
               <Grid item xs={9}>
-                <Typography variant="p" className={styles.name} noWrap>{name}</Typography>
+                {/* <Typography variant="p" className={styles.name} noWrap>{name}</Typography> */}
+                <p className={styles.name}>{name}</p>
                 <Typography variant="p" className={styles.info} noWrap>{info}</Typography>
               </Grid>
             </Grid>
