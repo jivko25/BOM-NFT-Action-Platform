@@ -22,10 +22,10 @@ export const TopCollectors = React.memo(({collectors = [], filters = [], onChang
         return (
             <Container className={styles.container} maxWidth="xl">
                 <Grid container spacing={1} justifyContent={"center"}>
-                    <Grid item xs={12} sm={6} md={6} xl={9}>
+                    <Grid item xs={12} md={6} xl={9}>
                         <h1>Top Collectors</h1>
                     </Grid >
-                    <Grid item xs={12} sm={6} md={6} xl={3}>
+                    <Grid item xs={12} md={6} xl={3}>
                       <Select 
                       className={styles.select}
                       labelId="select-label"
@@ -49,7 +49,7 @@ export const TopCollectors = React.memo(({collectors = [], filters = [], onChang
                       
                 {collectorChunks.map((chunk, idx) => {
                     return (
-                        <Grid item xs={10} md={5} xl={3} key={idx}>
+                        <Grid item xs={12} md={5} xl={3} key={idx}>
                             <CollectorColumn items={chunk} key={idx}/>
                         </Grid>
                 );

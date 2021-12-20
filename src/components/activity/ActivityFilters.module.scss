@@ -5,7 +5,15 @@
     margin-top: 3%;
     max-width: 50%;
     width: 100%;
-    // width: 50%;
+}
+
+@media (max-width: 1200px) {
+    .activity-filters{
+        margin: auto;
+        margin-top: 3%;
+        max-width: 80%;
+        width: 100%;
+    }
 }
 
 .input{
