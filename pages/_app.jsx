@@ -12,7 +12,7 @@ import { Layout } from '../src/components/layout/Layout';
 const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { Component, emotionCache = clientSideEmotionCache, pageProps, ...appProps } = props;
 
   return (
     <CacheProvider value={emotionCache}>
@@ -24,9 +24,13 @@ export default function MyApp(props) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
+        {[`/login`].includes(appProps.router.pathname) ?
+        <Component {...pageProps}/>
+        :
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        }
       </ThemeProvider>
     </CacheProvider>
   );
