@@ -14,10 +14,10 @@ export const Trending = React.memo(({cards = [], filters = [], filterValue, onCh
         return (
             <Container className={styles.container} maxWidth="xl" >
                 <Grid container spacing={12}>
-                    <Grid item xs={6} sm={6} md={6} xl={9}>
+                    <Grid item xs={8} xl={9}>
                         <h1>Trending</h1>
                     </Grid >
-                    <Grid item xs={6} sm={6} md={6} xl={3}>
+                    <Grid item xs={4} xl={3}>
                       <Select 
                       className={styles.select} 
                       label="Age"
