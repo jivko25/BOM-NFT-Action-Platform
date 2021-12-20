@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import ActivityFilters from '../../src/components/activity/ActivityFilters';
 import ActivityList from '../../src/components/activity/ActivityList';
-import Footer from '../../src/components/footer/Footer';
-import Header from '../../src/components/header/Header';
 import Hero from '../../src/components/hero/Hero';
 
 export default function Activity() {
@@ -25,7 +23,6 @@ export default function Activity() {
 
     return (
       <div style={{position : 'relative', overflow : "hidden"}}>
-      <Header/>
       <Hero text="Activity"></Hero>
       <ActivityFilters 
             sort={activityFilterSort}
@@ -36,7 +33,6 @@ export default function Activity() {
             typeValue = {typeFilterValue}
             />
       <ActivityList items={activity}/>
-      <Footer/>
       </div>
     );
   }

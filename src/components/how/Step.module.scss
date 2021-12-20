@@ -8,6 +8,7 @@
     width: 5%;
     margin-top: -45px;
     margin-bottom: -45px;
+    font-family: colors.$font_primary;
 }
 
 .numberContainer{
@@ -25,10 +26,11 @@
     text-align: center;
     border-top-right-radius: 2rem;
     border-bottom-right-radius: 2rem;
-    background-color: colors.$background_default
+    background-color: colors.$background_default;
 }
 
 .content p{
+    text-align: left;
     font-size: 15px;
     padding-left: 10px;
     padding-right: 10px;

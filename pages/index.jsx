@@ -1,42 +1,94 @@
-// import dataFeatured from "../data/featured.json"
-// import dataTrending from "../data/trending.json"
-// import dataUsers from "../data/users.json"
-import {timeInSeconds} from '../src/helpers/timeConvertor.js';
-import dataNfts from "../data/nfts.json"
 import { useState, useEffect, useRef } from "react"
 import Header from "../src/components/header/Header.jsx"
-import Featured from "../src/components/featured/Featured.jsx"
-import Trending from "../src/components/trending/Trending.jsx"
-import TopCollectors from "../src/components/collectors/TopCollectors.jsx"
+import {Featured} from "../src/components/featured/Featured.jsx"
+import {Trending} from "../src/components/trending/Trending.jsx"
+import {TopCollectors} from "../src/components/collectors/TopCollectors.jsx"
 import How from "../src/components/how/How.jsx"
-import Auctions from "../src/components/auctions/Auctions.jsx"
+import {Auctions} from "../src/components/auctions/Auctions.jsx"
 import Footer from "../src/components/footer/Footer.jsx"
-import ProductImage from "../src/components/product/ProductImage"
-import ProductInfoTitle from "../src/components/product/ProductInfoTitle"
-import ProductInfoPrice from "../src/components/product/ProductInfoPrice"
-import ProductInfoStatus from "../src/components/product/ProductInfoStatus"
-import ProductInfoLikes from "../src/components/product/ProductInfoLikes"
-import ProductInfoCreator from "../src/components/product/ProductInfoCreator"
-import ProductInfoTimer from "../src/components/product/ProductInfoTimer"
-import ProductInfo from "../src/components/product/ProductInfo"
-import ProductTabs from "../src/components/product/ProductTabs"
-import { LoremIpsum, Avatar, loremIpsum } from 'react-lorem-ipsum'
-import ProductActions from "../src/components/product/ProductActions"
-import ProductContainer from "../src/components/product/ProductContainer"
-import { Link } from "@mui/material"
-import Hero from "../src/components/hero/Hero"
-import Description from "../src/components/description/Description"
-import { formatDistance, parseISO } from 'date-fns';
-import NotFound from '../src/components/404/NotFound.jsx';
+import axios from 'axios';
+import PrivacyPolicy from "../src/components/policy/PrivacyPolicy.jsx"
+import CookiesPolicy from "../src/components/cookies/CookiesPolicy.jsx"
 
 
 
 export default function Home() {
-  //Featured
+  //useStates
   const [featuredCards, setFeaturedCards] = useState([]);
 
+  const [trendingItems, setTrendingItems] = useState([]);
+  const [trendingFilters, setTrendingFilters] = useState([]);
+  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
+
+  const [collectors, setCollectors] = useState([]);
+  const [collectorFilters, setCollectorFilters] = useState([]);
+  const [collectorFilterValue, setCollectorFilterValue] = useState('asc');
+
+  const [auctions, setAuctions] = useState([]);
+  const [auctionFilters, setAuctionFilters] = useState([]);
+  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
+
+  //Urls
+  const featuredUrl = `${process.env.apiUrl}/featured`;
+
+  const trendingUrl = process.env.apiUrl + '/trending'
+  + (trendingFilterValue != "" ? `?sort=${trendingFilterValue}` : '');
+
+  const collectorUrl = process.env.apiUrl + '/top-collectors'
+  + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : '');
+
+  const auctionUrl = process.env.apiUrl + '/live-auctions'
+  + (auctionFilterValue != "" ? `?sort=${auctionFilterValue}` : '');
+
+  const fetchDataForFirstTime = () => {
+    const getFeatured = axios.get(featuredUrl);
+    const getTrending = axios.get(trendingUrl);
+    const getCollectors = axios.get(collectorUrl);
+    const getAuctions = axios.get(auctionUrl);
+
+    axios.all([getFeatured, getTrending, getCollectors, getAuctions]).then(
+      axios.spread((...data) => {
+        const dataFeatured = data[0].data.nfts;
+        const dataTrending = data[1].data.nfts;
+        const dataCollectors = data[2].data.users;
+        const dataAuctions = data[3].data.nfts;
+
+        console.log(dataAuctions);
+
+        const dataTrendingFilters = data[1].data.filters.sort;
+        const dataCollectorsFilters = data[2].data.filters.sort;
+        const dataAuctionsFilters = data[3].data.filters.price;
+
+        dataFeatured[0].cols = 3;
+        dataFeatured[0].rows = 2;
+        setFeaturedCards(dataFeatured);
+
+        setTrendingItems(dataTrending);
+        setTrendingFilters(dataTrendingFilters)
+
+        setCollectors(dataCollectors.sort((a, b) => b.nftsCount - a.nftsCount));
+        setCollectorFilters(dataCollectorsFilters);
+
+        setAuctions(dataAuctions);
+        setAuctionFilters(dataAuctionsFilters)
+      })
+    )
+  }
+
+  useEffect(() => fetchDataForFirstTime(), []);
+
+  const firstUpdateFeatured = useRef(true);
+  const firstUpdateTrending = useRef(true);
+  const firstUpdateCollectors = useRef(true);
+  const firstUpdateAuctions = useRef(true);
+  //Featured
+
   useEffect(() => {
-    fetch(`${process.env.apiUrl}/featured`)
+    if (firstUpdateFeatured.current) {
+      firstUpdateFeatured.current = false;
+      return;
+    }
+    fetch(featuredUrl)
                         .then(res => res.json())
                         .then(data => {
                           data.nfts[0].cols = 3;
@@ -46,26 +98,26 @@ export default function Home() {
   }, []);
 
   //Trending
-  const [trendingItems, setTrendingItems] = useState([]);
-  const [trendingFilters, setTrendingFilters] = useState([]);
-  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
 
   useEffect(async () => {
-    const dataTrending = await fetch(process.env.apiUrl + '/trending'
-    + (trendingFilterValue != "" ? `?sort=${trendingFilterValue}` : ''))
+    if (firstUpdateTrending.current) {
+      firstUpdateTrending.current = false;
+      return;
+    }
+    const dataTrending = await fetch(trendingUrl)
     .then((res) => res.json());
     setTrendingItems(dataTrending?.nfts)
     setTrendingFilters(dataTrending?.filters?.sort)
   }, [trendingFilterValue])
 
   //Collectors
-  const [collectors, setCollectors] = useState([]);
-  const [collectorFilters, setCollectorFilters] = useState([]);
-  const [collectorFilterValue, setCollectorFilterValue] = useState('asc')
 
   useEffect(async () => {
-    await fetch(process.env.apiUrl + '/top-collectors'
-      + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : ''))
+    if (firstUpdateCollectors.current) {
+      firstUpdateCollectors.current = false;
+      return;
+    }
+    await fetch(collectorUrl)
     .then(res => res.json())
     .then(data => {
       setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
@@ -74,13 +126,13 @@ export default function Home() {
   }, [collectorFilterValue])
 
   //Auctions
-  const [auctions, setAuctions] = useState([]);
-  const [auctionFilters, setAuctionFilters] = useState([]);
-  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
 
   useEffect(async () => {
-    await fetch(process.env.apiUrl + '/live-auctions'
-      + (auctionFilterValue != "" ? `?sort=${auctionFilterValue}` : ''))
+    if (firstUpdateAuctions.current) {
+      firstUpdateAuctions.current = false;
+      return;
+    }
+    await fetch(auctionUrl)
     .then(res => res.json())
     .then(data => {
       setAuctions(data.nfts);
@@ -120,13 +172,11 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Header />
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
-      <Footer />
     </div>
   )
 }

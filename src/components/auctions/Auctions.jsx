@@ -9,14 +9,14 @@ import Link from 'next/link';
 import Spacer from '../spacer/Spacer';
 
 
-export default function Auctions({cards = [], filters = [], onChangeFilterValue, filterValue}){
+export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterValue, filterValue}) => {
         const [timeOption, setTimeOption] = useState();
 
         return (
             <Container className={styles.container} maxWidth="xl">
                 <Grid container spacing={12}>
                     <Grid item xs={6} sm={6} md={6} xl={9}>
-                        <h1>Live Auctions</h1>
+                        <h1>🔥Live Auctions</h1>
                     </Grid >
                     <Grid item xs={6} sm={6} md={6} xl={3}>
                       <Select className={styles.select} label="Age"
@@ -40,6 +40,7 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
                                     mediaUrl={card.source.url}
                                     user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
                                     ownerId = {card.owner.id}
+                                    timeLeft={(new Date(card.auction_end).getTime() - Date.now())/1000}
                                     />
                                 </Grid>
                             </Link>
@@ -51,4 +52,4 @@ export default function Auctions({cards = [], filters = [], onChangeFilterValue,
                 }
             </Container>
           );
-}
+})

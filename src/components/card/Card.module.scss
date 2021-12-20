@@ -10,14 +10,23 @@
     margin-left: auto;
 }
 
+.card:hover{
+    cursor:pointer;
+}
+
 .cardActive{
     position: relative;
     max-width: 21rem;
+    width: 100%;
     border-radius: 0.9375rem;
     background-color: #264645 !important;
     margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
+}
+
+.cardActive:hover{
+    cursor:pointer;
 }
 
 .badge{
@@ -44,8 +53,8 @@
     top: 345px;
     left: 0.95rem;
     height: auto;
-    // width: 19.1rem;
-    width: 91%;
+    max-width: 91%;
+    width: 100%;
     padding: 0.625rem 0.9375rem;
     border-bottom-left-radius: 1.875rem;
     border-bottom-right-radius: 1.875rem;
@@ -82,7 +91,8 @@
     border-color: #000;
     color: colors.$secondary_main !important; 
     background-color: #1a2e2d !important;
-    height: 2rem ;
+    max-height: 2rem ;
+    height: 100%;
     border-radius: 1.25rem ;
     font-size: 1rem ;
     font-weight: 600;

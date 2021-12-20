@@ -2,9 +2,10 @@ import { Container, ImageList, ImageListItem } from "@mui/material";
 import { useRouter } from "next/router";
 import styles from "./Featured.module.scss"
 import Link from 'next/link';
+import React from "react";
 
 
-export default function Featured({items = []}){    
+export const Featured = React.memo(({items = []}) => {    
     return (
         <div className={styles.wrapper}>
             <Container>
@@ -27,4 +28,4 @@ export default function Featured({items = []}){
             </Container>
         </div>
     )
-}
+});

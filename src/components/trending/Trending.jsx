@@ -9,7 +9,7 @@ import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 import Spacer from "../spacer/Spacer";
 
-export default function Trending({cards = [], filters = [], filterValue, onChangeFilterValue}){
+export const Trending = React.memo(({cards = [], filters = [], filterValue, onChangeFilterValue}) => {
     
         return (
             <Container className={styles.container} maxWidth="xl" >
@@ -52,4 +52,4 @@ export default function Trending({cards = [], filters = [], filterValue, onChang
                 }
             </Container>
           );
-}
+})

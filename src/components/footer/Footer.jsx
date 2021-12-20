@@ -5,7 +5,7 @@ import Logo from "../logo/Logo"
 import { Box, Grid } from "@mui/material";
 import { Button } from "@mui/material";
 
-export default function Footer(){
+export default function Footer({handleOpenPrivacyPolicy, handleOpenCookiePolicy}){
     return (
         <Grid container className={styles.container}>
             <Grid item xs={4}>
@@ -19,10 +19,10 @@ export default function Footer(){
             <Grid item xs={8} md={4}>
                 <Grid container spacing={4}>
                     <Grid item xs={6}>
-                        <Button className={styles.policy}>Privacy Policy</Button>
+                        <Button className={styles.policy} onClick={handleOpenPrivacyPolicy}>Privacy Policy</Button>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button className={styles.policy}>Cookie Policy</Button>
+                        <Button className={styles.policy} onClick={handleOpenCookiePolicy}>Cookie Policy</Button>
                     </Grid>
                 </Grid>
             </Grid>
