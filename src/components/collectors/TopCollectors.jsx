@@ -1,18 +1,15 @@
 import Container from "@mui/material/Container";
 import styles from "./TopCollectors.module.scss";
-import Card from "../card/Card"
 import Select from '@mui/material/Select';
 import { Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
-import Collector from "./Collector";
 import React, { useState } from "react"
 import CollectorColumn from "./CollectorColumn";
 import _ from "lodash";
-import { chunk } from "lodash";
 import Spacer from "../spacer/Spacer";
 
 
-export default function TopCollectors({collectors = [], filters = [], onChangeFilterValue, filterValue}){
+export const TopCollectors = React.memo(({collectors = [], filters = [], onChangeFilterValue, filterValue}) => {
 
         const res = collectors.map((element, idx) => ({
             ...element,
@@ -64,4 +61,4 @@ export default function TopCollectors({collectors = [], filters = [], onChangeFi
                 }
             </Container>
           );
-}
+})

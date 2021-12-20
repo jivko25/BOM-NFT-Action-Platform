@@ -70,13 +70,13 @@ function Header(){
                         <Container>
                         <Grid container spacing={10}>
                             <Grid item md={3}>
-                        <Link href='/'><Button variant="text" color="inherit">Home</Button></Link>
+                        <Link href='/'><Button variant="text" color="inherit" className={styles.homeBtn}>Home</Button></Link>
                             </Grid>
                             <Grid item md={3}>
-                        <Link href='/activity'><Button variant="text" color="inherit">Activity</Button></Link>
+                        <Link href='/activity'><Button variant="text" color="inherit" className={styles.activityBtn}>Activity</Button></Link>
                             </Grid>
                             <Grid item md={3}>
-                        <Link href='/explore'><Button variant="contained">Explore</Button></Link>
+                        <Link href='/explore'><Button variant="contained" className={styles.exploreBtn} >Explore</Button></Link>
                             </Grid>
                         </Grid>
                         </Container>

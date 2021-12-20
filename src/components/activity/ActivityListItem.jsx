@@ -6,21 +6,24 @@ import Link from '../link/Link';
 // import { Link } from "react-router-dom";
 
 export default function ActivityListItem({created_at, user, nft, type = "like"}){
+    console.log(user);
     return(
         <div className={styles["activity-list-item"]}>
             <Grid container>
-                <Grid item xs={4} lg={3} className={styles.avatar}>
+                <Grid item xs={4} lg={2} className={styles.avatar}>
+                    <Link href={`/profile/${user.id}`}>
                     <Avatar url={user.avatar.url} verified={user.confirmed} size={70}/>
+                    </Link>
                 </Grid>
-                <Grid item xs={8} lg={9}>
+                <Grid item xs={8} lg={10}>
                     <p>{nft.owner.username} {type}  
                     &ensp;
-                    <Link href="/">
+                    <Link href={`/product/${nft.id}`}>
                     "{nft.name}"
                     </Link>
                     &ensp;by&ensp;
-                     <Link href="/">
-                     {user.name}
+                     <Link href={`/profile/${user.id}`}>
+                     {user.username}
                      </Link>
                      </p>
                      <p>
