@@ -7,6 +7,11 @@ import { useState } from "react";
 
 
 export const Featured = React.memo(({items = []}) => {  
+    if (typeof window === "undefined") {
+        return(
+            <div></div>
+        )
+      }
     const [width, setWidth] =  useState(window.innerWidth);
 
     window.addEventListener("resize", function () {
