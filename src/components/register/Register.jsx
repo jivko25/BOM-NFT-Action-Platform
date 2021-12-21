@@ -33,12 +33,12 @@ export default function Register(){
               </Grid>
               <Grid item>
                 <Container>
-                    <TextField label="Password" variant="outlined" onChange={(e) => {setPassword(e.target.value)}} fullWidth />
+                    <TextField label="Password" variant="outlined" type="password" onChange={(e) => {setPassword(e.target.value)}} fullWidth />
                 </Container>
               </Grid>
               <Grid item>
                 <Container>
-                    <TextField label="Repeat Password" variant="outlined" fullWidth/>
+                    <TextField label="Repeat Password" type="password" variant="outlined" fullWidth/>
                 </Container>
               </Grid>
               <Grid item>

@@ -53,8 +53,6 @@ export default function Home() {
         const dataCollectors = data[2].data.users;
         const dataAuctions = data[3].data.nfts;
 
-        console.log(dataAuctions);
-
         const dataTrendingFilters = data[1].data.filters.sort;
         const dataCollectorsFilters = data[2].data.filters.sort;
         const dataAuctionsFilters = data[3].data.filters.price;
