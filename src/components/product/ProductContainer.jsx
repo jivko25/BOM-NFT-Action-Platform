@@ -9,7 +9,7 @@ import ProductActions from "./ProductActions";
 export default function ProductContainer({name, owner, price, currency, likes, auction_end, isLive, details, bids, source, bidAmount, onBuy, onBid, timeEnd}){
     return(
         <div className={styles["product-container"]}>
-            <Grid container justifyContent>
+            <Grid container>
                 <Grid item xs={12} md={6} justifyContent={"center"}>
                     <ProductImage url={source?.url}/>
                 </Grid>

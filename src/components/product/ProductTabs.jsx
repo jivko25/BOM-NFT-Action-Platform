@@ -38,16 +38,16 @@ export default function ProductTabs({text = '', bids = []}) {
         <TabPanel value="bids">
           {bids.length > 0 ?
         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table>
         <TableBody>
           {
             bids.sort((a, b) => b.amount - a.amount).map((user, i) => (
               <TableRow key={i} className={`table-row-${i}`}>
-              <TableCell align="right">
-                <User name = {user.user.name} verified = {user.user.verified} avatar = {user.user.avatar}/>
+              <TableCell>
+                <User name = {user.user.name} verified = {user.user.verified} avatar = {user.user.avatar} size={30} variant='small'/>
               </TableCell>
-              <TableCell align="right">{user.amount}</TableCell>
-              <TableCell align="right">{
+              <TableCell style={{fontSize : '8px'}}>{user.amount}</TableCell>
+              <TableCell style={{fontSize : '8px'}}>{
                 formatDistance(
                   Date.now(),
                   parseISO(user.date),

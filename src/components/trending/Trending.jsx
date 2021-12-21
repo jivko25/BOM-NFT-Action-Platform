@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import styles from "./Trending.module.scss";
 import Card from "../card/Card"
 import Select from '@mui/material/Select';
-import { Grid } from "@mui/material";
+import { FormControl, Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 import Spacer from "../spacer/Spacer";
@@ -12,12 +12,13 @@ import Spacer from "../spacer/Spacer";
 export const Trending = React.memo(({cards = [], filters = [], filterValue, onChangeFilterValue}) => {
     
         return (
-            <Container className={styles.container} maxWidth="xl" >
-                <Grid container spacing={12}>
-                    <Grid item xs={8} xl={9}>
-                        <h1>Trending</h1>
+            <Container className={styles.container}>
+                <Grid container spacing={1} justifyContent={"center"}>
+                    <Grid item xs={10} lg={9}>
+                        <h1 className={styles.title}>Trending</h1>
                     </Grid >
-                    <Grid item xs={4} xl={3}>
+                    <Grid item xs={10} sm={6} lg={3} justifyContent={"center"}>
+                    <FormControl fullWidth>
                       <Select 
                       className={styles.select} 
                       label="Age"
@@ -28,6 +29,7 @@ export const Trending = React.memo(({cards = [], filters = [], filterValue, onCh
                           })
                           }
                       </Select>
+                    </FormControl>
                     </Grid >
                 </Grid>
                 {cards.length > 0 ? 

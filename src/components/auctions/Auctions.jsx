@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import styles from "./Auctions.module.scss";
 import Card from "../card/Card"
 import Select from '@mui/material/Select';
-import { Grid } from "@mui/material";
+import { FormControl, Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 import Spacer from '../spacer/Spacer';
@@ -13,12 +13,13 @@ export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterVal
         const [timeOption, setTimeOption] = useState();
 
         return (
-            <Container className={styles.container} maxWidth="xl">
-                <Grid container spacing={12}>
-                    <Grid item xs={8} xl={9}>
-                        <h1>🔥Live Auctions</h1>
+            <Container className={styles.container}>
+                <Grid container spacing={1} justifyContent={"center"}>
+                    <Grid item xs={10} lg={9}>
+                        <h1 className={styles.title}>🔥Live Auctions🔥</h1>
                     </Grid >
-                    <Grid item xs={4} xl={3}>
+                    <Grid item xs={10} sm={6} lg={3} justifyContent={"center"}>
+                    <FormControl fullWidth>
                       <Select className={styles.select} label="Age"
                       value={filterValue}
                       onChange={onChangeFilterValue}>
@@ -27,6 +28,7 @@ export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterVal
                           })
                           }
                       </Select>
+                    </FormControl>
                     </Grid >
                 </Grid>
                 {cards.length > 0 ?

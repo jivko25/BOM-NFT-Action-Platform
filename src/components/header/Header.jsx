@@ -44,15 +44,14 @@ function Header(){
         <div className={styles.nav}>
             <div className={styles.wrapper}>
                 <Grid container className={styles.container}>
-                    <Box
-                    component={Grid}
-                    item
-                    sm={3} 
-                    display={{ xs: "none", sm: "block" }}>
                     <Grid item className={styles.logoContainer}>
                         <Logo />
                     </Grid>
-                    </Box>
+                    <Box
+                    component={Grid}
+                    item
+                    md={5}
+                    display={{ xs: "none", sm: "block" }}>
                     <Grid item xs>
                         <InputBase
                             startAdornment={<SearchIcon/>}
@@ -61,6 +60,7 @@ function Header(){
                         >
                         </InputBase>
                     </Grid>
+                    </Box>
                     <Box
                     component={Grid}
                     item
