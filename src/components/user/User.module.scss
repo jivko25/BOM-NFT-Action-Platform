@@ -9,8 +9,15 @@
 
 .name{
     color: colors.$text_primary;
-    margin: 0rem;
-    font-size: 1rem;
+    font-size: 12px;
+    font-weight: bold;
+    display: inline;
+    overflow-wrap: break-all;
+}
+
+.smallName{
+    color: colors.$text_primary;
+    font-size: 8px;
     font-weight: bold;
     display: inline;
     overflow-wrap: break-all;

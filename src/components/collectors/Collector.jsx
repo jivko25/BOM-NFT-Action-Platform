@@ -12,8 +12,8 @@ export default function Collector({name = '', nftsCount = 0, avatar = '', verifi
                 <p className={styles.id}>{id}</p>
             </Grid>
             <Link href={`/profile/${profileId}`}>
-            <Grid item xl = {9} className={styles.content} xs zeroMinWidth>
-                <User name = {name} info = {nftsCount > 1 ? `${nftsCount} items` : `${nftsCount} item`} avatar = {avatar} verified = {verified}/>
+            <Grid item xl = {9} className={styles.content} justifyContent={"left"}>
+                <User name = {name} info = {nftsCount > 1 ? `${nftsCount} items` : `${nftsCount} item`} avatar = {avatar} verified = {verified} size={45}/>
             </Grid>
             </Link>
         </Grid>

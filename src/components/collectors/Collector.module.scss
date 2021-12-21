@@ -3,6 +3,8 @@
 .wrapper_upper{
     background-color: rgba(colors.$primary_main, 10%);
     border-radius: 2rem 2rem 0 0;
+    max-width: 400px;
+    width: 100%;
 }
 
 .number_upper{
@@ -14,6 +16,8 @@
 .wrapper_down{
     background-color: rgba(colors.$primary_main, 10%);
     border-radius: 0 0 2rem 2rem;
+    max-width: 400px;
+    width: 100%;
 }
 
 .number_down{
@@ -24,6 +28,9 @@
 
 .wrapper{
     background-color: #2F1D81;
+    max-width: 400px;
+    width: 100%;
+    min-width: 200px;
 }
 
 .number{
@@ -32,9 +39,12 @@
 }
 
 .content{
-    padding: 3%;
+    padding: 6%;
     max-width: 300px;
     color: colors.$text_primary;
+    overflow: hidden;
+    white-space: nowrap; /* Don't forget this one */
+    text-overflow: ellipsis;
 }
 
 .id{

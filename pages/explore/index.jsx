@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import Card from "../../src/components/card/Card";
 import ExploreFilters from "../../src/components/explore/ExploreFilters";
 import ExploreTitle from "../../src/components/explore/ExploreTitle";
@@ -25,7 +25,8 @@ export default function Explore(){
     }, [priceFilterValue, sortFilterValue])
     return(
         <div style={{position:'relative', overflow : "hidden"}}>
-        <Grid container direction="column" spacing={3} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} }>
+        <Container>
+        <Grid container direction="column" spacing={1} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} } justifyContent={'center'}>
             <Grid item xs={12}>
                 <Grid container spacing={4}>
                     <Grid item xs={12}>
@@ -49,7 +50,7 @@ export default function Explore(){
             </Grid>
             {nfts.length > 0 ?
             <Grid item>
-                    <Grid container >
+                    <Grid container spacing={1} justifyContent="center">
                         {
                             nfts.map((item, index) => {  
                                 return <Link href={`/product/${item.id}`}>
@@ -78,6 +79,7 @@ export default function Explore(){
             <Spacer/>
             }
         </Grid>
+        </Container>
         </div>
     );
 }

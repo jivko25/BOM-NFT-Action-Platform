@@ -14,6 +14,11 @@
 
 .collectorColumns {
     display: grid;
-    // grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    width: auto;
+  }
+
+  @media (max-width : 1200px) {
+    .title {
+      text-align: center;
+    }
   }
