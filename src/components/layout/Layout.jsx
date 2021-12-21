@@ -12,8 +12,8 @@ export const Layout = React.memo(({children}) => {
             <Header/>
                 {children}
             <Footer handleOpenPrivacyPolicy = {() => {setPrivacyPolicyOpen(true)}} handleOpenCookiePolicy = {() => {setCookiePolicyOpen(true)}}/>
-            <PrivacyPolicy isOpen={privacyPolicyOpen} handleClose={() => {setPrivacyPolicyOpen(false)}}/>
-            <CookiesPolicy isOpen={cookiePolicyOpen} handleClose={() => {setCookiePolicyOpen(false)}}/>
+            {/* <PrivacyPolicy isOpen={privacyPolicyOpen} handleClose={() => {setPrivacyPolicyOpen(false)}}/>
+            <CookiesPolicy isOpen={cookiePolicyOpen} handleClose={() => {setCookiePolicyOpen(false)}}/> */}
         </div>
     )
 });
