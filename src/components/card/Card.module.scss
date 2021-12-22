@@ -71,6 +71,15 @@
 @media (max-width : 1335px) {
     .countdown{
         max-width: 91%;
+        min-width: 85%;
+    }
+}
+
+@media (max-width : 380px) {
+    .countdown{
+        max-width: 91%;
+        width: 88%;
+        min-width: 85%;
     }
 }
 
