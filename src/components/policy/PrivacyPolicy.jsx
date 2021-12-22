@@ -10,7 +10,7 @@ export default function PrivacyPolicy({isOpen, handleClose}){
 
     const handleScroll = (e) =>{
         const content = e.target
-        if ((content.scrollTop + content.offsetHeight) >= content.scrollHeight) {
+        if ((content.scrollTop + content.offsetHeight) >= content.scrollHeight-1) {
             setReachTheEnd(true);
         } 
     }

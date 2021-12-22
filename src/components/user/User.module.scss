@@ -23,6 +23,14 @@
     overflow-wrap: break-all;
 }
 
+.largeName{
+    color: colors.$text_primary;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline;
+    overflow-wrap: break-all;
+}
+
 .info {
     color: colors.$success_main;
     margin: 0rem;
