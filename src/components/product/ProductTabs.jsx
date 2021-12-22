@@ -46,8 +46,8 @@ export default function ProductTabs({text = '', bids = []}) {
               <TableCell>
                 <User name = {user.user.name} verified = {user.user.verified} avatar = {user.user.avatar} size={30} variant='small'/>
               </TableCell>
-              <TableCell style={{fontSize : '8px'}}>{user.amount}</TableCell>
-              <TableCell style={{fontSize : '8px'}}>{
+              <TableCell style={{fontSize : '14px'}}>{user.amount}</TableCell>
+              <TableCell style={{fontSize : '14px'}}>{
                 formatDistance(
                   Date.now(),
                   parseISO(user.date),
