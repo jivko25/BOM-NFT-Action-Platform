@@ -11,7 +11,20 @@ export default function Register(){
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [repassword, setRepassword] = useState();
     const [error, setError] = useState({error : false, message : ''});
+
+
+    const validatePassword = (e) => {
+      // console.log(password);
+      // e.target.value.length >= 6 ?
+      // e.target.value.length == repassword ?
+       setPassword(e.target.value)
+      //  :
+      //  null
+      //  : 
+      //    setError({error: true, message: 'Password need to be at least 6 symbols'})
+    }
 
     const handleClick = () => {
       setError({error : false, message : ''});
@@ -26,6 +39,7 @@ export default function Register(){
   };
 
     async function register(){
+      if(password == repassword){
         const res = await axios.post(`${process.env.api}/users`, {
             "username" : username,
             "email" : email,
@@ -42,6 +56,10 @@ export default function Register(){
         }
         sessionStorage.setItem('user', JSON.stringify(user));
         }
+      }
+      else{
+        setError({error : true, message : "Password and Repeat Password dont match"})
+      }
     }
     return(
       <div>
@@ -49,22 +67,22 @@ export default function Register(){
             <Grid container direction={"column"} spacing={3}>
               <Grid item>
                 <Container>
-                    <TextField label="Username" variant="outlined" onChange={(e) => {setUsername(e.target.value)}} fullWidth/>
+                    <TextField label="Username" variant="outlined" error={error.message && error.message.toLocaleLowerCase().includes('username')} onChange={(e) => {setUsername(e.target.value)}} fullWidth/>
                 </Container>
               </Grid>
               <Grid item>
                 <Container>
-                    <TextField label="Email" variant="outlined" onChange={(e) => {setEmail(e.target.value)}} fullWidth/>
+                    <TextField label="Email" variant="outlined" error={error.message && error.message.toLocaleLowerCase().includes('email')} onChange={(e) => {setEmail(e.target.value)}} fullWidth/>
                 </Container>
               </Grid>
               <Grid item>
                 <Container>
-                    <TextField label="Password" variant="outlined" type="password" onChange={(e) => {setPassword(e.target.value)}} fullWidth />
+                    <TextField label="Password" variant="outlined" type="password" error={error.message && error.message.toLocaleLowerCase().includes('password')} onChange={validatePassword} fullWidth />
                 </Container>
               </Grid>
               <Grid item>
                 <Container>
-                    <TextField label="Repeat Password" type="password" variant="outlined" fullWidth/>
+                    <TextField label="Repeat Password" type="password" variant="outlined" error={(error.error & password !== repassword) || error.message && error.message.toLocaleLowerCase().includes('password')} onChange={(e) => {setRepassword(e.target.value)}} fullWidth/>
                 </Container>
               </Grid>
               <Grid item>

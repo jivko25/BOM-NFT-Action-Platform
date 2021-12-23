@@ -31,14 +31,15 @@ export default function Login(){
         }, {headers: process.env.headers})
         .catch((error) => {
             setError({error : true, message: error.response.data.error});
-          });
+        });
         if(res?.data){
-        router.push('/');
-        const user = {
-            token : res.data.sessionToken,
-            username : res.data.username
-        }
-        sessionStorage.setItem('user', JSON.stringify(user));
+            const user = {
+                token : res.data.sessionToken,
+                username : res.data.username
+            }
+            sessionStorage.setItem('user', JSON.stringify(user));
+            setError({error : false, message : ''})
+            router.push('/');
         }
     }
     return(
@@ -51,7 +52,7 @@ export default function Login(){
                             label="Username" 
                             variant="outlined" 
                             onChange={(e) => {setUsername(e.target.value)}}
-                            error={error}
+                            error={error.error}
                             fullWidth/>
                     </Container>
                 </Grid>
@@ -62,7 +63,7 @@ export default function Login(){
                         variant="outlined" 
                         type="password" 
                         onChange={(e) => {setPassword(e.target.value)}} 
-                        error={error}
+                        error={error.error}
                         fullWidth />
                     </Container>
                 </Grid>
