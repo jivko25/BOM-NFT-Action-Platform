@@ -10,7 +10,7 @@ export default function ProductInfoCreator({name, avatar, verified=false, ownerI
             </div>
                 <Link href={`/profile/${ownerId}`}>
             <div className={styles["user-container"]}>
-                <User name={name} size={50} avatar={avatar} verified={verified}/>
+                <User name={name} size={50} avatar={avatar} verified={verified} variant="normal"/>
             </div>
                 </Link>
         </div>
