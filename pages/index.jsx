@@ -9,6 +9,7 @@ import Footer from "../src/components/footer/Footer.jsx"
 import axios from 'axios';
 import PrivacyPolicy from "../src/components/policy/PrivacyPolicy.jsx"
 import CookiesPolicy from "../src/components/cookies/CookiesPolicy.jsx"
+import Navigation from "../src/components/navigation/Navigation.jsx"
 
 
 
@@ -170,6 +171,7 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
+      <Navigation/>
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>

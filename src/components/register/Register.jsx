@@ -1,14 +1,29 @@
 import styles from './Register.module.scss';
 import Grid from '@mui/material/Grid'
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { Alert, Button, Container, Snackbar, TextField, Typography } from '@mui/material';
 import Link from '../link/Link';
 import axios from 'axios';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Register(){
+    const router = useRouter();
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [error, setError] = useState({error : false, message : ''});
+
+    const handleClick = () => {
+      setError({error : false, message : ''});
+  };
+
+  const handleClose = (event, reason) => {
+      if (reason === 'clickaway') {
+      return;
+      }
+
+      setError({error : false, message : ''});
+  };
 
     async function register(){
         const res = await axios.post(`${process.env.api}/users`, {
@@ -16,9 +31,20 @@ export default function Register(){
             "email" : email,
             "password" : password
         }, {headers: process.env.headers})
-        console.log(res);
+        .catch((error) => {
+          setError({error : true, message: error.response.data.error});
+        });
+        if(res?.data){
+        router.push('/');
+        const user = {
+            token : res.data.sessionToken,
+            username : username
+        }
+        sessionStorage.setItem('user', JSON.stringify(user));
+        }
     }
     return(
+      <div>
         <div className={styles["register-wrapper"]}>
             <Grid container direction={"column"} spacing={3}>
               <Grid item>
@@ -53,5 +79,11 @@ export default function Register(){
               </Grid>
             </Grid>
         </div>
+        <Snackbar open={error.error} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {error.message}
+          </Alert>
+        </Snackbar>
+      </div>
     )
 }

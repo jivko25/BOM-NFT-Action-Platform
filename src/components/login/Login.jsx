@@ -10,10 +10,10 @@ export default function Login(){
     const router = useRouter();
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [error, setError] = useState(false);
+    const [error, setError] = useState({error : false, message : ''});
 
     const handleClick = () => {
-        setError(true);
+        setError({error : false, message : ''});
     };
 
     const handleClose = (event, reason) => {
@@ -21,7 +21,7 @@ export default function Login(){
         return;
         }
 
-        setError(false);
+        setError({error : false, message : ''});
     };
 
     async function login(){
@@ -30,7 +30,7 @@ export default function Login(){
             "password" : password
         }, {headers: process.env.headers})
         .catch((error) => {
-            setError(true);
+            setError({error : true, message: error.response.data.error});
           });
         if(res?.data){
         router.push('/');
@@ -78,9 +78,9 @@ export default function Login(){
                 </Grid>
                 </Grid>
             </div>
-                <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={error.error} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    Wrong username or password
+                    {error.message}
                     </Alert>
                 </Snackbar>
         </div>
