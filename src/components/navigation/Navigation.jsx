@@ -48,6 +48,11 @@ export default function Navigation({isOpen = false}) {
     setOpen(false);
   };
 
+  const logout = () => {
+      sessionStorage.removeItem('user');
+      handleDrawerClose();
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -127,7 +132,7 @@ export default function Navigation({isOpen = false}) {
             </List>
         }
         {typeof window == 'undefined' ? null : sessionStorage.getItem('user') ?
-            <ListItem button key={"Logout"}>
+            <ListItem button key={"Logout"} onClick={logout}>
               <ListItemIcon>
                 <LogoutIcon style={{fill: "white"}}/>
               </ListItemIcon>
