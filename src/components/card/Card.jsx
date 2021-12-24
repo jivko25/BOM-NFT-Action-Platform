@@ -35,7 +35,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
         <Link href={`/profile/${ownerId}`}>
         <CardHeader 
-            avatar={<Avatar url={user.avatarUrl} size={40} verified={user.verified} />} />
+            avatar={<Avatar url={user.url} size={40} verified={user.verified} />} />
         </Link>
         <div>
         <CardMedia 

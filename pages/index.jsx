@@ -13,6 +13,7 @@ import Navigation from "../src/components/navigation/Navigation.jsx"
 
 
 
+
 export default function Home() {
   //useStates
   const [featuredCards, setFeaturedCards] = useState([]);
@@ -32,47 +33,51 @@ export default function Home() {
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
 
-  const trendingUrl = process.env.apiUrl + '/trending'
-  + (trendingFilterValue != "" ? `?sort=${trendingFilterValue}` : '');
+  const trendingUrl = "https://parseapi.back4app.com/classes/Nfts";
 
   const collectorUrl = process.env.apiUrl + '/top-collectors'
   + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : '');
 
-  const auctionUrl = process.env.apiUrl + '/live-auctions'
-  + (auctionFilterValue != "" ? `?sort=${auctionFilterValue}` : '');
+  const auctionUrl = "https://parseapi.back4app.com/classes/Nfts";
 
   const fetchDataForFirstTime = () => {
     const getFeatured = axios.get(featuredUrl);
-    const getTrending = axios.get(trendingUrl);
+    const getTrending = axios.get(trendingUrl, {headers: process.env.headers});
     const getCollectors = axios.get(collectorUrl);
-    const getAuctions = axios.get(auctionUrl);
+    const getAuctions = axios.get(auctionUrl, {headers: process.env.headers});
 
     axios.all([getFeatured, getTrending, getCollectors, getAuctions]).then(
       axios.spread((...data) => {
         const dataFeatured = data[0].data.nfts;
-        const dataTrending = data[1].data.nfts;
+        const dataTrending = data[1].data.results
+        .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
+        .sort((a, b) => b.likes - a.likes);
         const dataCollectors = data[2].data.users;
-        const dataAuctions = data[3].data.nfts;
+        const dataAuctions = data[3].data.results
+        .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
+        .sort((a, b) => (new Date(a.auction_end).getTime() - Date.now())/1000 - (new Date(b.auction_end).getTime() - Date.now())/1000);
 
-        const dataTrendingFilters = data[1].data.filters.sort;
+
+        // const dataTrendingFilters = data[1].data.filters.sort;
         const dataCollectorsFilters = data[2].data.filters.sort;
-        const dataAuctionsFilters = data[3].data.filters.price;
+        // const dataAuctionsFilters = data[3].data.filters.price;
 
         dataFeatured[0].cols = 3;
         dataFeatured[0].rows = 2;
         setFeaturedCards(dataFeatured);
 
         setTrendingItems(dataTrending);
-        setTrendingFilters(dataTrendingFilters)
+        // setTrendingFilters(dataTrendingFilters)
 
         setCollectors(dataCollectors.sort((a, b) => b.nftsCount - a.nftsCount));
         setCollectorFilters(dataCollectorsFilters);
 
         setAuctions(dataAuctions);
-        setAuctionFilters(dataAuctionsFilters)
+        // setAuctionFilters(dataAuctionsFilters)
       })
     )
   }
+
 
   useEffect(() => fetchDataForFirstTime(), []);
 
@@ -106,7 +111,7 @@ export default function Home() {
     const dataTrending = await fetch(trendingUrl)
     .then((res) => res.json());
     setTrendingItems(dataTrending?.nfts)
-    setTrendingFilters(dataTrending?.filters?.sort)
+    // setTrendingFilters(dataTrending?.filters?.sort)
   }, [trendingFilterValue])
 
   //Collectors
@@ -135,7 +140,7 @@ export default function Home() {
     .then(res => res.json())
     .then(data => {
       setAuctions(data.nfts);
-      setAuctionFilters(data.filters.price)
+      // setAuctionFilters(data.filters.price)
     })
   }, [auctionFilterValue])
 
@@ -168,7 +173,7 @@ export default function Home() {
     link: "https://app.boom.dev/"
   }
 
-
+  console.log(auctions);
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
       <Navigation/>

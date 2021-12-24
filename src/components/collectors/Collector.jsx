@@ -1,7 +1,7 @@
 import {Container, Grid } from "@mui/material";
 import styles from './Collector.module.scss';
 import User from '../user/User'
-import { style } from "@mui/material/node_modules/@mui/system";
+import { style } from './Collector.module.scss';
 import Link from 'next/link';
 
 

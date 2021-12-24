@@ -36,13 +36,13 @@ export const Trending = React.memo(({cards = [], filters = [], filterValue, onCh
                 <Grid container spacing={1} justifyContent="center">
                     {cards.map((card) => {
                         return (
-                            <Link href={`/product/${card.id}`} key={card.id}>
+                            <Link href={`/product/${card.objectId}`} key={card.objectId}>
                                 <Grid item xs={11} md={6} xl={3}>
                                     <Card
                                     {...card}
-                                    mediaUrl={card.source.url}
-                                    user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
-                                    ownerId = {card.owner.id}
+                                    mediaUrl={card.image}
+                                    user={card.owner}
+                                    timeLeft={(new Date(card.auction_end).getTime() - Date.now())/1000}
                                     />
                                 </Grid>
                             </Link>

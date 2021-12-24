@@ -39,9 +39,8 @@ export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterVal
                                 <Grid item xs={11} md={6} xl={3}>
                                     <Card className={styles.item}
                                     {...card}
-                                    mediaUrl={card.source.url}
-                                    user={{avatarUrl: card.owner.avatar.url, verified: card.owner.verified}}
-                                    ownerId = {card.owner.id}
+                                    mediaUrl={card.image}
+                                    user={card.owner}
                                     timeLeft={(new Date(card.auction_end).getTime() - Date.now())/1000}
                                     />
                                 </Grid>
