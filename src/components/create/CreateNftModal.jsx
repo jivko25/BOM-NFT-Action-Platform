@@ -1,27 +1,50 @@
-import * as React from 'react';
+import {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Container, Grid } from '@mui/material';
+import axios from 'axios';
 
-export default function CreateNftModal() {
-  const [value, setValue] = React.useState(null);
+export default function CreateNftModal({open, handleClose}) {
+  const [value, setValue] = useState(null)
+  const [name, setName] = useState(null);
+  const [image, setImage] = useState(null);
+  const [details, setDetails] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [currency, setCurrency] = useState(null);
+  const [date, setDate] = useState(null);
+  
 
 //   console.log(typeof value.toISOString());
 
-  const handleSubmit = () => {
-
-  }
-
-  const handleClose = () => {
-
+  async function handleSubmit() {
+    const body = {
+        "currency": currency,
+        "details": details,
+        "image": image,
+        "isFeatured": false,
+        "likes": 0,
+        "name": name,
+        "owner": {
+            "id" : "LO24LpLYgN",
+            "url" : "https://nft-auction.herokuapp.com/uploads/0xa6dbe6b4f8e2905c26e123ec6fd08a8f7200dbc1_64120a76f4.jpg",
+            "username" : "jivko25",
+            "email" : "jivkou@yahoo.com",
+            "verified" : true
+        },
+        "price": Number(price),
+        "auction_end" : value
+        }
+    const res = await axios.post(`${process.env.api}/classes/Nfts`, body, {headers: process.env.headers});
+    handleClose();
+    console.log(res);
   }
 
   return (
     <div>
         <Dialog
-            open={true}
+            open={open}
             onClose={handleClose}
         >
             <DialogTitle>Create NFT</DialogTitle>
@@ -31,7 +54,7 @@ export default function CreateNftModal() {
                 <TextField 
                 label="Name" 
                 variant="outlined" 
-                // onChange={(e) => {setUsername(e.target.value)}}
+                onChange={(e) => {setName(e.target.value)}}
                 // error={error.error}
                 fullWidth/>
                 </Grid>
@@ -40,7 +63,7 @@ export default function CreateNftModal() {
                 <TextField 
                 label="Image url" 
                 variant="outlined" 
-                // onChange={(e) => {setUsername(e.target.value)}}
+                onChange={(e) => {setImage(e.target.value)}}
                 // error={error.error}
                 fullWidth/>
                 </Grid>
@@ -49,7 +72,7 @@ export default function CreateNftModal() {
                 <TextField 
                 label="Details" 
                 variant="outlined" 
-                // onChange={(e) => {setUsername(e.target.value)}}
+                onChange={(e) => {setDetails(e.target.value)}}
                 // error={error.error}
                 fullWidth/>
                 </Grid>
@@ -58,7 +81,7 @@ export default function CreateNftModal() {
                 <TextField 
                 label="Price" 
                 variant="outlined" 
-                // onChange={(e) => {setUsername(e.target.value)}}
+                onChange={(e) => {setPrice(e.target.value)}}
                 // error={error.error}
                 fullWidth/>
                 </Grid>
@@ -67,7 +90,7 @@ export default function CreateNftModal() {
                 <TextField 
                 label="Currency" 
                 variant="outlined" 
-                // onChange={(e) => {setUsername(e.target.value)}}
+                onChange={(e) => {setCurrency(e.target.value)}}
                 // error={error.error}
                 fullWidth/>
                 </Grid>
@@ -78,8 +101,8 @@ export default function CreateNftModal() {
                     label="Auction end date"
                     value={value}
                     onChange={(newValue) => {
-                        setValue(newValue);
-                    }}
+                        setValue(newValue.toISOString());
+                      }}
                     renderInput={(params) => <TextField {...params} />}
                     />
                 </LocalizationProvider>

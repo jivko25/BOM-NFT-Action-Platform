@@ -36,7 +36,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navigation({isOpen = false}) {
+export default function Navigation({isOpen = false, onOpenCreate}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
 
@@ -100,7 +100,7 @@ export default function Navigation({isOpen = false}) {
               </ListItemIcon>
               <ListItemText primary={"Favorite Products"} />
             </ListItem>
-            <ListItem button key={"Create"}>
+            <ListItem button key={"Create"} onClick={onOpenCreate}>
               <ListItemIcon>
                 <AddCircleOutlineIcon style={{fill: "white"}}/>
               </ListItemIcon>

@@ -31,6 +31,8 @@ export default function Home() {
   const [auctionFilters, setAuctionFilters] = useState([]);
   const [auctionFilterValue, setAuctionFilterValue] = useState(1);
 
+  const [openCreate, setOpenCreate] = useState(false);
+
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
 
@@ -177,13 +179,13 @@ export default function Home() {
   console.log(auctions);
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Navigation/>
+      <Navigation onOpenCreate={() => setOpenCreate(true)}/>
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
-      <CreateNftModal/>
+      <CreateNftModal open={openCreate} handleClose={() => setOpenCreate(false)}/>
     </div>
   )
 }
