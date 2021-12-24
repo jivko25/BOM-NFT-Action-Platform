@@ -10,6 +10,7 @@ import axios from 'axios';
 import PrivacyPolicy from "../src/components/policy/PrivacyPolicy.jsx"
 import CookiesPolicy from "../src/components/cookies/CookiesPolicy.jsx"
 import Navigation from "../src/components/navigation/Navigation.jsx"
+import CreateNftModal from "../src/components/create/CreateNftModal.jsx"
 
 
 
@@ -182,6 +183,7 @@ export default function Home() {
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
+      <CreateNftModal/>
     </div>
   )
 }
