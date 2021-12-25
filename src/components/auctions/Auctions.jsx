@@ -35,7 +35,7 @@ export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterVal
                 <Grid container spacing={1} justifyContent="center">
                     {cards.map((card) => {
                         return (
-                            <Link href={`/product/${card.id}`} key={card.id}>
+                            <Link href={`/product/${card.objectId}`} key={card.objectId}>
                                 <Grid item xs={11} md={6} xl={3}>
                                     <Card className={styles.item}
                                     {...card}

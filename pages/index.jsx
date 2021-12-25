@@ -88,6 +88,9 @@ export default function Home() {
   const firstUpdateTrending = useRef(true);
   const firstUpdateCollectors = useRef(true);
   const firstUpdateAuctions = useRef(true);
+
+  useEffect(() => {fetchDataForFirstTime()}, [openCreate]);
+
   //Featured
 
   useEffect(() => {

@@ -78,6 +78,7 @@ export default function Navigation({isOpen = false, onOpenCreate}) {
         variant="persistent"
         anchor="left"
         open={open}
+        onClick={handleDrawerClose}
       >
         <DrawerHeader>
             <Typography variant="h4" color="initial">{typeof window == 'undefined' ? null : sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).username : null}</Typography>
