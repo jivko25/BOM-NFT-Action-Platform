@@ -22,6 +22,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import SettingsIcon from '@mui/icons-material/Settings';
 import Link from 'next/link';
 
 const drawerWidth = 240;
@@ -133,12 +134,20 @@ export default function Navigation({isOpen = false, onOpenCreate}) {
             </List>
         }
         {typeof window == 'undefined' ? null : sessionStorage.getItem('user') ?
+            <List>
             <ListItem button key={"Logout"} onClick={logout}>
               <ListItemIcon>
                 <LogoutIcon style={{fill: "white"}}/>
               </ListItemIcon>
               <ListItemText primary={"Logout"} />
             </ListItem>
+            <ListItem button key={"Settings"}>
+            <ListItemIcon>
+              <SettingsIcon style={{fill: "white"}}/>
+            </ListItemIcon>
+            <ListItemText primary={"Settings"} />
+          </ListItem>
+          </List>
         : null}
         </List>
       </Drawer>
