@@ -26,6 +26,8 @@ export default function Product(){
       }
     }
 
+
+    //Make it in one request
     async function makeBid(){
       const user = JSON.parse(sessionStorage.getItem('user')).data;
       console.log(`${process.env.api}/classes/Nfts/${id}`);

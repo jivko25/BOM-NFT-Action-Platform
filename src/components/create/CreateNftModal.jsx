@@ -34,7 +34,9 @@ export default function CreateNftModal({open, handleClose}) {
             "verified" : user.verified
         },
         "price": Number(price),
-        "auction_end" : value
+        "auction_end" : value,
+        "bids" : [],
+        "bid" : 1
         }
     const res = await axios.post(`${process.env.api}/classes/Nfts`, body, {headers: process.env.headers});
     handleClose();
