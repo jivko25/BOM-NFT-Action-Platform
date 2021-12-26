@@ -44,7 +44,7 @@ export default function ProductTabs({text = '', bids = []}) {
             bids.sort((a, b) => b.amount - a.amount).map((user, i) => (
               <TableRow key={i} className={`table-row-${i}`}>
               <TableCell>
-                <User name = {user.user.name} verified = {user.user.verified} avatar = {user.user.url} size={30} variant='small'/>
+                <User name = {user.user.username} verified = {user.user.verified} avatar = {user.user.url} size={30} variant='small'/>
               </TableCell>
               <TableCell style={{fontSize : '14px'}}>{user.amount}</TableCell>
               <TableCell style={{fontSize : '14px'}}>{

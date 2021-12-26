@@ -27,13 +27,13 @@ export default function Product(){
     }
 
 
-    //Make it in one request
+    
     async function makeBid(){
       const user = JSON.parse(sessionStorage.getItem('user')).data;
       console.log(`${process.env.api}/classes/Nfts/${id}`);
       const date = Date.now();
       product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
-      await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids}, {headers: {
+      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : product.bid + 1}, {headers: {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
         'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
@@ -41,19 +41,24 @@ export default function Product(){
         'Content-Type' : 'application/json'
       }})
       .catch((e) => console.log(e.response));
-      const minBidUpdatedProduct = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bid" : product.bid + 1}, {headers: {
-        'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
-        'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
-        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
-        'X-Parse-Revocable-Session' : '1',
-        'Content-Type' : 'application/json',
-      }})
-      .catch((e) => console.log(e));
-      console.log(minBidUpdatedProduct);
-      if(minBidUpdatedProduct?.data){
+      if(updateData?.data){
         getData();
       }
     }
+
+    async function deleteItem(){
+      const res = await axios.delete(`${process.env.api}/classes/Nfts/${id}`, {headers: {
+          'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+          'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+          'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+          'X-Parse-Revocable-Session' : '1',
+          'Content-Type' : 'application/json',
+        }})
+        .catch((e) => console.log(e));
+        if(res?.data){
+          router.push('/');
+        }
+  }
 
     useEffect(() => {
             getData();
@@ -80,6 +85,7 @@ export default function Product(){
           bidAmount={product.bid}
           onBuy={() => {}}
           onBid={makeBid}
+          onDelete={deleteItem}
       />
         </div>
     );

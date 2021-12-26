@@ -6,7 +6,7 @@ import ProductTabs from "./ProductTabs";
 import ProductActions from "./ProductActions";
 
 
-export default function ProductContainer({name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, timeEnd}){
+export default function ProductContainer({name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, timeEnd, onDelete}){
     return(
         <div className={styles["product-container"]}>
             <Grid container justifyContent={"center"}>
@@ -26,7 +26,7 @@ export default function ProductContainer({name, owner, price, currency, likes, a
                             />
                         <ProductTabs text={details} bids={bids}/>
                         <Container>
-                        <ProductActions buyAmount={price} bidAmount={bidAmount} isLive={isLive} onBuy={onBuy} onBid={onBid} currency={currency}/>
+                        <ProductActions buyAmount={price} bidAmount={bidAmount} isLive={isLive} onBuy={onBuy} onBid={onBid} onDelete={onDelete} currency={currency} owner={owner}/>
                         </Container>
                             
                     </Stack>

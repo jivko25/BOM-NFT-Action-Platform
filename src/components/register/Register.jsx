@@ -50,9 +50,10 @@ export default function Register(){
         });
         if(res?.data){
         router.push('/');
+        res.data.username = username;
         const user = {
             token : res.data.sessionToken,
-            username : res.data
+            data : res.data
         }
         sessionStorage.setItem('user', JSON.stringify(user));
         }
