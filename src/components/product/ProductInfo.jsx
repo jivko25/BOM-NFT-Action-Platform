@@ -38,7 +38,7 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                     <Grid container className={styles.creator_timer} spacing={3}>
                         <Grid item xs={12} md={6} maxWidth={"900px"} justifyContent={"center"}>
                             {/* <Container> */}
-                                <ProductInfoCreator name={creator?.username} avatar={creator?.avatar.url} verified={creator?.verified} ownerId={creator?.id}/>
+                                <ProductInfoCreator name={creator?.username} avatar={creator?.url} verified={creator?.verified} ownerId={creator?.id}/>
                             {/* </Container> */}
                         </Grid>
                         <Grid item xs={12} md={6} maxWidth={"700px"}>

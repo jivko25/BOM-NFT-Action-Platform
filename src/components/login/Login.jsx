@@ -33,9 +33,10 @@ export default function Login(){
             setError({error : true, message: error.response.data.error});
         });
         if(res?.data){
+            console.log(res);
             const user = {
                 token : res.data.sessionToken,
-                username : res.data.username
+                data : res.data
             }
             sessionStorage.setItem('user', JSON.stringify(user));
             setError({error : false, message : ''})

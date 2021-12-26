@@ -52,7 +52,7 @@ export default function Register(){
         router.push('/');
         const user = {
             token : res.data.sessionToken,
-            username : username
+            username : res.data
         }
         sessionStorage.setItem('user', JSON.stringify(user));
         }

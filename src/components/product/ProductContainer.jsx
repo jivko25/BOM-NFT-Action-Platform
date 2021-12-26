@@ -6,12 +6,12 @@ import ProductTabs from "./ProductTabs";
 import ProductActions from "./ProductActions";
 
 
-export default function ProductContainer({name, owner, price, currency, likes, auction_end, isLive, details, bids, source, bidAmount, onBuy, onBid, timeEnd}){
+export default function ProductContainer({name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, timeEnd}){
     return(
         <div className={styles["product-container"]}>
             <Grid container justifyContent={"center"}>
                 <Grid item xs={10} md={6}>
-                    <ProductImage url={source?.url}/>
+                    <ProductImage url={url}/>
                 </Grid>
                     <Grid item xs={12} md={6}>
                     <Stack>

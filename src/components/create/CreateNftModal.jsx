@@ -17,8 +17,8 @@ export default function CreateNftModal({open, handleClose}) {
   
 
 //   console.log(typeof value.toISOString());
-
   async function handleSubmit() {
+    const user = JSON.parse(sessionStorage.getItem('user')).data;
     const body = {
         "currency": currency,
         "details": details,
@@ -27,11 +27,11 @@ export default function CreateNftModal({open, handleClose}) {
         "likes": 0,
         "name": name,
         "owner": {
-            "id" : "LO24LpLYgN",
-            "url" : "https://nft-auction.herokuapp.com/uploads/0xa6dbe6b4f8e2905c26e123ec6fd08a8f7200dbc1_64120a76f4.jpg",
-            "username" : "jivko25",
-            "email" : "jivkou@yahoo.com",
-            "verified" : true
+            "id" : user.objectId,
+            "url" : user.url,
+            "username" : user.username,
+            "email" : user.email,
+            "verified" : user.verified
         },
         "price": Number(price),
         "auction_end" : value
