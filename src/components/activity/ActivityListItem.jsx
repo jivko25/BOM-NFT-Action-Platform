@@ -12,13 +12,13 @@ export default function ActivityListItem({created_at, user, nft, type = "like"})
             <Grid container>
                 <Grid item xs={3} lg={3} className={styles.avatar}>
                     <Link href={`/profile/${user.id}`}>
-                    <Avatar url={user.avatar.url} verified={user.confirmed} size={70}/>
+                    <Avatar url={user.url} verified={user.confirmed} size={70}/>
                     </Link>
                 </Grid>
                 <Grid item xs={9} lg={9}>
                     <p>{nft.owner.username} {type}  
                     &ensp;
-                    <Link href={`/product/${nft.id}`}>
+                    <Link href={`/product/${nft.objectId}`}>
                     "{nft.name}"
                     </Link>
                     &ensp;by&ensp;

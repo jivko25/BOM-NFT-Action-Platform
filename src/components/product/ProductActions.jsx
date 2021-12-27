@@ -21,21 +21,22 @@ export default function ProductActions({isLive = false, currency = '', buyAmount
     
     return(
         <div className={styles["product-actions"]}>
-            <Grid container spacing={3} justifyContent={"center"}>
-                <Grid item xs={12} sm={4}>
-                        <Button variant="contained" className={styles.button} onClick={onBuy} disabled={!isLive}>BUY FOR {buyAmount} {currency}</Button>                
-                </Grid>
-                <Grid item xs={12} sm={4} justifyContent={"center"}>
-                        <Button variant="outlined" color="success" className={styles.button} onClick={onBid} disabled={!isLive}>PLACE BID FOR {bidAmount} {currency}</Button>                
-                </Grid>
                 {   owner?.id === userId ?
+                <Grid container spacing={3} justifyContent={"center"}>
                     <Grid item xs={12} sm={4} justifyContent={"center"}>
                         <Button variant="outlined" color="error" className={styles.button} onClick={handleClickOpen}>DELETE THIS AUCTION</Button>                
                     </Grid>
-                    : 
-                    null
+                </Grid> 
+                    :
+                <Grid container spacing={3} justifyContent={"center"}>
+                    <Grid item xs={12} sm={4}>
+                            <Button variant="contained" className={styles.button} onClick={onBuy} disabled={!isLive}>BUY FOR {buyAmount} {currency}</Button>                
+                    </Grid>
+                    <Grid item xs={12} sm={4} justifyContent={"center"}>
+                            <Button variant="outlined" color="success" className={styles.button} onClick={onBid} disabled={!isLive}>PLACE BID FOR {bidAmount} {currency}</Button>                
+                    </Grid>
+                </Grid>
                 }
-            </Grid>
             <Dialog
                 open={open}
                 onClose={handleClose}

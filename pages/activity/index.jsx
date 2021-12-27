@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ActivityFilters from '../../src/components/activity/ActivityFilters';
 import ActivityList from '../../src/components/activity/ActivityList';
 import Hero from '../../src/components/hero/Hero';
+import axios from 'axios';
 
 export default function Activity() {
   const [activity, setActivity] = useState([]);
@@ -10,28 +11,39 @@ export default function Activity() {
   const [sortFilterValue, setSortFilterValue] = useState('');
   const [typeFilterValue, setTypeFilterValue] = useState('');
 
-  useEffect(async () => {
-        await fetch(process.env.apiUrl + '/activities' + '?' +
-        (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (typeFilterValue != "" ? `type=${typeFilterValue}` : ''))
-        .then(res => res.json())
-        .then(data => {
-          setActivity(data.activities);
-          setActivityFilterSort(data.filters.sort);
-          setActivityFilterType(data.filters.type);
-        })
-  }, [sortFilterValue, typeFilterValue])
+  const url = `${process.env.api}/classes/Activity`;
+
+  async function getData(){
+    const res = await axios.get(url, {headers: {
+      'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+      'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+      'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+      'X-Parse-Revocable-Session' : '1',
+      'Content-Type' : 'application/json',
+    }})
+    .catch((e) => console.log(e));
+    if(res?.data){
+      console.log(res);
+      setActivity(res.data.results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+    }
+  }
+
+  useEffect(() => {
+        getData();
+        console.log(activity);
+  }, [])
 
     return (
       <div style={{position : 'relative', overflow : "hidden"}}>
       <Hero text="Activity"></Hero>
-      <ActivityFilters 
+      {/* <ActivityFilters 
             sort={activityFilterSort}
             type={activityFilterType}
             onSortFilterChange={(e) => setSortFilterValue(e.target.value)}
             onTypeFilterChange={(e) => setTypeFilterValue(e.target.value)}
             sortValue = {sortFilterValue}
             typeValue = {typeFilterValue}
-            />
+            /> */}
       <ActivityList items={activity}/>
       </div>
     );

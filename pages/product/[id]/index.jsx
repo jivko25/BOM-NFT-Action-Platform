@@ -21,7 +21,6 @@ export default function Product(){
       }})
       .catch((e) => console.log(e));
       if(res?.data){
-        console.log(res.data);
         setProduct(res.data)
       }
     }
@@ -30,20 +29,26 @@ export default function Product(){
     
     async function makeBid(){
       const user = JSON.parse(sessionStorage.getItem('user')).data;
-      console.log(`${process.env.api}/classes/Nfts/${id}`);
-      const date = Date.now();
-      let obj = product.bids.find(item => item.user.objectId == user.objectId);
-      let index = product.bids.findIndex(item => item.user.objectId == user.objectId);
-      console.log(index);
-      obj ? product.bids.splice(index,1,{"amount" : product.bid, "user" : user, "time" : date}) :
-      product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
-      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : product.bid + 1}, {headers: {
+      const header = {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
         'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
         'X-Parse-Revocable-Session' : '1',
         'Content-Type' : 'application/json'
-      }})
+      };
+      const date = Date.now();
+      let obj = product.bids.find(item => item.user.objectId == user.objectId);
+      let index = product.bids.findIndex(item => item.user.objectId == user.objectId);
+      obj ? product.bids.splice(index,1,{"amount" : product.bid, "user" : user, "time" : date}) :
+      product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
+      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : product.bid + 1}, {headers: header})
+      .catch((e) => console.log(e.response));
+      const addActivity = await axios.post(`${process.env.api}/classes/Activity`, 
+      {
+        "user" : user,
+        "nft" : product,
+        "type" : "bid"
+      }, {headers: header})
       .catch((e) => console.log(e.response));
       if(updateData?.data){
         getData();
@@ -66,7 +71,6 @@ export default function Product(){
 
     useEffect(() => {
             getData();
-            console.log(product);
     }, [id])
 
 
