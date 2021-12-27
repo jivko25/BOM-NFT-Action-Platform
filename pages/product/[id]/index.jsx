@@ -32,6 +32,10 @@ export default function Product(){
       const user = JSON.parse(sessionStorage.getItem('user')).data;
       console.log(`${process.env.api}/classes/Nfts/${id}`);
       const date = Date.now();
+      let obj = product.bids.find(item => item.user.objectId == user.objectId);
+      let index = product.bids.findIndex(item => item.user.objectId == user.objectId);
+      console.log(index);
+      obj ? product.bids.splice(index,1,{"amount" : product.bid, "user" : user, "time" : date}) :
       product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
       const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : product.bid + 1}, {headers: {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',

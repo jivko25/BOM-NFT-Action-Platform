@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -24,6 +24,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Link from 'next/link';
+import User from '../user/User';
+import SettingsModal from '../settings/SettingsModal';
 
 const drawerWidth = 240;
 
@@ -37,7 +39,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navigation({isOpen = false, onOpenCreate}) {
+export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
 
@@ -53,6 +55,7 @@ export default function Navigation({isOpen = false, onOpenCreate}) {
       sessionStorage.removeItem('user');
       handleDrawerClose();
   }
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -82,7 +85,8 @@ export default function Navigation({isOpen = false, onOpenCreate}) {
         onClick={handleDrawerClose}
       >
         <DrawerHeader>
-            <Typography variant="h4" color="initial">{typeof window == 'undefined' ? null : sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).username : null}</Typography>
+            {typeof window == 'undefined' ? null : sessionStorage.getItem('user') ? 
+            <User name={JSON.parse(sessionStorage.getItem('user')).data.username} avatar={JSON.parse(sessionStorage.getItem('user')).data.url} verified={JSON.parse(sessionStorage.getItem('user')).data.verified} size={30}/> : null}
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -141,7 +145,7 @@ export default function Navigation({isOpen = false, onOpenCreate}) {
               </ListItemIcon>
               <ListItemText primary={"Logout"} />
             </ListItem>
-            <ListItem button key={"Settings"}>
+            <ListItem button key={"Settings"} onClick={onOpenSettings}>
             <ListItemIcon>
               <SettingsIcon style={{fill: "white"}}/>
             </ListItemIcon>

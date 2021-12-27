@@ -36,7 +36,7 @@ export const Trending = React.memo(({cards = [], filters = [], filterValue, onCh
                 <Grid container spacing={1} justifyContent="center">
                     {cards.map((card) => {
                         return (
-                            <Link href={`/product/${card.objectId}`} key={card.objectId}>
+                            <Link href={sessionStorage.getItem('user') ? `/product/${card.objectId}` : '/login'} key={card.objectId}>
                                 <Grid item xs={11} md={6} xl={3}>
                                     <Card
                                     {...card}

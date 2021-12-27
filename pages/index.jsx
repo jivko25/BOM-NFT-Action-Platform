@@ -11,6 +11,7 @@ import PrivacyPolicy from "../src/components/policy/PrivacyPolicy.jsx"
 import CookiesPolicy from "../src/components/cookies/CookiesPolicy.jsx"
 import Navigation from "../src/components/navigation/Navigation.jsx"
 import CreateNftModal from "../src/components/create/CreateNftModal.jsx"
+import SettingsModal from "../src/components/settings/SettingsModal.jsx"
 
 
 
@@ -31,7 +32,9 @@ export default function Home() {
   const [auctionFilters, setAuctionFilters] = useState([]);
   const [auctionFilterValue, setAuctionFilterValue] = useState(1);
 
+  //move create state in navigation component
   const [openCreate, setOpenCreate] = useState(false);
+  const [openSettings, setOpenSettings] = useState(false);
 
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
@@ -182,13 +185,14 @@ export default function Home() {
   console.log(auctions);
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Navigation onOpenCreate={() => setOpenCreate(true)}/>
+      <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)}/>
       <Featured items={featuredCards} />
       <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>
       <CreateNftModal open={openCreate} handleClose={() => setOpenCreate(false)}/>
+      <SettingsModal open={openSettings} handleClose={() => setOpenSettings(false)}/>
     </div>
   )
 }
