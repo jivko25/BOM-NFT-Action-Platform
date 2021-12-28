@@ -5,6 +5,7 @@ import ExploreTitle from "../../src/components/explore/ExploreTitle";
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import Spacer from "../../src/components/spacer/Spacer";
+import axios from "axios";
 
 export default function Explore(){
     const [nfts, setNfts] = useState([]);
@@ -13,15 +14,29 @@ export default function Explore(){
     const [priceFilterValue, setPriceFilterValue] = useState('');
     const [sortFilterValue, setSortFilterValue] = useState('');
 
+    async function getData(){
+        const url = `${process.env.api}/classes/Nfts`;
+        const items = await axios.get(url, {headers: {
+          'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+          'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+          'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+          'X-Parse-Revocable-Session' : '1',
+          'Content-Type' : 'application/json',
+        }})
+        .catch((e) => console.log(e));
+        if(items?.data){
+          setNfts(items.data.results);
+        }
+      }
+
     useEffect(async () => {
       const data = await fetch(process.env.apiUrl + '/explore' + '?' +
       (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (priceFilterValue != "" ? `price=${priceFilterValue}` : ''))
       .then((res) => res.json());
-        console.log(process.env.apiUrl + '/explore' + '?' +
-        (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (priceFilterValue != "" ? `price=${priceFilterValue}` : ''));
-      setNfts(data?.nfts)
+    //   setNfts(data?.nfts)
       setNftSortFilter(data?.filters.sort);
       setNftPriceFilter(data?.filters.price);
+      getData();
     }, [priceFilterValue, sortFilterValue])
     return(
         <div style={{position:'relative', overflow : "hidden"}}>
@@ -52,22 +67,15 @@ export default function Explore(){
             <Grid item>
                     <Grid container spacing={1} justifyContent="center">
                         {
-                            nfts.map((item, index) => {  
-                                return <Link href={`/product/${item.id}`}>
+                            nfts.map((card, index) => {  
+                                return <Link href={`/product/${card.id}`}>
                                             <Grid item xs={3} key={index} xs={11} md={6} xl={3}>
-                                            <Card name = {item.name} 
-                                            likes = {item.likes}  
-                                            mediaUrl = {item.source.url}  
-                                            user={
-                                                {
-                                                    avatarUrl : item.owner.avatar.url, 
-                                                    verified : item.owner.verified
-                                                }
-                                            }  
-                                            price = {item.price}  
-                                            currency = {item.currency} 
-                                            timeLeft={(new Date(item.auction_end).getTime() - Date.now())/1000}
-                                            ownerId = {item.owner.id}
+                                            <Card
+                                            {...card}
+                                            ownerId={card.owner.objectId}
+                                            mediaUrl={card.image}
+                                            user={card.owner}
+                                            timeLeft={(new Date(card.auction_end).getTime() - Date.now())/1000}
                                             />
                                         </Grid>
                                       </Link>
