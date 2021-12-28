@@ -9,7 +9,7 @@ import axios from 'axios';
 export default function Product(){
     const router = useRouter()
     const { id } = router.query
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState({});
 
     async function getData(){
       const res = await axios.get(`${process.env.api}/classes/Nfts/${id}`, {headers: {
@@ -21,10 +21,9 @@ export default function Product(){
       }})
       .catch((e) => console.log(e));
       if(res?.data){
-        setProduct(res.data)
+        setProduct(res.data);
       }
     }
-
 
     
     async function makeBid(){
@@ -41,7 +40,7 @@ export default function Product(){
       let index = product.bids.findIndex(item => item.user.objectId == user.objectId);
       obj ? product.bids.splice(index,1,{"amount" : product.bid, "user" : user, "time" : date}) :
       product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
-      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : product.bid + 1}, {headers: header})
+      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : Math.round(product.bid*1.1, 2)}, {headers: header})
       .catch((e) => console.log(e.response));
       const addActivity = await axios.post(`${process.env.api}/classes/Activity`, 
       {
@@ -67,10 +66,11 @@ export default function Product(){
         if(res?.data){
           router.push('/');
         }
-  }
+    }
 
     useEffect(() => {
             getData();
+            console.log(product);
     }, [id])
 
 
@@ -80,7 +80,7 @@ export default function Product(){
         <ProductContainer 
           name={product.name}
           owner={product.owner}
-
+          id={product.objectId}
           price={product.price}
           currency={product.currency}
           likes={product.likes}
@@ -94,6 +94,7 @@ export default function Product(){
           onBuy={() => {}}
           onBid={makeBid}
           onDelete={deleteItem}
+          buyerId={product.buyerId}
       />
         </div>
     );

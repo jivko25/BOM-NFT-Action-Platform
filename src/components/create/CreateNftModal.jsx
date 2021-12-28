@@ -5,6 +5,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DatePicker from '@mui/lab/DatePicker';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Container, Grid } from '@mui/material';
 import axios from 'axios';
+import { DateTimePicker } from '@mui/lab';
 
 export default function CreateNftModal({open, handleClose}) {
   const [value, setValue] = useState(null)
@@ -99,7 +100,7 @@ export default function CreateNftModal({open, handleClose}) {
 
                 <Grid item>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DatePicker
+                <DateTimePicker
                     label="Auction end date"
                     value={value}
                     onChange={(newValue) => {

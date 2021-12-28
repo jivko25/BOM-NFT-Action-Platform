@@ -4,9 +4,29 @@ import ProductImage from "./ProductImage";
 import ProductInfo from "./ProductInfo";
 import ProductTabs from "./ProductTabs";
 import ProductActions from "./ProductActions";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 
-export default function ProductContainer({name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, timeEnd, onDelete}){
+export default function ProductContainer({id, name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, timeEnd, onDelete, buyerId}){
+    const [buyerObjectId, setBuyerObjectId] = useState('')
+    async function setBuyer(){
+        const header = {
+          'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+          'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+          'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+          'X-Parse-Revocable-Session' : '1',
+          'Content-Type' : 'application/json'
+        };
+        await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"buyerId" : bids ? bids[0]?.user.objectId : '', "isBought" : true}, {headers: header})
+        .catch((e) => console.log(e.response));
+        setBuyerObjectId(bids && bids[0]?.user.objectId)
+      }
+
+    useEffect(() => {
+        buyerId && setBuyer();
+    }, [])
+
     return(
         <div className={styles["product-container"]}>
             <Grid container justifyContent={"center"}>
@@ -26,7 +46,7 @@ export default function ProductContainer({name, owner, price, currency, likes, a
                             />
                         <ProductTabs text={details} bids={bids}/>
                         <Container>
-                        <ProductActions buyAmount={price} bidAmount={bidAmount} isLive={isLive} onBuy={onBuy} onBid={onBid} onDelete={onDelete} currency={currency} owner={owner}/>
+                        <ProductActions buyAmount={price} bidAmount={bidAmount} isLive={isLive} onBuy={onBuy} onBid={onBid} onDelete={onDelete} currency={currency} owner={owner} buyerId={buyerId}/>
                         </Container>
                             
                     </Stack>

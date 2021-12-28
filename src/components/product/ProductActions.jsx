@@ -3,9 +3,10 @@ import styles from './ProductActions.module.scss';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 
-export default function ProductActions({isLive = false, currency = '', buyAmount = 0, bidAmount = 0, onBuy, onBid, onDelete, owner}){
+export default function ProductActions({isLive = false, currency = '', buyAmount = 0, bidAmount = 0, onBuy, onBid, onDelete, owner, isBought = false, buyerId}){
     const [open, setOpen] = useState(false);
     const [userId, setUserId] = useState();
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -30,7 +31,7 @@ export default function ProductActions({isLive = false, currency = '', buyAmount
                     :
                 <Grid container spacing={3} justifyContent={"center"}>
                     <Grid item xs={12} sm={4}>
-                            <Button variant="contained" className={styles.button} onClick={onBuy} disabled={!isLive}>BUY FOR {buyAmount} {currency}</Button>                
+                            <Button variant="contained" className={styles.button} onClick={onBuy} disabled={!isLive & !isBought & userId !== buyerId}>BUY FOR {isLive ? buyAmount : bidAmount} {currency}</Button>                
                     </Grid>
                     <Grid item xs={12} sm={4} justifyContent={"center"}>
                             <Button variant="outlined" color="success" className={styles.button} onClick={onBid} disabled={!isLive}>PLACE BID FOR {bidAmount} {currency}</Button>                
