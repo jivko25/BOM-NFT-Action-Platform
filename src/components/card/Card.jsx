@@ -11,7 +11,7 @@ import millify from 'millify';
 import Countdown from 'react-countdown';
 import Link from 'next/link';
 
-export default function Card({name = '', likes = 0, mediaUrl = '', 
+export default function Card({name = '', likes = [], mediaUrl = '', 
                               user = {avatarUrl: '/images/avatar.png',verified: false}, 
                               price = '', currency = '', timeLeft, ownerId}){
     const Completionist = () => <span>Time runs out!</span>;
@@ -33,7 +33,7 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
     return(
     <div>
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
-        <Link href={`/profile/${ownerId}`}>
+        <Link href={`/profile/${user.id}`}>
         <CardHeader 
             avatar={<Avatar url={user.url} size={40} verified={user.verified} />} />
         </Link>
@@ -58,8 +58,8 @@ export default function Card({name = '', likes = 0, mediaUrl = '',
                 </div>
             <Chip 
                 className={styles.likes} 
-                icon={<FavoriteIcon className={likes > 0 ? styles.icon : null}/>} 
-                label = {millify(likes)} 
+                icon={<FavoriteIcon className={likes.length > 0 ? styles.icon : null}/>} 
+                label = {millify(likes.length)} 
                 variant="outlined" />
         </CardActions>
     </CardM>

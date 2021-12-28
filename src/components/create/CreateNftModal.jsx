@@ -25,7 +25,7 @@ export default function CreateNftModal({open, handleClose}) {
         "details": details,
         "image": image,
         "isFeatured": false,
-        "likes": 0,
+        "likes": [],
         "name": name,
         "owner": {
             "id" : user.objectId,
@@ -37,7 +37,9 @@ export default function CreateNftModal({open, handleClose}) {
         "price": Number(price),
         "auction_end" : value,
         "bids" : [],
-        "bid" : 1
+        "bid" : 1,
+        "isBought" : false,
+        "buyerId" : ''
         }
     const res = await axios.post(`${process.env.api}/classes/Nfts`, body, {headers: process.env.headers});
     handleClose();

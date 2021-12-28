@@ -19,7 +19,7 @@ export default function SettingsModal({open, handleClose}){
         .catch((e) => console.log(e.response));
         if(res?.data){
         user.url = url;
-        sessionStorage.setItem('user', JSON.stringify({"token" : user.token, "data": user}))
+        sessionStorage.setItem('user', JSON.stringify({"token" : user.sessionToken, "data": user}))
         handleClose();
         }
       }

@@ -57,7 +57,8 @@ export default function Home() {
         const dataFeatured = data[0].data.nfts;
         const dataTrending = data[1].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
-        .sort((a, b) => b.likes - a.likes);
+        .sort((a, b) => b.likes - a.likes)
+        .slice(0, 4);
         const dataCollectors = data[2].data.users;
         const dataAuctions = data[3].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)

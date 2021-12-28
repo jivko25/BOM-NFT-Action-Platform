@@ -40,6 +40,7 @@ export const Trending = React.memo(({cards = [], filters = [], filterValue, onCh
                                 <Grid item xs={11} md={6} xl={3}>
                                     <Card
                                     {...card}
+                                    ownerId={card.owner.objectId}
                                     mediaUrl={card.image}
                                     user={card.owner}
                                     timeLeft={(new Date(card.auction_end).getTime() - Date.now())/1000}

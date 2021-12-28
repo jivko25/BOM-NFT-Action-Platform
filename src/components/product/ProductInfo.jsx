@@ -10,7 +10,7 @@ import ProductInfoTitle from "./ProductInfoTitle";
 import styles from './ProductInfo.module.scss';
 
 
-export default function ProductInfo({title = '', creator, price = 0, currency = '', likes = 0, onTimeEnd = '', timeEnd, isLive = false}){
+export default function ProductInfo({title = '', creator, price = 0, currency = '', likes = [], onTimeEnd = '', timeEnd, isLive = false}){
     return(
         <div className={styles["product-info"]}>
         <Grid container>
@@ -32,7 +32,7 @@ export default function ProductInfo({title = '', creator, price = 0, currency = 
                         </Grid>
                         : null}
                         <Grid item xs={2}>
-                            <ProductInfoLikes amount={likes} />
+                            <ProductInfoLikes amount={likes.length} />
                         </Grid>
                     </Grid>
                     <Grid container className={styles.creator_timer} spacing={3}>

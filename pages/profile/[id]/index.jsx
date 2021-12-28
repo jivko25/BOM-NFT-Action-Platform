@@ -6,6 +6,7 @@ import Footer from "../../../src/components/footer/Footer";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import Spacer from "../../../src/components/spacer/Spacer";
+import axios from "axios";
 
 
 export default function Index(){
@@ -17,6 +18,21 @@ export default function Index(){
     const [profileFiltersPrice, setProfileFiltersPrice ] = useState([]);
     const [profileFiltersSortValue, setProfileFiltersSortValue ] = useState('');
     const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState('');
+    async function getData(){
+      const url = `${process.env.api}/classes/Nfts?where={"isBought" :  true, "buyerId" : "${JSON.parse(sessionStorage.getItem('user')).data.objectId}"}&limit=4`;
+      const res = await axios.get(url, {headers: {
+        'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+        'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+        'X-Parse-Revocable-Session' : '1',
+        'Content-Type' : 'application/json',
+      }})
+      .catch((e) => console.log(e));
+      if(res?.data){
+        setProfile(res.data);
+        console.log(res.data.results);
+      }
+    }
 
     useEffect(async () => {
       await fetch(process.env.apiUrl + '/users/' + id + '?' +
@@ -25,22 +41,23 @@ export default function Index(){
               .then(data => {
                   console.log(process.env.apiUrl + '/users/' + id + '?' +
                   (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''));
-                  setProfile(data.user);
+                  // setProfile(data.user);
                   setProfileFilters(data.filters);
                   setProfileFiltersSort(data?.filters.sort);
                   setProfileFiltersPrice(data?.filters.price);
-              })
-              .catch(error => {
-                console.log(error.message);
-              });
+                })
+                .catch(error => {
+                  console.log(error.message);
+                });
+                getData();
     }, [id, profileFiltersSortValue, profileFiltersPriceValue])
 
     return(
       <div style={{position:'relative', overflow : "hidden"}}>
-        <ProfileHero image={profile?.avatar.backgroundUrl}/>
+        <ProfileHero image={"https://media.istockphoto.com/photos/mount-hood-oregon-picture-id1268487061?b=1&k=20&m=1268487061&s=170667a&w=0&h=3fHYwaImlqUETcjCnSV7YO2-PzCFvaX6VSQaiGfWqpc="}/>
         <ProfileUser 
         {...profile}
-        avatar={profile?.avatar.url}
+        avatar={JSON.parse(sessionStorage.getItem('user')).data.url}
         />
         <ProfileCollection 
         filters = {{
@@ -48,8 +65,8 @@ export default function Index(){
             price: profileFiltersPrice
           }
         }
-        user = {{avatarUrl : profile?.avatar.url, verified : profile?.verified}}
-        items = {profile?.nfts}    
+        user = {{avatarUrl : profile?.url, verified : profile?.verified}}
+        items = {profile?.results}    
         sortFilterValue = {profileFiltersSortValue}
         priceFilterValue = {profileFiltersPriceValue}
         onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}

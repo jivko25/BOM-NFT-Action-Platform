@@ -23,8 +23,8 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
                             <Grid key={key} item xs={11} sm={6} md={4} xl={3}>
                                 <Card
                                 {...item}
-                                mediaUrl={item.source.url}
-                                user={{avatarUrl: item.owner.avatar.url, verified: item.owner.verified, id: item.owner.id}}
+                                mediaUrl={item.image}
+                                user={item.owner}
                                 ownerId = {item.owner.id}
                                 />
                             </Grid>

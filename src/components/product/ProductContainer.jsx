@@ -18,7 +18,7 @@ export default function ProductContainer({id, name, owner, price, currency, like
           'X-Parse-Revocable-Session' : '1',
           'Content-Type' : 'application/json'
         };
-        await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"buyerId" : bids ? bids[0]?.user.objectId : '', "isBought" : true}, {headers: header})
+        await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"buyerId" : bids ? bids[0]?.user.objectId : ''}, {headers: header})
         .catch((e) => console.log(e.response));
         setBuyerObjectId(bids && bids[0]?.user.objectId)
       }
