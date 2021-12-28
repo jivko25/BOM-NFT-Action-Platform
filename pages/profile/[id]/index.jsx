@@ -18,8 +18,10 @@ export default function Index(){
     const [profileFiltersPrice, setProfileFiltersPrice ] = useState([]);
     const [profileFiltersSortValue, setProfileFiltersSortValue ] = useState('');
     const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState('');
+
+
     async function getData(){
-      const url = `${process.env.api}/classes/Nfts?where={"isBought" :  true, "buyerId" : "${JSON.parse(sessionStorage.getItem('user')).data.objectId}"}&limit=4`;
+      const url = `${process.env.api}/classes/Nfts?where={"isBought" :  true, "buyerId" : "${id}"}&limit=4`;
       const res = await axios.get(url, {headers: {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
@@ -39,8 +41,6 @@ export default function Index(){
       (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''))
               .then(res => res.json())
               .then(data => {
-                  console.log(process.env.apiUrl + '/users/' + id + '?' +
-                  (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''));
                   // setProfile(data.user);
                   setProfileFilters(data.filters);
                   setProfileFiltersSort(data?.filters.sort);
