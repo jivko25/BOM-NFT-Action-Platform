@@ -42,7 +42,7 @@ export default function Product(){
       product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
       const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : Math.round(product.bid*1.1 + 1, 2)}, {headers: header})
       .catch((e) => console.log(e.response));
-      const addActivity = await axios.post(`${process.env.api}/classes/Activity`, 
+      await axios.post(`${process.env.api}/classes/Activity`, 
       {
         "user" : user,
         "nft" : product,
@@ -95,6 +95,7 @@ export default function Product(){
           onBid={makeBid}
           onDelete={deleteItem}
           buyerId={product.buyerId}
+          isBought={product.isBought}
       />
         </div>
     );

@@ -16,14 +16,14 @@ export default function ActivityListItem({created_at, user, nft, type = "like"})
                     </Link>
                 </Grid>
                 <Grid item xs={9} lg={9}>
-                    <p>{nft.owner.username} {type}  
+                    <p>{user.username} {type}  
                     &ensp;
                     <Link href={`/product/${nft.objectId}`}>
                     "{nft.name}"
                     </Link>
                     &ensp;by&ensp;
                      <Link href={`/profile/${user.id}`}>
-                     {user.username}
+                     {nft.owner.username}
                      </Link>
                      </p>
                      <p>

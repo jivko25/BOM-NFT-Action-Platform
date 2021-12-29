@@ -34,7 +34,35 @@ export default function Card({name = '', likes, mediaUrl = '',
       setProductLikes(likes);
       await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"likes" : likes}, {headers: header})
       .catch((e) => console.log(e.response));
+      addActivity()
       }
+    }
+
+    async function addActivity(){
+      const header = {
+        'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+        'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+        'X-Parse-Revocable-Session' : '1',
+        'Content-Type' : 'application/json'
+      }
+      const nft = {
+        "objectId" : id,
+        "name" : name,
+        "owner" : user
+      }
+      console.log({
+        "user" : sessionStorage.getItem('user').data,
+        "nft" : nft,
+        "type" : "like"
+      });
+      await axios.post(`${process.env.api}/classes/Activity`, 
+      {
+        "user" : JSON.parse(sessionStorage.getItem('user')).data,
+        "nft" : nft,
+        "type" : "like"
+      }, {headers: header})
+      .catch((e) => console.log(e.response));
     }
 
     useEffect(() => {setCurrentUser(JSON.parse(sessionStorage.getItem('user'))?.data.objectId)}, [productLikes])
