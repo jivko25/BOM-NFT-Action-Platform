@@ -68,7 +68,7 @@ export default function Explore(){
                     <Grid container spacing={1} justifyContent="center">
                         {
                             nfts.map((card, index) => {  
-                                return <Link href={`/product/${card.id}`}>
+                                return <Link href={`/product/${card.objectId}`}>
                                             <Grid item xs={3} key={index} xs={11} md={6} xl={3}>
                                             <Card
                                             {...card}

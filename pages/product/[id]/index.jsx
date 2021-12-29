@@ -40,7 +40,7 @@ export default function Product(){
       let index = product.bids.findIndex(item => item.user.objectId == user.objectId);
       obj ? product.bids.splice(index,1,{"amount" : product.bid, "user" : user, "time" : date}) :
       product.bids.splice(0, 0, {"amount" : product.bid, "user" : user, "time" : date});
-      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : Math.round(product.bid*1.1, 2)}, {headers: header})
+      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"bids" : product.bids, "bid" : Math.round(product.bid*1.1 + 1, 2)}, {headers: header})
       .catch((e) => console.log(e.response));
       const addActivity = await axios.post(`${process.env.api}/classes/Activity`, 
       {

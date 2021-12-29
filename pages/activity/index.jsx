@@ -4,6 +4,7 @@ import ActivityList from '../../src/components/activity/ActivityList';
 import Hero from '../../src/components/hero/Hero';
 import axios from 'axios';
 
+
 export default function Activity() {
   const [activity, setActivity] = useState([]);
   const [activityFilterSort, setActivityFilterSort] = useState([]);
