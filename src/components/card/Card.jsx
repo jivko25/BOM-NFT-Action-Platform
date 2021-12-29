@@ -14,7 +14,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export default function Card({name = '', likes, mediaUrl = '', 
-                              user = {avatarUrl: '/images/avatar.png',verified: false}, 
+                              user = {url: '/images/avatar.png',verified: false}, 
                               price = '', currency = '', timeLeft, ownerId, id}){
     const [productLikes, setProductLikes] = useState(likes);
     const Completionist = () => <span>Time runs out!</span>;
