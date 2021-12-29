@@ -24,7 +24,7 @@ export default function ProductContainer({id, name, owner, price, currency, like
       }
 
     useEffect(() => {
-        buyerId && setBuyer();
+        !isLive & !buyerId && setBuyer();
     }, [])
 
     return(

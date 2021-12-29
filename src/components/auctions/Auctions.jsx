@@ -35,16 +35,19 @@ export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterVal
                 <Grid container spacing={1} justifyContent="center">
                     {cards.map((card) => {
                         return (
-                            <Link href={sessionStorage.getItem('user') ? `/product/${card.objectId}` : '/login'} key={card.objectId}>
+                            // <Link href={sessionStorage.getItem('user') ? `/product/${card.objectId}` : '/login'} >
                                 <Grid item xs={11} md={6} xl={3}>
-                                    <Card className={styles.item}
+                                    <Card
                                     {...card}
+                                    likes={card.likes}
+                                    ownerId={card.owner.objectId}
                                     mediaUrl={card.image}
                                     user={card.owner}
                                     timeLeft={(new Date(card.auction_end).getTime() - Date.now())/1000}
+                                    id={card.objectId}
                                     />
                                 </Grid>
-                            </Link>
+                            // </Link>
                             )
                         })}
                 </Grid>

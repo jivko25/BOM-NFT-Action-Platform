@@ -9,12 +9,35 @@ import styles from './Card.module.scss';
 import Avatar from '../avatar/Avatar';
 import millify from 'millify';
 import Countdown from 'react-countdown';
-import Link from 'next/link';
+import Link from '../link/Link';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-export default function Card({name = '', likes = [], mediaUrl = '', 
+export default function Card({name = '', likes, mediaUrl = '', 
                               user = {avatarUrl: '/images/avatar.png',verified: false}, 
-                              price = '', currency = '', timeLeft, ownerId}){
+                              price = '', currency = '', timeLeft, ownerId, id}){
+    const [productLikes, setProductLikes] = useState(likes);
     const Completionist = () => <span>Time runs out!</span>;
+
+    async function like(){
+      const user = JSON.parse(sessionStorage.getItem('user')).data;
+      const header = {
+        'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+        'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+        'X-Parse-Revocable-Session' : '1',
+        'Content-Type' : 'application/json'
+      };
+      if(!likes.includes(user.objectId)){
+        likes.push(user.objectId);
+      setProductLikes(likes);
+      await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"likes" : likes}, {headers: header})
+      .catch((e) => console.log(e.response));
+      }
+    }
+
+    useEffect(() => {console.log("refresh")}, [productLikes])
+
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
@@ -38,11 +61,13 @@ export default function Card({name = '', likes = [], mediaUrl = '',
             avatar={<Avatar url={user.url} size={40} verified={user.verified} />} />
         </Link>
         <div>
+        <Link href={`/product/${id}`}>
         <CardMedia 
             className={styles.media}
             component="img"
             image={mediaUrl}
             /> 
+        </Link>
         {timeLeft > 0 ? <div className={styles.badge}>⚫ Live</div> : null}
         {timeLeft > 0 ? <div className={styles.countdown}><Countdown
         date={Date.now() + timeLeft * 1000}
@@ -58,9 +83,10 @@ export default function Card({name = '', likes = [], mediaUrl = '',
                 </div>
             <Chip 
                 className={styles.likes} 
-                icon={<FavoriteIcon className={likes.length > 0 ? styles.icon : null}/>} 
+                icon={<FavoriteIcon onClick={like} className={likes.includes(JSON.parse(sessionStorage.getItem('user')).data.objectId) ? styles.icon : null}/>} 
                 label = {millify(likes.length)} 
-                variant="outlined" />
+                variant="outlined" 
+                />
         </CardActions>
     </CardM>
     </div>
