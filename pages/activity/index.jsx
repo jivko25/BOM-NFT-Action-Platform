@@ -3,6 +3,7 @@ import ActivityFilters from '../../src/components/activity/ActivityFilters';
 import ActivityList from '../../src/components/activity/ActivityList';
 import Hero from '../../src/components/hero/Hero';
 import axios from 'axios';
+import Pagenator from '../../src/components/pagenator/Pagenator';
 
 
 export default function Activity() {
@@ -11,8 +12,9 @@ export default function Activity() {
   const [activityFilterType, setActivityFilterType] = useState([]);
   const [sortFilterValue, setSortFilterValue] = useState('');
   const [typeFilterValue, setTypeFilterValue] = useState('');
+  const [page, setPage] = useState(0);
 
-  const url = `${process.env.api}/classes/Activity`;
+  const url = `${process.env.api}/classes/Activity?order=-updatedAt&limit=10&skip=${page*10}`;
 
   async function getData(){
     const res = await axios.get(url, {headers: {
@@ -31,8 +33,7 @@ export default function Activity() {
 
   useEffect(() => {
         getData();
-        console.log(activity);
-  }, [])
+  }, [page])
 
     return (
       <div style={{position : 'relative', overflow : "hidden"}}>
@@ -46,6 +47,7 @@ export default function Activity() {
             typeValue = {typeFilterValue}
             /> */}
       <ActivityList items={activity}/>
+      <Pagenator onPrevious={() => {setPage(page-1)}} onNext={() => {setPage(page+1)}} isFirst={page == 0} isLast={activity.length < 10}/>
       </div>
     );
   }
