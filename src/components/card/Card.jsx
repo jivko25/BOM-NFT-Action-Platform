@@ -17,6 +17,7 @@ export default function Card({name = '', likes, mediaUrl = '',
                               user = {url: '/images/avatar.png',verified: false}, 
                               price = '', currency = '', timeLeft, ownerId, id}){
     const [productLikes, setProductLikes] = useState(likes);
+    const [currentUser, setCurrentUser] = useState();
     const Completionist = () => <span>Time runs out!</span>;
 
     async function like(){
@@ -36,7 +37,7 @@ export default function Card({name = '', likes, mediaUrl = '',
       }
     }
 
-    useEffect(() => {console.log("refresh")}, [productLikes])
+    useEffect(() => {setCurrentUser(JSON.parse(sessionStorage.getItem('user'))?.data.objectId)}, [productLikes])
 
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
@@ -56,12 +57,12 @@ export default function Card({name = '', likes, mediaUrl = '',
     return(
     <div>
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
-        <Link href={`/profile/${user.id}`}>
+        <Link href={sessionStorage.getItem('user') ? `/product/${user.id}` : '/login'}>
         <CardHeader 
             avatar={<Avatar url={user.url} size={40} verified={user.verified} />} />
         </Link>
         <div>
-        <Link href={`/product/${id}`}>
+        <Link href={sessionStorage.getItem('user') ? `/product/${id}` : '/login'}>
         <CardMedia 
             className={styles.media}
             component="img"
@@ -83,7 +84,7 @@ export default function Card({name = '', likes, mediaUrl = '',
                 </div>
             <Chip 
                 className={styles.likes} 
-                icon={<FavoriteIcon onClick={like} className={likes.includes(JSON.parse(sessionStorage.getItem('user')).data.objectId) ? styles.icon : null}/>} 
+                icon={<FavoriteIcon onClick={like} className={window ? likes.includes(currentUser) ? styles.icon : null : null}/>} 
                 label = {millify(likes.length)} 
                 variant="outlined" 
                 />
