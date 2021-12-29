@@ -10,6 +10,7 @@ export default function Product(){
     const router = useRouter()
     const { id } = router.query
     const [product, setProduct] = useState({});
+    const [isSold, setIsSold] = useState(false);
 
     async function getData(){
       const res = await axios.get(`${process.env.api}/classes/Nfts/${id}`, {headers: {
@@ -68,10 +69,24 @@ export default function Product(){
         }
     }
 
+    async function buyItem(){
+      const user = JSON.parse(sessionStorage.getItem('user')).data;
+      const header = {
+        'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+        'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+        'X-Parse-Revocable-Session' : '1',
+        'Content-Type' : 'application/json'
+      };
+      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"isBought" : true, "buyerId" : user.objectId, "auction_end" : product.createdAt}, {headers: header})
+      .catch((e) => console.log(e.response));
+        getData();
+    }
+
     useEffect(() => {
             getData();
             console.log(product);
-    }, [id])
+    }, [id, isSold])
 
 
 
@@ -91,7 +106,7 @@ export default function Product(){
           url={product?.image}
           bids= {product.bids}
           bidAmount={product.bid}
-          onBuy={() => {}}
+          onBuy={buyItem}
           onBid={makeBid}
           onDelete={deleteItem}
           buyerId={product.buyerId}

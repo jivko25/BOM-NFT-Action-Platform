@@ -29,14 +29,17 @@ export default function ProductActions({isLive = false, currency = '', buyAmount
                     </Grid>
                 </Grid> 
                     :
+                isBought == false ?
                 <Grid container spacing={3} justifyContent={"center"}>
                     <Grid item xs={12} sm={4}>
-                            <Button variant="contained" className={styles.button} onClick={onBuy} disabled={!isLive & !isBought & userId !== buyerId}>BUY FOR {isLive ? buyAmount : bidAmount} {currency}</Button>                
+                            <Button variant="contained" className={styles.button} onClick={onBuy} disabled={(!isLive & userId !== buyerId) == 1}>BUY FOR {isLive ? buyAmount : bidAmount} {currency}</Button>                
                     </Grid>
                     <Grid item xs={12} sm={4} justifyContent={"center"}>
                             <Button variant="outlined" color="success" className={styles.button} onClick={onBid} disabled={!isLive}>PLACE BID FOR {bidAmount} {currency}</Button>                
                     </Grid>
                 </Grid>
+                    :
+                    null
                 }
             <Dialog
                 open={open}

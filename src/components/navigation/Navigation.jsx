@@ -94,12 +94,14 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
         <Divider />
             {typeof window == 'undefined' ? null : sessionStorage.getItem('user') ?  
         <List>
+            <Link href={`/profile/${JSON.parse(sessionStorage.getItem('user')).data.objectId}`}>
             <ListItem button key={"Profile"}>
               <ListItemIcon>
                 <AccountCircleIcon style={{fill: "white"}}/>
               </ListItemIcon>
               <ListItemText primary={"My Profile"} />
             </ListItem>
+            </Link>
             <ListItem button key={"Favorites"}>
               <ListItemIcon>
                 <FavoriteBorderIcon style={{fill: "white"}}/>

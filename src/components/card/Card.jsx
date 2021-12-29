@@ -85,7 +85,7 @@ export default function Card({name = '', likes, mediaUrl = '',
     return(
     <div>
     <CardM className={timeLeft > 0 ? styles.cardActive : styles.card}>
-        <Link href={sessionStorage.getItem('user') ? `/product/${user.id}` : '/login'}>
+        <Link href={sessionStorage.getItem('user') ? `/profile/${user.id}` : '/login'}>
         <CardHeader 
             avatar={<Avatar url={user.url} size={40} verified={user.verified} />} />
         </Link>
