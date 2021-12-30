@@ -45,15 +45,15 @@ export default function Home() {
 
   const trendingUrl = `${process.env.api}/classes/Nfts?order=-updatedAt`;
 
-  const collectorUrl = process.env.apiUrl + '/top-collectors'
-  + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : '');
+  const collectorUrl = `${process.env.api}/users?order=-nfts,username`;
+  console.log(collectorUrl);
 
   const auctionUrl = "https://parseapi.back4app.com/classes/Nfts?order=-createdAt";
 
   const fetchDataForFirstTime = () => {
     const getFeatured = axios.get(featuredUrl);
     const getTrending = axios.get(trendingUrl, {headers: process.env.headers});
-    const getCollectors = axios.get(collectorUrl);
+    const getCollectors = axios.get(collectorUrl, {headers: process.env.headers});
     const getAuctions = axios.get(auctionUrl, {headers: process.env.headers});
 
     axios.all([getFeatured, getTrending, getCollectors, getAuctions]).then(
@@ -62,7 +62,7 @@ export default function Home() {
         const dataTrending = data[1].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
         .slice(trendingPage, trendingPage+4);
-        const dataCollectors = data[2].data.users;
+        const dataCollectors = data[2].data.results;
         const dataAuctions = data[3].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
         .sort((a, b) => (new Date(a.auction_end).getTime() - Date.now())/1000 - (new Date(b.auction_end).getTime() - Date.now())/1000)
@@ -70,7 +70,7 @@ export default function Home() {
 
 
         // const dataTrendingFilters = data[1].data.filters.sort;
-        const dataCollectorsFilters = data[2].data.filters.sort;
+        // const dataCollectorsFilters = data[2].data.filters.sort;
         // const dataAuctionsFilters = data[3].data.filters.price;
 
         dataFeatured[0].cols = 3;
@@ -81,8 +81,9 @@ export default function Home() {
         setTrendingItems(dataTrending);
         // setTrendingFilters(dataTrendingFilters)
 
-        setCollectors(dataCollectors.sort((a, b) => b.nftsCount - a.nftsCount));
-        setCollectorFilters(dataCollectorsFilters);
+        console.log(dataCollectors);
+        setCollectors(dataCollectors);
+        // setCollectorFilters(dataCollectorsFilters);
 
         setAuctions(data[3].data.results.filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0));
         setAuctionItems(dataAuctions);
@@ -128,16 +129,16 @@ export default function Home() {
   //Collectors
 
   useEffect(async () => {
-    if (firstUpdateCollectors.current) {
-      firstUpdateCollectors.current = false;
-      return;
-    }
-    await fetch(collectorUrl)
-    .then(res => res.json())
-    .then(data => {
-      setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
-      setCollectorFilters(data.filters.sort);
-    });
+    // if (firstUpdateCollectors.current) {
+    //   firstUpdateCollectors.current = false;
+    //   return;
+    // }
+    // await fetch(collectorUrl)
+    // .then(res => res.json())
+    // .then(data => {
+    //   setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
+    //   // setCollectorFilters(data.filters.sort);
+    // });
   }, [collectorFilterValue])
 
   //Auctions

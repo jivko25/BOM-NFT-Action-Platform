@@ -43,7 +43,8 @@ export default function Register(){
         const res = await axios.post(`${process.env.api}/users`, {
             "username" : username,
             "email" : email,
-            "password" : password
+            "password" : password,
+            "url" : "https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
         }, {headers: process.env.headers})
         .catch((error) => {
           setError({error : true, message: error.response.data.error});

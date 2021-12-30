@@ -10,9 +10,9 @@ export default function CollectorColumn({items = []}){
                 items.map((item, index) => {
                     return <Collector 
                     key={index}
-                    name = {item.name} 
-                    nftsCount = {item.nftsCount} 
-                    avatar = {item.avatar.url} 
+                    name = {item.username} 
+                    nftsCount = {item.nfts.length} 
+                    avatar = {item.url} 
                     verified = {item.verified} 
                     id = {item.id} 
                     profileId = {item.profileId}
