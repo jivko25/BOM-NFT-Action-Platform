@@ -20,7 +20,7 @@ export default function ProductContainer({id, name, owner, price, currency, like
         };
         await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"buyerId" : bids ? bids[0]?.user.objectId : ''}, {headers: header})
         .catch((e) => console.log(e.response));
-        setBuyerObjectId(bids && bids[0]?.user.objectId)
+        setBuyerObjectId(bids ? bids.length > 0 ? bids[0]?.user.objectId : null : null)
       }
 
     useEffect(() => {

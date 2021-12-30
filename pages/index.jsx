@@ -45,7 +45,7 @@ export default function Home() {
 
   const trendingUrl = `${process.env.api}/classes/Nfts?order=-updatedAt`;
 
-  const collectorUrl = `${process.env.api}/users?order=-nfts,username`;
+  const collectorUrl = `${process.env.api}/users?order=-nfts,username&limit=12`;
   console.log(collectorUrl);
 
   const auctionUrl = "https://parseapi.back4app.com/classes/Nfts?order=-createdAt";

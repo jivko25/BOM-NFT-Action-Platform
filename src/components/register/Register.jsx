@@ -52,6 +52,7 @@ export default function Register(){
         if(res?.data){
         router.push('/');
         res.data.username = username;
+        res.data.url = "https://m.media-amazon.com/images/I/810XSuEz1vL._AC_SL1500_.jpg";
         const user = {
             token : res.data.sessionToken,
             data : res.data
