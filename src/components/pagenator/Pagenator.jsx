@@ -5,18 +5,18 @@ import styles from './Pagenator.module.scss';
 
 export default function Pagenator({onPrevious, onNext, isFirst, isLast}){
     return(
-            <Grid container spacing={3} justifyContent={"center"} margin={3} className={styles.wrapper}>
+            <Grid container justifyContent={"center"} margin={3} className={styles.wrapper}>
                 {isFirst ?
                     null
                     :
-                <Grid item>
-                    <ArrowBackIosNewIcon onClick={onPrevious}/>
+                <Grid item justifyContent={"center"}>
+                    <ArrowBackIosNewIcon onClick={onPrevious} justifyContent="left"/>
                 </Grid>
                 }
                 {isLast ?
                 null
                 :
-                <Grid item>
+                <Grid item justifyContent={"center"}>
                     <ArrowForwardIosIcon onClick={onNext}/>
                 </Grid>
                 }

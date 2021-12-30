@@ -41,7 +41,7 @@ export default function Home() {
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
 
-  const trendingUrl = `${process.env.api}/classes/Nfts?order=-createdAt`;
+  const trendingUrl = `${process.env.api}/classes/Nfts?order=-updatedAt`;
 
   const collectorUrl = process.env.apiUrl + '/top-collectors'
   + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : '');

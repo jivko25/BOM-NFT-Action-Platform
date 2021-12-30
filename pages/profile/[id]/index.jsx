@@ -22,15 +22,6 @@ export default function Index(){
 
 
     async function getData(){
-      const url = `${process.env.api}/classes/Nfts?where={"isBought" :  true, "buyerId" : "${id}"}&limit=4`;
-      const items = await axios.get(url, {headers: {
-        'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
-        'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
-        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
-        'X-Parse-Revocable-Session' : '1',
-        'Content-Type' : 'application/json',
-      }})
-      .catch((e) => console.log(e));
       const profile = await axios.get(`${process.env.api}/users/${id}`, {headers: {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
@@ -40,8 +31,7 @@ export default function Index(){
       }})
       .catch((e) => console.log(e));
       if(profile?.data){
-        setProfileItems(items.data.results);
-        console.log(items.data.results);
+        setProfileItems(profile.data.nfts);
         setProfile(profile.data)
       }
     }

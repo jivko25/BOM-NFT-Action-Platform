@@ -70,16 +70,19 @@ export default function Product(){
     }
 
     async function buyItem(){
-      const user = JSON.parse(sessionStorage.getItem('user')).data;
+      const user = JSON.parse(sessionStorage.getItem('user'));
       const header = {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
-        'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+        'X-Parse-Session-Token' : user.token,
         'X-Parse-Revocable-Session' : '1',
         'Content-Type' : 'application/json'
       };
-      const updateData = await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"isBought" : true, "buyerId" : user.objectId, "auction_end" : product.createdAt}, {headers: header})
+      user.data.nfts.push(product);
+      await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"isBought" : true, "buyerId" : user.data.objectId, "auction_end" : product.createdAt}, {headers: header})
       .catch((e) => console.log(e.response));
+      await axios.put(`${process.env.api}/users/${user.data.objectId}`, {'nfts' : user.data.nfts}, {headers : header});
+      sessionStorage.setItem('user', JSON.stringify(user));
         getData();
     }
 
