@@ -20,9 +20,11 @@ export default function Home() {
   //useStates
   const [featuredCards, setFeaturedCards] = useState([]);
 
+  const [trending, setTrending] = useState([]);
   const [trendingItems, setTrendingItems] = useState([]);
   const [trendingFilters, setTrendingFilters] = useState([]);
   const [trendingFilterValue, setTrendingFilterValue] = useState(2);
+  const [trendingPage, setTrendingPage] = useState(0);
 
   const [collectors, setCollectors] = useState([]);
   const [collectorFilters, setCollectorFilters] = useState([]);
@@ -39,7 +41,7 @@ export default function Home() {
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
 
-  const trendingUrl = "https://parseapi.back4app.com/classes/Nfts";
+  const trendingUrl = `${process.env.api}/classes/Nfts?order=-createdAt`;
 
   const collectorUrl = process.env.apiUrl + '/top-collectors'
   + (collectorFilterValue != "" ? `?sort=${collectorFilterValue}` : '');
@@ -57,8 +59,7 @@ export default function Home() {
         const dataFeatured = data[0].data.nfts;
         const dataTrending = data[1].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
-        .sort((a, b) => b.likes - a.likes)
-        .slice(0, 4);
+        .slice(trendingPage, trendingPage+4);
         const dataCollectors = data[2].data.users;
         const dataAuctions = data[3].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
@@ -73,6 +74,7 @@ export default function Home() {
         dataFeatured[0].rows = 2;
         setFeaturedCards(dataFeatured);
 
+        setTrending(data[1].data.results.filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0));
         setTrendingItems(dataTrending);
         // setTrendingFilters(dataTrendingFilters)
 
@@ -114,15 +116,10 @@ export default function Home() {
   //Trending
 
   useEffect(async () => {
-    if (firstUpdateTrending.current) {
-      firstUpdateTrending.current = false;
-      return;
-    }
-    const dataTrending = await fetch(trendingUrl)
-    .then((res) => res.json());
-    setTrendingItems(dataTrending?.nfts)
+    const newData = trending.slice(trendingPage, trendingPage+4);
+    setTrendingItems(newData)
     // setTrendingFilters(dataTrending?.filters?.sort)
-  }, [trendingFilterValue])
+  }, [trendingFilterValue, trendingPage])
 
   //Collectors
 
@@ -183,12 +180,20 @@ export default function Home() {
     link: "https://app.boom.dev/"
   }
 
-  console.log(auctions);
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
       <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)}/>
       <Featured items={featuredCards} />
-      <Trending cards={trendingItems} filters={trendingFilters} filterValue={trendingFilterValue} onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}/>
+      <Trending 
+      cards={trendingItems} 
+      filters={trendingFilters} 
+      filterValue={trendingFilterValue} 
+      onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}
+      onPrevious={() => setTrendingPage(trendingPage-1)}
+      onNext={() => setTrendingPage(trendingPage+1)}
+      isFirst={trendingPage == 0}
+      isLast={trending.length == trendingPage + 4}
+      />
       <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions cards={auctions} filters={auctionFilters} onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} filterValue={auctionFilterValue}/>

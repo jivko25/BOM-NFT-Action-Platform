@@ -8,8 +8,9 @@ import { FormControl, Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 import Spacer from "../spacer/Spacer";
+import Pagenator from "../pagenator/Pagenator";
 
-export const Trending = React.memo(({cards = [], filters = [], filterValue, onChangeFilterValue}) => {
+export const Trending = React.memo(({cards = [], filters = [], filterValue, onChangeFilterValue, onPrevious, onNext, isFirst, isLast}) => {
     
         return (
             <Container className={styles.container}>
@@ -55,6 +56,7 @@ export const Trending = React.memo(({cards = [], filters = [], filterValue, onCh
                 :
                 <Spacer/>
                 }
+                <Pagenator onPrevious={onPrevious} onNext={onNext} isFirst={isFirst} isLast={isLast}/>
             </Container>
           );
 })
