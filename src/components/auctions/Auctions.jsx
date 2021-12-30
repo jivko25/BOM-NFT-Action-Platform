@@ -7,9 +7,10 @@ import { FormControl, Grid } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import Link from 'next/link';
 import Spacer from '../spacer/Spacer';
+import Pagenator from "../pagenator/Pagenator";
 
 
-export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterValue, filterValue}) => {
+export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterValue, filterValue, onPrevious, onNext, isFirst, isLast}) => {
         const [timeOption, setTimeOption] = useState();
 
         return (
@@ -54,6 +55,7 @@ export const Auctions = React.memo(({cards = [], filters = [], onChangeFilterVal
                 :
                 <Spacer/>
                 }
+                <Pagenator onPrevious={onPrevious} onNext={onNext} isFirst={isFirst} isLast={isLast}/>
             </Container>
           );
 })
