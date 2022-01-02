@@ -13,7 +13,25 @@ import Navigation from "../src/components/navigation/Navigation.jsx"
 import CreateNftModal from "../src/components/create/CreateNftModal.jsx"
 import SettingsModal from "../src/components/settings/SettingsModal.jsx"
 
+const sortValues = [
+  {value : 0, label : "By name ASC", queryString : "order=name"},
+  {value : 1, label : "By name DESC", queryString : "order=-name"},
+  {value : 2, label : "By price ASC", queryString : "order=price"},
+  {value : 3, label : "By price DESC", queryString : "order=-price"},
+  {value : 4, label : "By created date ASC", queryString : "order=createdAt"},
+  {value : 5, label : "By created date DESC", queryString : "order=-createdAt"},
+  {value : 6, label : "By end date ASC", queryString : 'order=updatedAt'},
+  {value : 7, label : "By end date DESC", queryString : 'order=-updatedAt'}
+]
 
+const sortValuesCollectors = [
+  {value : 0, label : "By items ASC", queryString : "order=-nfts,username&limit=12"},
+  {value : 1, label : "By items DESC", queryString : "order=nfts,username&limit=12"},
+  {value : 2, label : "By name ASC", queryString : "order=username"},
+  {value : 3, label : "By name DESC", queryString : "order=-username"},
+  {value : 4, label : "By register date ASC", queryString : "order=createdAt"},
+  {value : 5, label : "By register date DESC", queryString : "order=-createdAt"},
+]
 
 
 export default function Home() {
@@ -22,18 +40,15 @@ export default function Home() {
 
   const [trending, setTrending] = useState([]);
   const [trendingItems, setTrendingItems] = useState([]);
-  const [trendingFilters, setTrendingFilters] = useState([]);
-  const [trendingFilterValue, setTrendingFilterValue] = useState(2);
+  const [trendingFilterValue, setTrendingFilterValue] = useState(0);
   const [trendingPage, setTrendingPage] = useState(0);
 
   const [collectors, setCollectors] = useState([]);
-  const [collectorFilters, setCollectorFilters] = useState([]);
-  const [collectorFilterValue, setCollectorFilterValue] = useState('asc');
+  const [collectorFilterValue, setCollectorFilterValue] = useState(0);
 
   const [auctions, setAuctions] = useState([]);
   const [auctionItems, setAuctionItems] = useState([]);
-  const [auctionFilters, setAuctionFilters] = useState([]);
-  const [auctionFilterValue, setAuctionFilterValue] = useState(1);
+  const [auctionFilterValue, setAuctionFilterValue] = useState(6);
   const [auctionPage, setAuctionPage] = useState(0);
 
   //move create state in navigation component
@@ -43,17 +58,24 @@ export default function Home() {
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
 
-  const trendingUrl = `${process.env.api}/classes/Nfts?order=-updatedAt`;
+  function trendingUrl(sort){
+    return `https://parseapi.back4app.com/classes/Nfts?${sort}`
+  }
 
-  const collectorUrl = `${process.env.api}/users?order=-nfts,username&limit=12`;
-  console.log(collectorUrl);
+  // const trendingUrl = (sort) => `https://parseapi.back4app.com/classes/Nfts?${sort}`;
 
-  const auctionUrl = "https://parseapi.back4app.com/classes/Nfts?order=-createdAt";
+  function collectorUrl(sort) {
+    return `https://parseapi.back4app.com/users?${sort}`;
+  }
+  
+  // const collectorUrl = (sort) => `https://parseapi.back4app.com/users?${sort}`;
+  
+  const auctionUrl = (sort) => `https://parseapi.back4app.com/classes/Nfts?${sort}`;
 
   const fetchDataForFirstTime = () => {
     const getFeatured = axios.get(featuredUrl);
     const getTrending = axios.get(trendingUrl, {headers: process.env.headers});
-    const getCollectors = axios.get(collectorUrl, {headers: process.env.headers});
+    const getCollectors = axios.get('https://parseapi.back4app.com/users', {headers: process.env.headers});
     const getAuctions = axios.get(auctionUrl, {headers: process.env.headers});
 
     axios.all([getFeatured, getTrending, getCollectors, getAuctions]).then(
@@ -62,7 +84,7 @@ export default function Home() {
         const dataTrending = data[1].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
         .slice(trendingPage, trendingPage+4);
-        const dataCollectors = data[2].data.results;
+        const dataCollectors = data[2].data.results.sort((a, b) => b.nfts.length - a.nfts.length);
         const dataAuctions = data[3].data.results
         .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
         .sort((a, b) => (new Date(a.auction_end).getTime() - Date.now())/1000 - (new Date(b.auction_end).getTime() - Date.now())/1000)
@@ -89,11 +111,11 @@ export default function Home() {
         setAuctionItems(dataAuctions);
         // setAuctionFilters(dataAuctionsFilters)
       })
-    )
+    ).catch((error) => {console.log(error.response)})
   }
 
 
-  useEffect(() => fetchDataForFirstTime(), []);
+  // useEffect(() => fetchDataForFirstTime(), []);
 
   const firstUpdateFeatured = useRef(true);
   const firstUpdateTrending = useRef(true);
@@ -105,10 +127,10 @@ export default function Home() {
   //Featured
 
   useEffect(() => {
-    if (firstUpdateFeatured.current) {
-      firstUpdateFeatured.current = false;
-      return;
-    }
+    // if (firstUpdateFeatured.current) {
+    //   firstUpdateFeatured.current = false;
+    //   return;
+    // }
     fetch(featuredUrl)
                         .then(res => res.json())
                         .then(data => {
@@ -121,14 +143,41 @@ export default function Home() {
   //Trending
 
   useEffect(async () => {
-    const newData = trending.slice(trendingPage, trendingPage+4);
+    // if(firstUpdateTrending.current) {
+    //   firstUpdateTrending.current = false;
+    //   return;
+    // }
+    const data = await axios.get(trendingUrl(sortValues[trendingFilterValue].queryString), {headers: process.env.headers});
+    const newData = data.data.results
+    .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0);
+    setTrending(newData);
+    setTrendingItems(newData.slice(trendingPage, trendingPage+4));
+    setTrendingPage(0);
+  }, [trendingFilterValue])
+
+  useEffect(() => {
+    const newData = trending
+    .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
+    .slice(trendingPage, trendingPage+4);
     setTrendingItems(newData)
-    // setTrendingFilters(dataTrending?.filters?.sort)
-  }, [trendingFilterValue, trendingPage])
+  }, [trendingPage])
 
   //Collectors
 
   useEffect(async () => {
+    const data = await axios.get(`https://parseapi.back4app.com/users?${sortValuesCollectors[collectorFilterValue].queryString}`, {headers: process.env.headers});
+    // const sortedData = sortValuesCollectors !== 0 ? data.data.results.sort((a, b) => b.nfts.length - a.nfts.length) : data.data.results.sort((a, b) => a.nfts.length - b.nfts.length);
+    if(collectorFilterValue == 0){
+          const sortedData = data.data.results.sort((a, b) => b.nfts.length - a.nfts.length)
+          setCollectors( data.data.results );
+    }
+    else if(collectorFilterValue == 1){
+      const sortedData = data.data.results.sort((a, b) => a.nfts.length - b.nfts.length)
+      setCollectors( data.data.results );
+    }
+    else{
+      setCollectors( data.data.results );
+    }
     // if (firstUpdateCollectors.current) {
     //   firstUpdateCollectors.current = false;
     //   return;
@@ -144,9 +193,37 @@ export default function Home() {
   //Auctions
 
   useEffect(async () => {
-    const newData = auctions.slice(auctionPage, auctionPage+4);
+    // if(firstUpdateAuctions.current) {
+    //   firstUpdateAuctions.current = false;
+    //   return;
+    // }
+    const data = await axios.get(auctionUrl(sortValues[auctionFilterValue].queryString), {headers: process.env.headers});
+    if(auctionFilterValue != 6 & auctionFilterValue != 7){
+    const newData = data.data.results
+    .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0);
+    setAuctions(newData);
+    setAuctionItems(newData.slice(auctionPage, auctionPage+4));
+    setAuctionPage(0);
+    }
+    else{
+      const newData = data.data.results
+    .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
+    .sort((a, b) => auctionFilterValue == 6 ? (new Date(a.auction_end).getTime() - Date.now())/1000 - (new Date(b.auction_end).getTime() - Date.now())/1000
+    : (new Date(b.auction_end).getTime() - Date.now())/1000 - (new Date(a.auction_end).getTime() - Date.now())/1000)
+    setAuctions(newData);
+    setAuctionItems(newData.slice(auctionPage, auctionPage+4));
+    setAuctionPage(0);
+    }
+  }, [auctionFilterValue])
+
+  useEffect(() => {
+    const newData = auctions
+    .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
+    .slice(auctionPage, auctionPage+4);
     setAuctionItems(newData)
-  }, [auctionFilterValue, auctionPage])
+  }, [auctionPage])
+
+  
 
 
 
@@ -177,13 +254,14 @@ export default function Home() {
     link: "https://app.boom.dev/"
   }
 
+
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
       <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)}/>
       <Featured items={featuredCards} />
       <Trending 
       cards={trendingItems} 
-      filters={trendingFilters} 
+      filters={sortValues} 
       filterValue={trendingFilterValue} 
       onChangeFilterValue={(e) => setTrendingFilterValue(e.target.value)}
       onPrevious={() => setTrendingPage(trendingPage-1)}
@@ -191,11 +269,11 @@ export default function Home() {
       isFirst={trendingPage == 0}
       isLast={trending.length <= trendingPage + 4}
       />
-      <TopCollectors collectors={collectors} filters={collectorFilters} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
+      <TopCollectors collectors={collectors} filters={sortValuesCollectors} filterValue={collectorFilterValue} onChangeFilterValue={(e) => setCollectorFilterValue(e.target.value)}/>
       <How title={how.title} description={how.description} items={how.items} link={how.link} />
       <Auctions 
       cards={auctionItems} 
-      filters={auctionFilters} 
+      filters={sortValues} 
       onChangeFilterValue={(e) => setAuctionFilterValue(e.target.value)} 
       filterValue={auctionFilterValue}
       onPrevious={() => setAuctionPage(auctionPage-1)}

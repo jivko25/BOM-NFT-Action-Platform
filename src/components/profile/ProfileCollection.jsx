@@ -18,17 +18,19 @@ export default function ProfileCollection({user, filters, items, sortFilterValue
                 <Grid container>
                     {
                         items?.map((item, key) => {
+                            console.log(item.objectId);
                             return (
-                                <Link href={`/product/${item.id}`}>
-                            <Grid key={key} item xs={11} sm={6} md={4} xl={3}>
+                                // <Link href={`/product/${item.objectId}`}>
+                            <Grid key={item.objectId} item xs={11} sm={6} md={4} xl={3}>
                                 <Card
                                 {...item}
                                 mediaUrl={item.image}
                                 user={item.owner}
                                 ownerId = {item.owner.id}
+                                id={item.objectId}
                                 />
                             </Grid>
-                                </Link>
+                                // </Link>
                             )
                         })
                     }
