@@ -36,6 +36,7 @@ export default function Card({name = '', likes, mediaUrl = '',
       .catch((e) => console.log(e.response));
       addActivity()
       }
+      setProductLikes(productLikes + 1);
     }
 
     async function addActivity(){
@@ -51,11 +52,6 @@ export default function Card({name = '', likes, mediaUrl = '',
         "name" : name,
         "owner" : user
       }
-      console.log({
-        "user" : sessionStorage.getItem('user').data,
-        "nft" : nft,
-        "type" : "like"
-      });
       await axios.post(`${process.env.api}/classes/Activity`, 
       {
         "user" : JSON.parse(sessionStorage.getItem('user')).data,

@@ -28,6 +28,7 @@ export default function Product(){
 
     
     async function makeBid(){
+      getData();
       const user = JSON.parse(sessionStorage.getItem('user')).data;
       const header = {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
@@ -97,8 +98,8 @@ export default function Product(){
 
     useEffect(() => {
             getData();
-            console.log(product);
     }, [id, isSold])
+
 
 
 
