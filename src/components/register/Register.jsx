@@ -52,7 +52,7 @@ export default function Register(){
         if(res?.data){
         router.push('/');
         res.data.username = username;
-        res.data.url = "https://m.media-amazon.com/images/I/810XSuEz1vL._AC_SL1500_.jpg";
+        res.data.url = "https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png";
         const user = {
             token : res.data.sessionToken,
             data : res.data
