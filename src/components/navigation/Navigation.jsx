@@ -52,7 +52,7 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
   };
 
   const logout = () => {
-      sessionStorage.removeItem('user');
+      sessionStorage.clear();
       handleDrawerClose();
   }
 

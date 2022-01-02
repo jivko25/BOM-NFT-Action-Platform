@@ -73,10 +73,10 @@ function Header(){
                         <Link href='/'><Button variant="text" color="inherit" className={styles.homeBtn}>Home</Button></Link>
                             </Grid>
                             <Grid item md={3}>
-                        <Link href='/activity'><Button variant="text" color="inherit" className={styles.activityBtn}>Activity</Button></Link>
+                        <Link href={typeof window !== 'undefined' && sessionStorage?.getItem('user') !== null ? '/activity' : '/login'}><Button variant="text" color="inherit" className={styles.activityBtn}>Activity</Button></Link>
                             </Grid>
                             <Grid item md={3}>
-                        <Link href='/explore'><Button variant="contained" className={styles.exploreBtn} >Explore</Button></Link>
+                        <Link href={typeof window !== 'undefined' && sessionStorage?.getItem('user') !== null ? '/explore' : '/login'}><Button variant="contained" className={styles.exploreBtn} >Explore</Button></Link>
                             </Grid>
                         </Grid>
                         </Container>
@@ -117,12 +117,12 @@ function Header(){
                                         Home
                                     </MenuItem>
                                 </Link>
-                                <Link href='/activity'>
+                                <Link href={typeof window !== 'undefined' && sessionStorage?.getItem('user') !== null ? '/activity' : '/login'}>
                                     <MenuItem>
                                         Activity
                                     </MenuItem>
                                 </Link>
-                                <Link href='/explore'>
+                                <Link href={typeof window !== 'undefined' && sessionStorage?.getItem('user') !== null ? '/explore' : '/login'}>
                                     <MenuItem>
                                         Explore
                                     </MenuItem>
