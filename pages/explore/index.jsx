@@ -6,13 +6,31 @@ import {useState, useEffect} from 'react';
 import Link from 'next/link';
 import Spacer from "../../src/components/spacer/Spacer";
 import axios from "axios";
+import Pagenator from '../../src/components/pagenator/Pagenator';
+
+const sortValues = [
+    {value : 0, label : "By created date ASC", queryString : "order=createdAt"},
+    {value : 1, label : "By created date DESC", queryString : "order=-createdAt"},
+    {value : 2, label : "By name ASC", queryString : "order=name"},
+    {value : 3, label : "By name DESC", queryString : "order=-name"},
+    {value : 4, label : "By price ASC", queryString : "order=price"},
+    {value : 5, label : "By price DESC", queryString : "order=-price"},
+  ]
+  
+  const priceRangeValues = [
+    {value : 0, label : "Show all", queryString : ''},
+    {value : 1, label : "0-200", queryString : 'where={"price":{"$gte":0,"$lte":200}}'},
+    {value : 2, label : "201-1000", queryString : 'where={"price":{"$gte":201,"$lte":1000}}'},
+    {value : 3, label : "1000+", queryString : 'where={"price":{"$gte":1000}}'},
+  ]
 
 export default function Explore(){
     const [nfts, setNfts] = useState([]);
     const [nftSortFilter, setNftSortFilter] = useState([]);
     const [nftPriceFilter, setNftPriceFilter] = useState([]);
-    const [priceFilterValue, setPriceFilterValue] = useState('');
-    const [sortFilterValue, setSortFilterValue] = useState('');
+    const [priceFilterValue, setPriceFilterValue] = useState(0);
+    const [sortFilterValue, setSortFilterValue] = useState(0);
+    const [page, setPage] = useState(0);
 
     async function getData(){
         const url = `${process.env.api}/classes/Nfts`;
@@ -30,14 +48,19 @@ export default function Explore(){
       }
 
     useEffect(async () => {
-      const data = await fetch(process.env.apiUrl + '/explore' + '?' +
-      (sortFilterValue != "" ? `sort=${sortFilterValue}` : '') + '&' + (priceFilterValue != "" ? `price=${priceFilterValue}` : ''))
-      .then((res) => res.json());
-    //   setNfts(data?.nfts)
-      setNftSortFilter(data?.filters.sort);
-      setNftPriceFilter(data?.filters.price);
-      getData();
-    }, [priceFilterValue, sortFilterValue])
+        const url = (sort, price) => `${process.env.api}/classes/Nfts?limit=8&skip=${page*8}&${sort}&${price}`;
+        const items = await axios.get(url(sortValues[sortFilterValue].queryString, priceRangeValues[priceFilterValue].queryString), {headers: {
+          'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+          'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+          'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
+          'X-Parse-Revocable-Session' : '1',
+          'Content-Type' : 'application/json',
+        }})
+        .catch((e) => console.log(e));
+        if(items?.data){
+          setNfts(items.data.results);
+        }
+    }, [priceFilterValue, sortFilterValue, page])
     return(
         <div style={{position:'relative', overflow : "hidden"}}>
         <Container>
@@ -49,14 +72,10 @@ export default function Explore(){
                     </Grid>
                     <Grid item xs={12}>
                         <ExploreFilters 
-                        sort={nftSortFilter}
-                        price={nftPriceFilter}
-                        onPriceFilterChange={((e) => {
-                            setPriceFilterValue(e.target.value)
-                            console.log(priceFilterValue);
-                        })}
-                        onSortFilterChange={(e) => setSortFilterValue(e.target.value)}
-                        onPriceFilterChange={(e) => setPriceFilterValue(e.target.value)}
+                        sort={sortValues}
+                        price={priceRangeValues}
+                        onSortFilterChange={(e) => {setSortFilterValue(e.target.value);setPage(0);}}
+                        onPriceFilterChange={(e) => {setPriceFilterValue(e.target.value);setPage(0);}}
                         sortValue={sortFilterValue}
                         priceValue = {priceFilterValue}
                         />
@@ -87,6 +106,7 @@ export default function Explore(){
             <Spacer/>
             }
         </Grid>
+        <Pagenator onPrevious={() => {setPage(page-1); scroll(0, 0)}} onNext={() => {setPage(page+1); scroll(0, 0)}} isFirst={page == 0} isLast={nfts.length < 8}/>
         </Container>
         </div>
     );

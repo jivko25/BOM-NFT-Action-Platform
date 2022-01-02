@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import {parseISO, isAfter} from 'date-fns';
 import axios from 'axios';
 
+
 export default function Product(){
     const router = useRouter()
     const { id } = router.query
