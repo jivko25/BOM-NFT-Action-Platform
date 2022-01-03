@@ -102,12 +102,12 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               <ListItemText primary={"My Profile"} />
             </ListItem>
             </Link>
-            <ListItem button key={"Favorites"}>
+            {/* <ListItem button key={"Favorites"}>
               <ListItemIcon>
                 <FavoriteBorderIcon style={{fill: "white"}}/>
               </ListItemIcon>
               <ListItemText primary={"Favorite Products"} />
-            </ListItem>
+            </ListItem> */}
             <ListItem button key={"Create"} onClick={onOpenCreate}>
               <ListItemIcon>
                 <AddCircleOutlineIcon style={{fill: "white"}}/>

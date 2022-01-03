@@ -8,6 +8,22 @@ import { useRouter } from 'next/router'
 import Spacer from "../../../src/components/spacer/Spacer";
 import axios from "axios";
 
+  const sortValues = [
+    {value : 0, label : "By created date ASC", queryString : "order=createdAt"},
+    {value : 1, label : "By created date DESC", queryString : "order=-createdAt"},
+    {value : 2, label : "By name ASC", queryString : "order=name"},
+    {value : 3, label : "By name DESC", queryString : "order=-name"},
+    {value : 4, label : "By price ASC", queryString : "order=price"},
+    {value : 5, label : "By price DESC", queryString : "order=-price"},
+  ]
+
+  const priceRangeValues = [
+    {value : 0, label : "Show all", queryString : ''},
+    {value : 1, label : "0-200", queryString : ',"price":{"$gte":0,"$lte":200}'},
+    {value : 2, label : "201-1000", queryString : ',"price":{"$gte":201,"$lte":1000}'},
+    {value : 3, label : "1000+", queryString : ',"price":{"$gte":1000}'},
+  ]
+
 
 export default function Index(){
     const router = useRouter()
@@ -17,39 +33,29 @@ export default function Index(){
     const [profileFilters, setProfileFilters] = useState([]);
     const [profileFiltersSort, setProfileFiltersSort ] = useState([]);
     const [profileFiltersPrice, setProfileFiltersPrice ] = useState([]);
-    const [profileFiltersSortValue, setProfileFiltersSortValue ] = useState('');
-    const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState('');
+    const [profileFiltersSortValue, setProfileFiltersSortValue ] = useState(0);
+    const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState(0);
 
+    const url = `${process.env.api}/users/${id}`;
+    const itemsUrl = (sort, price) => `${process.env.api}/classes/Nfts?where={"buyerId" : "${id}"${price}}&${sort}`
 
-    async function getData(){
-      const profile = await axios.get(`${process.env.api}/users/${id}`, {headers: {
+    useEffect(async () => {
+      const header = {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
         'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
         'X-Parse-Revocable-Session' : '1',
         'Content-Type' : 'application/json',
-      }})
+      }
+      const profile = await axios.get(url, {headers: header})
       .catch((e) => console.log(e));
+      const items = await axios.get(itemsUrl(sortValues[profileFiltersSortValue].queryString, priceRangeValues[profileFiltersPriceValue].queryString), {headers: header})
+      .catch((e) => console.log(e));
+      console.log(items);
       if(profile?.data){
-        setProfileItems(profile.data.nfts);
+        setProfileItems(items?.data.results);
         setProfile(profile.data)
       }
-    }
-
-    useEffect(async () => {
-      await fetch(process.env.apiUrl + '/users/' + id + '?' +
-      (profileFiltersSortValue != "" ? `sort=${profileFiltersSortValue}` : '') + '&' + (profileFiltersPriceValue != "" ? `price=${profileFiltersPriceValue}` : ''))
-              .then(res => res.json())
-              .then(data => {
-                  // setProfile(data.user);
-                  // setProfileFilters(data.filters);
-                  // setProfileFiltersSort(data?.filters.sort);
-                  // setProfileFiltersPrice(data?.filters.price);
-                })
-                .catch(error => {
-                  console.log(error.message);
-                });
-                getData();
     }, [id, profileFiltersSortValue, profileFiltersPriceValue])
 
     return(
@@ -58,11 +64,13 @@ export default function Index(){
         <ProfileUser 
         {...profile}
         avatar={profile?.url}
+        name={profile?.username}
+        // info={`Registered on ${new Date(profile?.createdAt).getDay()}.${new Date(profile?.createdAt).getMonth() + 1}.${new Date(profile?.createdAt).getFullYear()} `}
         />
         <ProfileCollection 
         filters = {{
-            sort: profileFiltersSort,
-            price: profileFiltersPrice
+            sort: sortValues,
+            price: priceRangeValues
           }
         }
         user = {{avatarUrl : profile?.url, verified : profile?.verified}}

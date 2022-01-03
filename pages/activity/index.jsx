@@ -11,9 +11,10 @@ const sortValues = [
 ]
 
 const typeValues = [
-  {value : 0, label : "Bid", queryString : 'where={"type":"bid"}'},
-  {value : 1, label : "Buy", queryString : 'where={"type":"buy"}'},
-  {value : 2, label : "Like", queryString : 'where={"type":"like"}'}
+  {value : 0, label : "Show all", queryString : ''},
+  {value : 1, label : "Bid", queryString : 'where={"type":"bid"}'},
+  {value : 2, label : "Buy", queryString : 'where={"type":"buy"}'},
+  {value : 3, label : "Like", queryString : 'where={"type":"like"}'}
 ]
 
 

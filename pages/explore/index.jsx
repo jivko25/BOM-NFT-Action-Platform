@@ -8,7 +8,7 @@ import Spacer from "../../src/components/spacer/Spacer";
 import axios from "axios";
 import Pagenator from '../../src/components/pagenator/Pagenator';
 
-const sortValues = [
+  const sortValues = [
     {value : 0, label : "By created date ASC", queryString : "order=createdAt"},
     {value : 1, label : "By created date DESC", queryString : "order=-createdAt"},
     {value : 2, label : "By name ASC", queryString : "order=name"},
