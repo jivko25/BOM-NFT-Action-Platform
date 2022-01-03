@@ -4,7 +4,7 @@ import styles from './ActivityFilters.module.scss';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
-export default function ActivityFilters({sort, type, onSortFilterChange, onTypeFilterChange, sortValue, typeValue}){
+export default function ActivityFilters({sort, type, onSortFilterChange, onTypeFilterChange, onSearchChange, sortValue, typeValue}){
     const [sortBy, setSortBy] = useState('');
     const [typeBy, setType] = useState('');
 
@@ -70,6 +70,7 @@ export default function ActivityFilters({sort, type, onSortFilterChange, onTypeF
                     <TextField
                         label={<SearchIcon/>}
                         className={styles.input}
+                        onChange={onSearchChange}
                         fullWidth
                         />
                 </Grid>

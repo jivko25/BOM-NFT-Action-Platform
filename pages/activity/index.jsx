@@ -20,31 +20,17 @@ const typeValues = [
 
 export default function Activity() {
   const [activity, setActivity] = useState([]);
-  const [activityFilterSort, setActivityFilterSort] = useState([]);
-  const [activityFilterType, setActivityFilterType] = useState([]);
   const [sortFilterValue, setSortFilterValue] = useState(0);
-  const [typeFilterValue, setTypeFilterValue] = useState(1);
+  const [typeFilterValue, setTypeFilterValue] = useState(0);
+  const [searchValue, setSearchValue] = useState('');
   const [page, setPage] = useState(0);
 
-  const url = (sort = 'order=-updatedAt', type = '') => `${process.env.api}/classes/Activity?${sort}&limit=10&skip=${page*10}&&${type}`;
-
-  async function getData(){
-    const res = await axios.get(url('order=-updatedAt',typeValues[2].queryString), {headers: {
-      'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
-      'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
-      'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
-      'X-Parse-Revocable-Session' : '1',
-      'Content-Type' : 'application/json',
-    }})
-    .catch((e) => console.log(e));
-    if(res?.data){
-      console.log(res);
-      setActivity(res.data.results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-    }
-  }
+  const url = (sort = 'order=-updatedAt', type = '', limit) => `${process.env.api}/classes/Activity?${sort}${limit == true && `&limit=10&skip=${page*10}`}&${type}`;
 
   useEffect(async () => {
-    const res = await axios.get(url(sortValues[sortFilterValue].queryString,typeValues[typeFilterValue].queryString), {headers: {
+    const limit = searchValue == '';
+    console.log(limit);
+    const res = await axios.get(url(sortValues[sortFilterValue].queryString,typeValues[typeFilterValue].queryString, limit), {headers: {
       'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
       'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
       'X-Parse-Session-Token' : JSON.parse(sessionStorage.getItem('user')).token,
@@ -54,9 +40,9 @@ export default function Activity() {
     .catch((e) => console.log(e));
     if(res?.data){
       console.log(res);
-      setActivity(res.data.results.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+      setActivity(res.data.results.filter(item => item.user.username.includes(searchValue) || item.nft.name.includes(searchValue)).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
     }
-  }, [page, sortFilterValue, typeFilterValue])
+  }, [page, sortFilterValue, typeFilterValue, searchValue])
 
     return (
       <div style={{position : 'relative', overflow : "hidden"}}>
@@ -64,8 +50,10 @@ export default function Activity() {
       <ActivityFilters 
             sort={sortValues}
             type={typeValues}
+            search={searchValue}
             onSortFilterChange={(e) => setSortFilterValue(e.target.value)}
             onTypeFilterChange={(e) => setTypeFilterValue(e.target.value)}
+            onSearchChange={(e) => setSearchValue(e.target.value)}
             sortValue = {sortFilterValue}
             typeValue = {typeFilterValue}
             />
