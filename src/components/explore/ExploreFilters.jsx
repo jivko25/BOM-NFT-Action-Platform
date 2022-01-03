@@ -3,7 +3,7 @@ import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ExploreFilters.module.scss';
 
-export default function ExploreFilters({sort, price, onPriceFilterChange, onSortFilterChange, sortValue, priceValue}){
+export default function ExploreFilters({sort, price, onPriceFilterChange, onSortFilterChange, onSearchValueChange, sortValue, priceValue}){
 
     return(
         <div className={styles["explore-filters"]}>
@@ -59,6 +59,7 @@ export default function ExploreFilters({sort, price, onPriceFilterChange, onSort
                     <TextField
                         label={<SearchIcon/>}
                         className={styles["MuiInputAdornment-standard"]}
+                        onChange={onSearchValueChange}
                         fullWidth
                         />
                 </Grid>

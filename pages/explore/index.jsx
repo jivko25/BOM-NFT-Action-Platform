@@ -26,10 +26,9 @@ import Pagenator from '../../src/components/pagenator/Pagenator';
 
 export default function Explore(){
     const [nfts, setNfts] = useState([]);
-    const [nftSortFilter, setNftSortFilter] = useState([]);
-    const [nftPriceFilter, setNftPriceFilter] = useState([]);
     const [priceFilterValue, setPriceFilterValue] = useState(0);
     const [sortFilterValue, setSortFilterValue] = useState(0);
+    const [searchValue, setSearchValue] = useState('');
     const [page, setPage] = useState(0);
 
     async function getData(){
@@ -48,7 +47,7 @@ export default function Explore(){
       }
 
     useEffect(async () => {
-        const url = (sort, price) => `${process.env.api}/classes/Nfts?limit=8&skip=${page*8}&${sort}&${price}`;
+        const url = (sort, price) => `${process.env.api}/classes/Nfts?${searchValue == '' ? `limit=8&skip=${page*8}` : ''}&${sort}&${price}`;
         const items = await axios.get(url(sortValues[sortFilterValue].queryString, priceRangeValues[priceFilterValue].queryString), {headers: {
           'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
           'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
@@ -58,9 +57,10 @@ export default function Explore(){
         }})
         .catch((e) => console.log(e));
         if(items?.data){
-          setNfts(items.data.results);
+          console.log(items);
+          setNfts(items?.data.results.filter(item => item?.name.includes(searchValue)));
         }
-    }, [priceFilterValue, sortFilterValue, page])
+    }, [priceFilterValue, sortFilterValue,searchValue, page])
     return(
         <div style={{position:'relative', overflow : "hidden"}}>
         <Container>
@@ -76,6 +76,7 @@ export default function Explore(){
                         price={priceRangeValues}
                         onSortFilterChange={(e) => {setSortFilterValue(e.target.value);setPage(0);}}
                         onPriceFilterChange={(e) => {setPriceFilterValue(e.target.value);setPage(0);}}
+                        onSearchValueChange = {(e) => {setSearchValue(e.target.value);setPage(0);}}
                         sortValue={sortFilterValue}
                         priceValue = {priceFilterValue}
                         />
