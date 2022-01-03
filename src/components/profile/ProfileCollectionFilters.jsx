@@ -3,7 +3,7 @@ import { Grid, InputBase, TextField, Typography, FormControl, Select, MenuItem, 
 import SearchIcon from '@mui/icons-material/Search';
 import styles from './ProfileCollectionFilters.module.scss';
 
-export default function ProfileCollectionFilters({sort, price, sortFilterValue, priceFilterValue, onChangeSortFilterValue, onChangePriceFilterValue}){
+export default function ProfileCollectionFilters({sort, price, sortFilterValue, priceFilterValue, onChangeSortFilterValue, onChangePriceFilterValue, onChangeSearch}){
     const [sortBy, setSortBy] = useState('');
     const [range, setRange] = useState('');
     
@@ -69,6 +69,7 @@ export default function ProfileCollectionFilters({sort, price, sortFilterValue, 
                     <TextField
                         label={<SearchIcon/>}
                         className={styles["MuiInputAdornment-standard"]}
+                        onChange={onChangeSearch}
                         fullWidth
                         />
                 </Grid>

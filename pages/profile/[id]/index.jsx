@@ -1,11 +1,8 @@
-import Header from "../../../src/components/header/Header";
 import ProfileHero from "../../../src/components/profile/ProfileHero";
 import ProfileUser from "../../../src/components/profile/ProfileUser";
 import ProfileCollection from "../../../src/components/profile/ProfileCollection";
-import Footer from "../../../src/components/footer/Footer";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
-import Spacer from "../../../src/components/spacer/Spacer";
 import axios from "axios";
 
   const sortValues = [
@@ -30,14 +27,12 @@ export default function Index(){
     const id = router.query.id;
     const [profile, setProfile] = useState();
     const [profileItems, setProfileItems] = useState();
-    const [profileFilters, setProfileFilters] = useState([]);
-    const [profileFiltersSort, setProfileFiltersSort ] = useState([]);
-    const [profileFiltersPrice, setProfileFiltersPrice ] = useState([]);
     const [profileFiltersSortValue, setProfileFiltersSortValue ] = useState(0);
     const [profileFiltersPriceValue, setProfileFiltersPriceValue ] = useState(0);
+    const [profileSearchValue, setProfileSearchValue] = useState('');
 
     const url = `${process.env.api}/users/${id}`;
-    const itemsUrl = (sort, price) => `${process.env.api}/classes/Nfts?where={"buyerId" : "${id}"${price}}&${sort}`
+    const itemsUrl = (sort, price, search) => `${process.env.api}/classes/Nfts?where={"buyerId" : "${id}"${price}${search}}&${sort}`
 
     useEffect(async () => {
       const header = {
@@ -49,14 +44,13 @@ export default function Index(){
       }
       const profile = await axios.get(url, {headers: header})
       .catch((e) => console.log(e));
-      const items = await axios.get(itemsUrl(sortValues[profileFiltersSortValue].queryString, priceRangeValues[profileFiltersPriceValue].queryString), {headers: header})
+      const items = await axios.get(itemsUrl(sortValues[profileFiltersSortValue].queryString, priceRangeValues[profileFiltersPriceValue].queryString, profileSearchValue !== '' ? `,"name":{"$regex" : "${profileSearchValue}"}` : ''), {headers: header})
       .catch((e) => console.log(e));
-      console.log(items);
       if(profile?.data){
         setProfileItems(items?.data.results);
         setProfile(profile.data)
       }
-    }, [id, profileFiltersSortValue, profileFiltersPriceValue])
+    }, [id, profileFiltersSortValue, profileFiltersPriceValue, profileSearchValue])
 
     return(
       <div style={{position:'relative', overflow : "hidden"}}>
@@ -79,6 +73,7 @@ export default function Index(){
         priceFilterValue = {profileFiltersPriceValue}
         onChangeSortFilterValue = {(e) => setProfileFiltersSortValue(e.target.value)}
         onChangePriceFilterValue = {(e) => setProfileFiltersPriceValue(e.target.value)}
+        onChangeSearch = {(e) => setProfileSearchValue(e.target.value)}
         />
       </div>
       );
