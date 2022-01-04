@@ -27,10 +27,10 @@ const sortValues = [
 const sortValuesCollectors = [
   {value : 0, label : "By items ASC", queryString : "order=-nfts,username&limit=12"},
   {value : 1, label : "By items DESC", queryString : "order=nfts,username&limit=12"},
-  {value : 2, label : "By name ASC", queryString : "order=username"},
-  {value : 3, label : "By name DESC", queryString : "order=-username"},
-  {value : 4, label : "By register date ASC", queryString : "order=createdAt"},
-  {value : 5, label : "By register date DESC", queryString : "order=-createdAt"},
+  {value : 2, label : "By name ASC", queryString : "order=username&limit=12"},
+  {value : 3, label : "By name DESC", queryString : "order=-username&limit=12"},
+  {value : 4, label : "By register date ASC", queryString : "order=createdAt&limit=12"},
+  {value : 5, label : "By register date DESC", queryString : "order=-createdAt&limit=12"},
 ]
 
 
