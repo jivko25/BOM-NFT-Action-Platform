@@ -39,7 +39,7 @@ export default function Activity() {
     }})
     .catch((e) => console.log(e));
     if(res?.data){
-      setActivity(res.data.results.filter(item => item.user.username.includes(searchValue) || item.nft.name.includes(searchValue) || item.nft.owner.username.includes(searchValue)).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+      setActivity(res.data.results.filter(item => item.user.username.includes(searchValue) || item.nft.name.includes(searchValue) || item.nft.owner.username.includes(searchValue)));
     }
   }, [page, sortFilterValue, typeFilterValue, searchValue])
 
