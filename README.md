@@ -7,7 +7,33 @@ npm i
 npm run dev
 ```
 
+Production project: https://bom-nft-auction-platform-git-authentication-jivko25.vercel.app/
 See the demo of the project: https://bom-nft-auction-platform.vercel.app/
+
+## 💡 Functionalities
+
+- Authentication
+- Edit profil information
+- Create auction
+- Bid on auction
+- Buy product
+- Like product
+- Use filters to find easier item you want
+- See activity in the platform from Activity page
+
+## 💡 Functionalities in development
+
+- Edit product
+- Live time change information on products
+- Authorization
+- Admin can change featured photos
+- Toggle show/hide button with more information for each product
+- Dislike button
+- Comments on different products
+- Page with liked product
+- Badge on sold products
+- Badge that shows all products that user have bid
+- Chat between users
 
 ## 😏 Some tips
 
