@@ -8,6 +8,7 @@ npm run dev
 ```
 
 Production project: https://bom-nft-auction-platform-git-authentication-jivko25.vercel.app/
+
 See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 
 ## 💡 Functionalities
