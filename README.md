@@ -28,6 +28,8 @@ See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 - Live time change information on products
 - Authorization
 - Admin can change featured photos
+- Email verification
+- Reset password
 - Toggle show/hide button with more information for each product
 - Comments on different products
 - Page with liked product
