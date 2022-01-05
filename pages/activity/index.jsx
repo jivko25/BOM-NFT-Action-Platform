@@ -14,7 +14,8 @@ const typeValues = [
   {value : 0, label : "Show all", queryString : ''},
   {value : 1, label : "Bid", queryString : 'where={"type":"bid"}'},
   {value : 2, label : "Buy", queryString : 'where={"type":"buy"}'},
-  {value : 3, label : "Like", queryString : 'where={"type":"like"}'}
+  {value : 3, label : "Like", queryString : 'where={"type":"like"}'},
+  {value : 4, label : "Dislike", queryString : 'where={"type":"dislike"}'}
 ]
 
 
