@@ -34,12 +34,20 @@ export default function Card({name = '', likes, mediaUrl = '',
       setProductLikes(likes);
       await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"likes" : likes}, {headers: header})
       .catch((e) => console.log(e.response));
-      addActivity()
-      }
+      addActivity("like")
       setProductLikes(productLikes + 1);
+      }
+      else{
+        likes.splice(likes.indexOf(user.objectId), 1);
+        setProductLikes(likes);
+        await axios.put(`${process.env.api}/classes/Nfts/${id}`, {"likes" : likes}, {headers: header})
+        .catch((e) => console.log(e.response));
+        addActivity("dislike")
+        setProductLikes(productLikes - 1);
+      }
     }
 
-    async function addActivity(){
+    async function addActivity(type){
       const header = {
         'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
         'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
@@ -56,7 +64,7 @@ export default function Card({name = '', likes, mediaUrl = '',
       {
         "user" : JSON.parse(sessionStorage.getItem('user')).data,
         "nft" : nft,
-        "type" : "like"
+        "type" : type
       }, {headers: header})
       .catch((e) => console.log(e.response));
     }
