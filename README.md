@@ -16,20 +16,19 @@ See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 - Authentication
 - Edit profil information
 - Create auction
+- Edit auction
 - Bid on auction
 - Buy product
-- Like product
+- Like/Dislike product
 - Use filters to find easier item you want
 - See activity in the platform from Activity page
 
 ## 💡 Functionalities in development
 
-- Edit product
 - Live time change information on products
 - Authorization
 - Admin can change featured photos
 - Toggle show/hide button with more information for each product
-- Dislike button
 - Comments on different products
 - Page with liked product
 - Badge on sold products
