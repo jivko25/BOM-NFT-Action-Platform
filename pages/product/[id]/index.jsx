@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from "react";
 import {parseISO, isAfter} from 'date-fns';
 import axios from 'axios';
+import ProductEditModal from "../../../src/components/product/ProductEditModal";
 
 
 export default function Product(){
@@ -12,6 +13,7 @@ export default function Product(){
     const { id } = router.query
     const [product, setProduct] = useState({});
     const [isSold, setIsSold] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
 
     async function getData(){
       const res = await axios.get(`${process.env.api}/classes/Nfts/${id}`, {headers: {
@@ -99,7 +101,7 @@ export default function Product(){
 
     useEffect(() => {
             getData();
-    }, [id, isSold])
+    }, [id, isSold, openEdit])
 
 
 
@@ -123,9 +125,11 @@ export default function Product(){
           onBuy={buyItem}
           onBid={makeBid}
           onDelete={deleteItem}
+          onEdit={() => setOpenEdit(true)}
           buyerId={product.buyerId}
           isBought={product.isBought}
       />
+        <ProductEditModal open ={openEdit} nft={product} handleClose={() => setOpenEdit(false)} id={id}/>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import styles from './ProductActions.module.scss';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 
-export default function ProductActions({isLive = false, currency = '', buyAmount = 0, bidAmount = 0, onBuy, onBid, onDelete, owner, isBought = false, buyerId}){
+export default function ProductActions({isLive = false, currency = '', buyAmount = 0, bidAmount = 0, onBuy, onBid, onDelete, onEdit, owner, isBought = false, buyerId}){
     const [open, setOpen] = useState(false);
     const [userId, setUserId] = useState();
 
@@ -26,9 +26,13 @@ export default function ProductActions({isLive = false, currency = '', buyAmount
                 {   owner?.id === userId ?
                 <Grid container spacing={3} justifyContent={"center"}>
                     <Grid item xs={12} sm={4} justifyContent={"center"}>
-                        <Button variant="outlined" color="error" className={styles.button} onClick={handleClickOpen}>DELETE THIS AUCTION</Button>                
+                        <Button variant="outlined" color="error" className={styles.button} onClick={handleClickOpen}>DELETE</Button>                
+                    </Grid>
+                    <Grid item xs={12} sm={4} justifyContent={"center"}>
+                        <Button variant="outlined" color="secondary" className={styles.button} onClick={onEdit}>EDIT</Button>                
                     </Grid>
                 </Grid> 
+                
                     :
                 isBought == false ?
                 <Grid container spacing={3} justifyContent={"center"}>

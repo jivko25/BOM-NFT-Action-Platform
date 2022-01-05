@@ -8,7 +8,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 
-export default function ProductContainer({id, name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, timeEnd, onDelete, buyerId, isBought}){
+export default function ProductContainer({id, name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, onEdit, timeEnd, onDelete, buyerId, isBought}){
     const [buyerObjectId, setBuyerObjectId] = useState(buyerId)
     async function setBuyer(){
         const header = {
@@ -49,7 +49,18 @@ export default function ProductContainer({id, name, owner, price, currency, like
                             />
                         <ProductTabs text={details} bids={bids}/>
                         <Container>
-                        <ProductActions buyAmount={price} bidAmount={bidAmount} isLive={isLive} onBuy={onBuy} onBid={onBid} onDelete={onDelete} currency={currency} owner={owner} buyerId={buyerId} isBought={isBought}/>
+                        <ProductActions 
+                        buyAmount={price} 
+                        bidAmount={bidAmount} 
+                        isLive={isLive} 
+                        onBuy={onBuy} 
+                        onBid={onBid} 
+                        onDelete={onDelete} 
+                        onEdit={onEdit}
+                        currency={currency} 
+                        owner={owner} 
+                        buyerId={buyerId} 
+                        isBought={isBought}/>
                         </Container>
                             
                     </Stack>

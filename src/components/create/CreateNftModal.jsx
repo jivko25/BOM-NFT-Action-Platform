@@ -17,6 +17,7 @@ export default function CreateNftModal({open, handleClose}) {
   const [date, setDate] = useState(null);
   
 
+  console.log(value);
 //   console.log(typeof value.toISOString());
   async function handleSubmit() {
     const user = JSON.parse(sessionStorage.getItem('user')).data;
