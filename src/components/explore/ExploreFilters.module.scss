@@ -1,7 +1,11 @@
+@use '../../styles/colors.scss';
+
 .explore-filters{
     position: static;
 }
 
 .MuiInputAdornment-standard{
     position: static;
+    background-color: colors.$background_paper;
+    border-radius: 2rem;
 }

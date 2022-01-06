@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Spacer from "../../src/components/spacer/Spacer";
 import axios from "axios";
 import Pagenator from '../../src/components/pagenator/Pagenator';
+import Hero from "../../src/components/hero/Hero";
 
   const sortValues = [
     {value : 0, label : "By created date ASC", queryString : "order=createdAt"},
@@ -63,12 +64,12 @@ export default function Explore(){
     }, [priceFilterValue, sortFilterValue,searchValue, page])
     return(
         <div style={{position:'relative', overflow : "hidden"}}>
+        <Hero text="Explore"/>
         <Container>
         <Grid container direction="column" spacing={1} style={{"margin-top": "30px", "margin":"auto", "max-width":"100%"} } justifyContent={'center'}>
             <Grid item xs={12}>
                 <Grid container spacing={4}>
                     <Grid item xs={12}>
-                    <ExploreTitle text = "Explore"/>
                     </Grid>
                     <Grid item xs={12}>
                         <ExploreFilters 
