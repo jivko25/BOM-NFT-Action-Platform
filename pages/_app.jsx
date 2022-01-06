@@ -7,6 +7,8 @@ import { CacheProvider } from '@emotion/react';
 import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
 import { Layout } from '../src/components/layout/Layout';
+import UserContextProvider from '../src/components/contexts/UserProvider';
+import UserProvider from '../src/components/contexts/UserProvider';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -15,6 +17,7 @@ export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps, ...appProps } = props;
 
   return (
+    <UserProvider>
     <CacheProvider value={emotionCache}>
       <Head>
         <title>BOM NFT Auction</title>
@@ -33,6 +36,7 @@ export default function MyApp(props) {
         }
       </ThemeProvider>
     </CacheProvider>
+    </UserProvider>
   );
 }
 

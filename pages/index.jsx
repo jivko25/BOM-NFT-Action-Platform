@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import Header from "../src/components/header/Header.jsx"
 import {Featured} from "../src/components/featured/Featured.jsx"
 import {Trending} from "../src/components/trending/Trending.jsx"
@@ -12,6 +12,9 @@ import CookiesPolicy from "../src/components/cookies/CookiesPolicy.jsx"
 import Navigation from "../src/components/navigation/Navigation.jsx"
 import CreateNftModal from "../src/components/create/CreateNftModal.jsx"
 import SettingsModal from "../src/components/settings/SettingsModal.jsx"
+import {createContext } from "react";
+import { UserContext } from "../src/components/contexts/UserProvider.jsx"
+import { Button } from "@mui/material"
 
 const sortValues = [
   {value : 0, label : "By name ASC", queryString : "order=name"},
@@ -35,6 +38,8 @@ const sortValuesCollectors = [
 
 
 export default function Home() {
+  //Context
+  const [userLikes, setUserLikes, items, setItems] = useContext(UserContext);
   //useStates
   const [bids, setBids] = useState([]);
   const [likes, setLikes] = useState([]);
@@ -65,14 +70,11 @@ export default function Home() {
     return `https://parseapi.back4app.com/classes/Nfts?${sort}`
   }
 
-  // const trendingUrl = (sort) => `https://parseapi.back4app.com/classes/Nfts?${sort}`;
-
   function collectorUrl(sort) {
     return `https://parseapi.back4app.com/users?${sort}`;
   }
-  
-  // const collectorUrl = (sort) => `https://parseapi.back4app.com/users?${sort}`;
-  
+
+    
   const auctionUrl = (sort) => `https://parseapi.back4app.com/classes/Nfts?${sort}`;
 
   const fetchDataForFirstTime = () => {
@@ -120,12 +122,12 @@ export default function Home() {
 
   // useEffect(() => fetchDataForFirstTime(), []);
 
-  const firstUpdateFeatured = useRef(true);
-  const firstUpdateTrending = useRef(true);
-  const firstUpdateCollectors = useRef(true);
-  const firstUpdateAuctions = useRef(true);
+  // const firstUpdateFeatured = useRef(true);
+  // const firstUpdateTrending = useRef(true);
+  // const firstUpdateCollectors = useRef(true);
+  // const firstUpdateAuctions = useRef(true);
 
-  useEffect(() => {fetchDataForFirstTime()}, [openCreate]);
+  // useEffect(() => {fetchDataForFirstTime()}, [openCreate]);
 
   //Featured
 
@@ -147,6 +149,7 @@ export default function Home() {
 
   useEffect(async () => {
     const data = await axios.get(trendingUrl(sortValues[trendingFilterValue].queryString), {headers: process.env.headers});
+    setItems(data.data.results);
     const newData = data.data.results
     .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0);
     setTrending(newData);
@@ -161,6 +164,7 @@ export default function Home() {
       }
     })
     setLikes(newLikes)
+    setUserLikes(newLikes)
   }, [trendingFilterValue])
 
   useEffect(() => {
@@ -222,7 +226,6 @@ export default function Home() {
       }
     })
     setBids(newBids);
-    console.log(bids);
     }
   }, [auctionFilterValue])
 
@@ -263,6 +266,7 @@ export default function Home() {
     ],
     link: "https://app.boom.dev/"
   }
+
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
