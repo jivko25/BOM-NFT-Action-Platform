@@ -161,7 +161,7 @@ export default function Home() {
       }
     })
     setLikes(newLikes)
-  }, [trendingFilterValue, likes])
+  }, [trendingFilterValue])
 
   useEffect(() => {
     const newData = trending
