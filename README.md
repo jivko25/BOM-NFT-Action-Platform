@@ -22,6 +22,8 @@ See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 - Like/Dislike product
 - Use filters to find easier item you want
 - See activity in the platform from Activity page
+- Page with liked products
+- Page with bid products
 
 ## 💡 Functionalities in development
 
@@ -32,9 +34,7 @@ See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 - Reset password
 - Toggle show/hide button with more information for each product
 - Comments on different products
-- Page with liked product
 - Badge on sold products
-- Badge that shows all products that user have bid
 - Chat between users
 
 ## 😏 Some tips
