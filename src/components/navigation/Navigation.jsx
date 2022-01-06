@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -25,11 +25,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SettingsIcon from '@mui/icons-material/Settings';
 import Link from 'next/link';
 import User from '../user/User';
-import SettingsModal from '../settings/SettingsModal';
 import GavelIcon from '@mui/icons-material/Gavel';
+import { useUserContext, useUpdateContext, UserContext } from '../contexts/UserProvider';
+
 
 const drawerWidth = 240;
-
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -43,6 +43,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings, bids, likes}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
+  const [userLikes, setUserLikes, items] = useContext(UserContext);
+
+
+  // const userInfo = useUserContext();
+  // userInfo.changeLikes(['test']);
+  // const update = useUpdateContext(['test']);
+  // setUserLikes(['test']);
+  // const update = useContext(UpdateContext);
+  // update(['item', 'next'])
+  // userInfo.setLikes([]);
+  console.log(userLikes);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -56,7 +67,6 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
       sessionStorage.clear();
       handleDrawerClose();
   }
-
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -103,6 +113,8 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               <ListItemText primary={"My Profile"} />
             </ListItem>
             </Link>
+
+            <Link href='/likes'>
             <ListItem button key={"Favorites"}>
               <ListItemIcon>
                 <Badge badgeContent={likes} color="primary">
@@ -111,6 +123,8 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               </ListItemIcon>
               <ListItemText primary={"Favorite Products"} />
             </ListItem>
+            </Link>
+
             <ListItem button key={"Bids"}>
               <ListItemIcon>
                 <Badge badgeContent={bids} color="primary">
