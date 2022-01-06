@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { useContext, useState } from "react"
 import Card from "../../src/components/card/Card";
 import { UserContext } from "../../src/components/contexts/UserProvider"
@@ -10,7 +10,8 @@ export default function Index(){
     return(
         <div>
             <Hero text={'My Bids'}/>
-            <Grid container>
+            <Container>
+            <Grid container spacing={1}>
             {
                 context[2].map(card => {
                     return <Grid item xs={11} md={6} xl={3} key={card.objectId}>
@@ -27,6 +28,7 @@ export default function Index(){
                 })
             }
             </Grid>
+            </Container>
         </div>
     )
 }
