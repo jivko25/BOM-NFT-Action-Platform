@@ -36,6 +36,8 @@ const sortValuesCollectors = [
 
 export default function Home() {
   //useStates
+  const [bids, setBids] = useState([]);
+
   const [featuredCards, setFeaturedCards] = useState([]);
 
   const [trending, setTrending] = useState([]);
@@ -204,6 +206,9 @@ export default function Home() {
     setAuctions(newData);
     setAuctionItems(newData.slice(auctionPage, auctionPage+4));
     setAuctionPage(0);
+    const user = JSON.parse(sessionStorage.getItem('user')).data.objectId;
+    const bids = data.data.results.filter(item => item.bids.filter(bid => bid.user.objectId == user));
+    console.log(bids);
     }
     else{
       const newData = data.data.results
@@ -213,6 +218,20 @@ export default function Home() {
     setAuctions(newData);
     setAuctionItems(newData.slice(auctionPage, auctionPage+4));
     setAuctionPage(0);
+    const user = JSON.parse(sessionStorage.getItem('user')).data.objectId;
+    console.log(data.data.results[0].bids[0].user.objectId);
+    // const bids = data.data.results.filter(item => item.bids.filter(bid => bid.user.objectId == user));
+    // console.log(bids);
+    let newBids = [];
+    data.data.results.forEach(item => {
+      item.bids.forEach(bid => {
+        if(bid.user.objectId == user){
+          newBids.splice(0, 0, item);
+        }
+      })
+    })
+    setBids(newBids);
+    console.log(bids);
     }
   }, [auctionFilterValue])
 
@@ -254,10 +273,9 @@ export default function Home() {
     link: "https://app.boom.dev/"
   }
 
-
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)}/>
+      <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)} bids={bids.length}/>
       <Featured items={featuredCards} />
       <Trending 
       cards={trendingItems} 

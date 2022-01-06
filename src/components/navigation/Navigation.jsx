@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Typography } from '@mui/material';
+import { Badge, Typography } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -26,6 +26,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Link from 'next/link';
 import User from '../user/User';
 import SettingsModal from '../settings/SettingsModal';
+import GavelIcon from '@mui/icons-material/Gavel';
 
 const drawerWidth = 240;
 
@@ -39,7 +40,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings}) {
+export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings, bids}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
 
@@ -108,6 +109,14 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               </ListItemIcon>
               <ListItemText primary={"Favorite Products"} />
             </ListItem> */}
+            <ListItem button key={"Bids"}>
+              <ListItemIcon>
+                <Badge badgeContent={bids} color="secondary">
+                    <GavelIcon style={{fill: "white"}}/>
+                  </Badge>
+              </ListItemIcon>
+              <ListItemText primary={"My bids"} />
+            </ListItem>
             <ListItem button key={"Create"} onClick={onOpenCreate}>
               <ListItemIcon>
                 <AddCircleOutlineIcon style={{fill: "white"}}/>
