@@ -37,6 +37,7 @@ const sortValuesCollectors = [
 export default function Home() {
   //useStates
   const [bids, setBids] = useState([]);
+  const [likes, setLikes] = useState([]);
 
   const [featuredCards, setFeaturedCards] = useState([]);
 
@@ -145,17 +146,22 @@ export default function Home() {
   //Trending
 
   useEffect(async () => {
-    // if(firstUpdateTrending.current) {
-    //   firstUpdateTrending.current = false;
-    //   return;
-    // }
     const data = await axios.get(trendingUrl(sortValues[trendingFilterValue].queryString), {headers: process.env.headers});
     const newData = data.data.results
     .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0);
     setTrending(newData);
     setTrendingItems(newData.slice(trendingPage, trendingPage+4));
     setTrendingPage(0);
-  }, [trendingFilterValue])
+    const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user'))?.data.objectId : null;
+    let newLikes = [];
+    data.data.results.forEach(item => {
+      console.log(item);
+      if(item.likes.includes(user)){
+        newLikes.splice(0, 0, item);
+      }
+    })
+    setLikes(newLikes)
+  }, [trendingFilterValue, likes])
 
   useEffect(() => {
     const newData = trending
@@ -168,7 +174,6 @@ export default function Home() {
 
   useEffect(async () => {
     const data = await axios.get(`https://parseapi.back4app.com/users?${sortValuesCollectors[collectorFilterValue].queryString}`, {headers: process.env.headers});
-    // const sortedData = sortValuesCollectors !== 0 ? data.data.results.sort((a, b) => b.nfts.length - a.nfts.length) : data.data.results.sort((a, b) => a.nfts.length - b.nfts.length);
     if(collectorFilterValue == 0){
           const sortedData = data.data.results.sort((a, b) => b.nfts.length - a.nfts.length)
           setCollectors( data.data.results );
@@ -180,25 +185,11 @@ export default function Home() {
     else{
       setCollectors( data.data.results );
     }
-    // if (firstUpdateCollectors.current) {
-    //   firstUpdateCollectors.current = false;
-    //   return;
-    // }
-    // await fetch(collectorUrl)
-    // .then(res => res.json())
-    // .then(data => {
-    //   setCollectors(data.users.sort((a, b) => b.nftsCount - a.nftsCount));
-    //   // setCollectorFilters(data.filters.sort);
-    // });
   }, [collectorFilterValue])
 
   //Auctions
 
   useEffect(async () => {
-    // if(firstUpdateAuctions.current) {
-    //   firstUpdateAuctions.current = false;
-    //   return;
-    // }
     const data = await axios.get(auctionUrl(sortValues[auctionFilterValue].queryString), {headers: process.env.headers});
     if(auctionFilterValue != 6 & auctionFilterValue != 7){
     const newData = data.data.results
@@ -218,17 +209,17 @@ export default function Home() {
     setAuctions(newData);
     setAuctionItems(newData.slice(auctionPage, auctionPage+4));
     setAuctionPage(0);
-    const user = JSON.parse(sessionStorage.getItem('user')).data.objectId;
+    const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user'))?.data.objectId : null;
     console.log(data.data.results[0].bids[0].user.objectId);
-    // const bids = data.data.results.filter(item => item.bids.filter(bid => bid.user.objectId == user));
-    // console.log(bids);
     let newBids = [];
     data.data.results.forEach(item => {
+      if(item.isBought == false){
       item.bids.forEach(bid => {
         if(bid.user.objectId == user){
           newBids.splice(0, 0, item);
         }
       })
+      }
     })
     setBids(newBids);
     console.log(bids);
@@ -275,7 +266,7 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)} bids={bids.length}/>
+      <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)} bids={bids.length} likes={likes.length}/>
       <Featured items={featuredCards} />
       <Trending 
       cards={trendingItems} 

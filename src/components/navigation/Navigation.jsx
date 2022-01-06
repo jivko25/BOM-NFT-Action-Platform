@@ -40,7 +40,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings, bids}) {
+export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings, bids, likes}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
 
@@ -103,15 +103,17 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               <ListItemText primary={"My Profile"} />
             </ListItem>
             </Link>
-            {/* <ListItem button key={"Favorites"}>
+            <ListItem button key={"Favorites"}>
               <ListItemIcon>
-                <FavoriteBorderIcon style={{fill: "white"}}/>
+                <Badge badgeContent={likes} color="primary">
+                  <FavoriteBorderIcon style={{fill: "white"}}/>
+                  </Badge>
               </ListItemIcon>
               <ListItemText primary={"Favorite Products"} />
-            </ListItem> */}
+            </ListItem>
             <ListItem button key={"Bids"}>
               <ListItemIcon>
-                <Badge badgeContent={bids} color="secondary">
+                <Badge badgeContent={bids} color="primary">
                     <GavelIcon style={{fill: "white"}}/>
                   </Badge>
               </ListItemIcon>
