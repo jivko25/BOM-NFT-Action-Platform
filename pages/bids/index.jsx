@@ -6,13 +6,13 @@ import Hero from "../../src/components/hero/Hero";
 
 
 export default function Index(){
-    const [userLikes] = useContext(UserContext);
+    const context = useContext(UserContext);
     return(
         <div>
-            <Hero text={'My Likes'}/>
+            <Hero text={'My Bids'}/>
             <Grid container>
             {
-                userLikes.map(card => {
+                context[2].map(card => {
                     return <Grid item xs={11} md={6} xl={3} key={card.objectId}>
                                           <Card
                                           {...card}

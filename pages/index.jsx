@@ -39,7 +39,7 @@ const sortValuesCollectors = [
 
 export default function Home() {
   //Context
-  const [userLikes, setUserLikes, items, setItems] = useContext(UserContext);
+  const [userLikes, setUserLikes, userBids, setUserBids] = useContext(UserContext);
   //useStates
   const [bids, setBids] = useState([]);
   const [likes, setLikes] = useState([]);
@@ -108,7 +108,6 @@ export default function Home() {
         setTrendingItems(dataTrending);
         // setTrendingFilters(dataTrendingFilters)
 
-        console.log(dataCollectors);
         setCollectors(dataCollectors);
         // setCollectorFilters(dataCollectorsFilters);
 
@@ -149,7 +148,6 @@ export default function Home() {
 
   useEffect(async () => {
     const data = await axios.get(trendingUrl(sortValues[trendingFilterValue].queryString), {headers: process.env.headers});
-    setItems(data.data.results);
     const newData = data.data.results
     .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0);
     setTrending(newData);
@@ -158,7 +156,6 @@ export default function Home() {
     const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user'))?.data.objectId : null;
     let newLikes = [];
     data.data.results.forEach(item => {
-      console.log(item);
       if(item.likes.includes(user)){
         newLikes.splice(0, 0, item);
       }
@@ -214,7 +211,6 @@ export default function Home() {
     setAuctionItems(newData.slice(auctionPage, auctionPage+4));
     setAuctionPage(0);
     const user = sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user'))?.data.objectId : null;
-    console.log(data.data.results[0].bids[0].user.objectId);
     let newBids = [];
     data.data.results.forEach(item => {
       if(item.isBought == false){
@@ -226,6 +222,8 @@ export default function Home() {
       }
     })
     setBids(newBids);
+    setUserBids(newBids);
+    
     }
   }, [auctionFilterValue])
 

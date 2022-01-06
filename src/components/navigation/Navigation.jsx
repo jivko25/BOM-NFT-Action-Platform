@@ -53,7 +53,6 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
   // const update = useContext(UpdateContext);
   // update(['item', 'next'])
   // userInfo.setLikes([]);
-  console.log(userLikes);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -125,6 +124,7 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
             </ListItem>
             </Link>
 
+            <Link href='/bids'>
             <ListItem button key={"Bids"}>
               <ListItemIcon>
                 <Badge badgeContent={bids} color="primary">
@@ -133,6 +133,8 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               </ListItemIcon>
               <ListItemText primary={"My bids"} />
             </ListItem>
+            </Link>
+
             <ListItem button key={"Create"} onClick={onOpenCreate}>
               <ListItemIcon>
                 <AddCircleOutlineIcon style={{fill: "white"}}/>

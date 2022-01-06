@@ -2,7 +2,6 @@ import {useState} from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Container, Grid } from '@mui/material';
 import axios from 'axios';
 import { DateTimePicker } from '@mui/lab';
@@ -16,9 +15,6 @@ export default function CreateNftModal({open, handleClose}) {
   const [currency, setCurrency] = useState(null);
   const [date, setDate] = useState(null);
   
-
-  console.log(value);
-//   console.log(typeof value.toISOString());
   async function handleSubmit() {
     const user = JSON.parse(sessionStorage.getItem('user')).data;
     const body = {
