@@ -14,6 +14,7 @@ See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 ## 💡 Functionalities
 
 - Authentication
+- Authorization
 - Edit profil information
 - Create auction
 - Edit auction
@@ -28,12 +29,12 @@ See the demo of the project: https://bom-nft-auction-platform.vercel.app/
 ## 💡 Functionalities in development
 
 - Live time change information on products
-- Authorization
 - Admin can change featured photos
 - Email verification
 - Reset password
 - Toggle show/hide button with more information for each product
 - Comments on different products
+- Diagram for bids
 - Badge on sold products
 - Chat between users
 
