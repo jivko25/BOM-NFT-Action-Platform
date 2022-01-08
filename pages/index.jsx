@@ -15,6 +15,7 @@ import SettingsModal from "../src/components/settings/SettingsModal.jsx"
 import {createContext } from "react";
 import { UserContext } from "../src/components/contexts/UserProvider.jsx"
 import { Button } from "@mui/material"
+import AdminModal from "../src/components/admin/AdminModal.jsx"
 
 const sortValues = [
   {value : 0, label : "By name ASC", queryString : "order=name"},
@@ -44,6 +45,9 @@ export default function Home() {
   const [bids, setBids] = useState([]);
   const [likes, setLikes] = useState([]);
 
+  const [users, setUsers] = useState([]);
+  const [usersPermissions, setUsersPermissions] = useState([]);
+
   const [featuredCards, setFeaturedCards] = useState([]);
 
   const [trending, setTrending] = useState([]);
@@ -62,6 +66,7 @@ export default function Home() {
   //move create state in navigation component
   const [openCreate, setOpenCreate] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
+  const [openAdmin, setOpenAdmin] = useState(false);
 
   //Urls
   const featuredUrl = `${process.env.apiUrl}/featured`;
@@ -77,64 +82,21 @@ export default function Home() {
     
   const auctionUrl = (sort) => `https://parseapi.back4app.com/classes/Nfts?${sort}`;
 
-  const fetchDataForFirstTime = () => {
-    const getFeatured = axios.get(featuredUrl);
-    const getTrending = axios.get(trendingUrl, {headers: process.env.headers});
-    const getCollectors = axios.get('https://parseapi.back4app.com/users', {headers: process.env.headers});
-    const getAuctions = axios.get(auctionUrl, {headers: process.env.headers});
+  //Users
 
-    axios.all([getFeatured, getTrending, getCollectors, getAuctions]).then(
-      axios.spread((...data) => {
-        const dataFeatured = data[0].data.nfts;
-        const dataTrending = data[1].data.results
-        .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
-        .slice(trendingPage, trendingPage+4);
-        const dataCollectors = data[2].data.results.sort((a, b) => b.nfts.length - a.nfts.length);
-        const dataAuctions = data[3].data.results
-        .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0)
-        .sort((a, b) => (new Date(a.auction_end).getTime() - Date.now())/1000 - (new Date(b.auction_end).getTime() - Date.now())/1000)
-        .slice(auctionPage, auctionPage+4);
-
-
-        // const dataTrendingFilters = data[1].data.filters.sort;
-        // const dataCollectorsFilters = data[2].data.filters.sort;
-        // const dataAuctionsFilters = data[3].data.filters.price;
-
-        dataFeatured[0].cols = 3;
-        dataFeatured[0].rows = 2;
-        setFeaturedCards(dataFeatured);
-
-        setTrending(data[1].data.results.filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0));
-        setTrendingItems(dataTrending);
-        // setTrendingFilters(dataTrendingFilters)
-
-        setCollectors(dataCollectors);
-        // setCollectorFilters(dataCollectorsFilters);
-
-        setAuctions(data[3].data.results.filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 > 0));
-        setAuctionItems(dataAuctions);
-        // setAuctionFilters(dataAuctionsFilters)
-      })
-    ).catch((error) => {console.log(error.response)})
-  }
-
-
-  // useEffect(() => fetchDataForFirstTime(), []);
-
-  // const firstUpdateFeatured = useRef(true);
-  // const firstUpdateTrending = useRef(true);
-  // const firstUpdateCollectors = useRef(true);
-  // const firstUpdateAuctions = useRef(true);
-
-  // useEffect(() => {fetchDataForFirstTime()}, [openCreate]);
+  useEffect(async () => {
+    const data = await axios.get(`${process.env.api}/users`, {headers: process.env.headers});
+    //Get only permissions, because I hit limit of requests in back4app
+    const permissionsData = await axios.get(`${process.env.api}/classes/Admins`, {headers: process.env.headers});
+    const users = data.data.results;
+    const permissions = permissionsData.data.results;
+    setUsers(users);
+    setUsersPermissions(permissions);
+  },[])
 
   //Featured
 
   useEffect(() => {
-    // if (firstUpdateFeatured.current) {
-    //   firstUpdateFeatured.current = false;
-    //   return;
-    // }
     fetch(featuredUrl)
                         .then(res => res.json())
                         .then(data => {
@@ -143,6 +105,7 @@ export default function Home() {
                           setFeaturedCards(data.nfts);
                         });
   }, []);
+
 
   //Trending
 
@@ -169,7 +132,7 @@ export default function Home() {
     .filter(item => (new Date(item.auction_end).getTime() - Date.now())/1000 < 0)
     .slice(trendingPage, trendingPage+4);
     setTrendingItems(newData)
-  }, [trendingPage])
+  }, [trendingPage, likes])
 
   //Collectors
 
@@ -223,7 +186,6 @@ export default function Home() {
     })
     setBids(newBids);
     setUserBids(newBids);
-    
     }
   }, [auctionFilterValue])
 
@@ -268,7 +230,7 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Navigation onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)} bids={bids.length} likes={likes.length}/>
+      <Navigation onOpenAdmin={() => setOpenAdmin(true)} onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)} bids={bids.length} likes={likes.length}/>
       <Featured items={featuredCards} />
       <Trending 
       cards={trendingItems} 
@@ -294,6 +256,7 @@ export default function Home() {
       />
       <CreateNftModal open={openCreate} handleClose={() => setOpenCreate(false)}/>
       <SettingsModal open={openSettings} handleClose={() => setOpenSettings(false)}/>
+      <AdminModal open={openAdmin} handleClose={() => setOpenAdmin(false)} users={users} permissions={usersPermissions}/>
     </div>
   )
 }

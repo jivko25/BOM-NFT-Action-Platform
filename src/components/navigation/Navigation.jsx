@@ -26,6 +26,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import Link from 'next/link';
 import User from '../user/User';
 import GavelIcon from '@mui/icons-material/Gavel';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useUserContext, useUpdateContext, UserContext } from '../contexts/UserProvider';
 
 
@@ -40,19 +41,13 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings, bids, likes}) {
+export default function Navigation({isOpen = false, onOpenAdmin, onOpenCreate, onOpenSettings, bids, likes}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
   const [userLikes, setUserLikes, items] = useContext(UserContext);
 
 
-  // const userInfo = useUserContext();
-  // userInfo.changeLikes(['test']);
-  // const update = useUpdateContext(['test']);
-  // setUserLikes(['test']);
-  // const update = useContext(UpdateContext);
-  // update(['item', 'next'])
-  // userInfo.setLikes([]);
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -141,6 +136,20 @@ export default function Navigation({isOpen = false, onOpenCreate, onOpenSettings
               </ListItemIcon>
               <ListItemText primary={"Create Auction"} />
             </ListItem>
+
+            {
+              typeof window !== undefined ? JSON.parse(sessionStorage.getItem('user')).data.permissions == 'admin' ?
+              <ListItem button key={"Permissions"} onClick={onOpenAdmin}>
+              <ListItemIcon>
+                <AdminPanelSettingsIcon style={{fill: "white"}}/>
+              </ListItemIcon>
+              <ListItemText primary={"User permissions"} />
+              </ListItem>
+              :
+              null
+              :
+              null
+            }
         </List>
                 : null}
         <Divider />

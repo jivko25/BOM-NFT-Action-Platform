@@ -33,7 +33,34 @@ export default function Login(){
             setError({error : true, message: error.response.data.error});
         });
         if(res?.data){
-            console.log(res);
+            const permissions = await axios.get(`${process.env.api}/classes/Admins?where={"userId" : "${res.data.objectId}"}`, {headers : {
+                'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+                'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+                'X-Parse-Revocable-Session' : '1',
+                'Content-Type' : 'application/json'}}
+              ).catch((error) => {console.log('No permissions')});
+              console.log(res?.data.permissions);
+              console.log(permissions?.data.results.length);
+              if(permissions?.data.results.length !== 0 & res?.data.permissions == 'user'){
+                await axios.put(`${process.env.api}/users/${res.data.objectId}`, {"permissions" : "admin"}, {headers : {
+                    'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+                    'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+                    'X-Parse-Session-Token' : res.data.sessionToken,
+                    'X-Parse-Revocable-Session' : '1',
+                    'Content-Type' : 'application/json'}}
+                  ).catch((error) => {console.log('No permissions')});
+                  res.data.permissions = "admin";
+              }
+              else if(permissions?.data.results.length == 0 & res?.data.permissions == 'admin'){
+                await axios.put(`${process.env.api}/users/${res.data.objectId}`, {"permissions" : "user"}, {headers : {
+                    'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
+                    'X-Parse-REST-API-Key' : 'Of9P0j3AUKnDZmSqM5FQSYDZXZnYqDFjQJuoa5t9',
+                    'X-Parse-Session-Token' : res.data.sessionToken,
+                    'X-Parse-Revocable-Session' : '1',
+                    'Content-Type' : 'application/json'}}
+                  ).catch((error) => {console.log('No permissions')});
+                  res.data.permissions = "user";
+              }
             const user = {
                 token : res.data.sessionToken,
                 data : res.data
