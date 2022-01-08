@@ -92,7 +92,7 @@ export default function Home() {
     const permissions = permissionsData.data.results;
     setUsers(users);
     setUsersPermissions(permissions);
-  },[])
+  },[openAdmin])
 
   //Featured
 

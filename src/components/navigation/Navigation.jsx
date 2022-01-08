@@ -27,6 +27,7 @@ import Link from 'next/link';
 import User from '../user/User';
 import GavelIcon from '@mui/icons-material/Gavel';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ImageIcon from '@mui/icons-material/Image';
 import { useUserContext, useUpdateContext, UserContext } from '../contexts/UserProvider';
 
 
@@ -136,15 +137,24 @@ export default function Navigation({isOpen = false, onOpenAdmin, onOpenCreate, o
               </ListItemIcon>
               <ListItemText primary={"Create Auction"} />
             </ListItem>
-
+            {typeof window !== undefined ? JSON.parse(sessionStorage.getItem('user')).data.permissions == 'admin' ?<Divider />:null:null}
             {
               typeof window !== undefined ? JSON.parse(sessionStorage.getItem('user')).data.permissions == 'admin' ?
-              <ListItem button key={"Permissions"} onClick={onOpenAdmin}>
-              <ListItemIcon>
-                <AdminPanelSettingsIcon style={{fill: "white"}}/>
-              </ListItemIcon>
-              <ListItemText primary={"User permissions"} />
-              </ListItem>
+              <List>
+                <ListItem button key={"Permissions"} onClick={onOpenAdmin}>
+                <ListItemIcon>
+                  <AdminPanelSettingsIcon style={{fill: "white"}}/>
+                </ListItemIcon>
+                <ListItemText primary={"User permissions"} />
+                </ListItem>
+                
+                <ListItem button key={"Featured"} onClick={onOpenAdmin}>
+                <ListItemIcon>
+                  <ImageIcon style={{fill: "white"}}/>
+                </ListItemIcon>
+                <ListItemText primary={"Featured images"} />
+                </ListItem>
+              </List>
               :
               null
               :

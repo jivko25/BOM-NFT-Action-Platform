@@ -4,16 +4,14 @@ import UserRow from "./UserRow";
 
 
 export default function AdminModal({open, handleClose, users = [], permissions=[]}){
-    console.log(permissions);
         return(
         <div>
         <Dialog
             open={open}
             onClose={handleClose}
             fullWidth={true}
-            maxWidth={"md"}
         >
-            <DialogTitle>Settings</DialogTitle>
+            <DialogTitle>User Permissions</DialogTitle>
             <DialogContent>
                 {
                     users?.map(user => {
@@ -24,7 +22,7 @@ export default function AdminModal({open, handleClose, users = [], permissions=[
                 }
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} fullWidth>Close</Button>
+                <Button onClick={handleClose} fullWidth>Save and close</Button>
             </DialogActions>
         </Dialog>
     </div>    
