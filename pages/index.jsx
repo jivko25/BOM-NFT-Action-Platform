@@ -112,7 +112,7 @@ export default function Home() {
   useEffect(async () => {
     const data = await axios.get(`${process.env.api}/classes/Nfts`, {headers: process.env.headers});
     setFeatured(data.data.results);
-  })
+  },[])
 
 
   //Trending
