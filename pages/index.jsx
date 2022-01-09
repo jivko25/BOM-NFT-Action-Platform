@@ -15,7 +15,8 @@ import SettingsModal from "../src/components/settings/SettingsModal.jsx"
 import {createContext } from "react";
 import { UserContext } from "../src/components/contexts/UserProvider.jsx"
 import { Button } from "@mui/material"
-import AdminModal from "../src/components/admin/AdminModal.jsx"
+import AdminModal from "../src/components/admin/AdminModal.jsx";
+import FeaturedModal from "../src/components/featured/FeaturedModal.jsx"
 
 const sortValues = [
   {value : 0, label : "By name ASC", queryString : "order=name"},
@@ -48,7 +49,9 @@ export default function Home() {
   const [users, setUsers] = useState([]);
   const [usersPermissions, setUsersPermissions] = useState([]);
 
+  const [featured, setFeatured] = useState([]);
   const [featuredCards, setFeaturedCards] = useState([]);
+  const [openFeatured, setOpenFeatured] = useState(false);
 
   const [trending, setTrending] = useState([]);
   const [trendingItems, setTrendingItems] = useState([]);
@@ -105,6 +108,11 @@ export default function Home() {
                           setFeaturedCards(data.nfts);
                         });
   }, []);
+
+  useEffect(async () => {
+    const data = await axios.get(`${process.env.api}/classes/Nfts`, {headers: process.env.headers});
+    setFeatured(data.data.results);
+  })
 
 
   //Trending
@@ -230,7 +238,12 @@ export default function Home() {
 
   return (
     <div style={{position : 'relative', overflow : "hidden"}}>
-      <Navigation onOpenAdmin={() => setOpenAdmin(true)} onOpenCreate={() => setOpenCreate(true)} onOpenSettings={() => setOpenSettings(true)} bids={bids.length} likes={likes.length}/>
+      <Navigation 
+      onOpenAdmin={() => setOpenAdmin(true)} 
+      onOpenCreate={() => setOpenCreate(true)} 
+      onOpenSettings={() => setOpenSettings(true)} 
+      onOpenFeatured={() => setOpenFeatured(true)}
+      bids={bids.length} likes={likes.length}/>
       <Featured items={featuredCards} />
       <Trending 
       cards={trendingItems} 
@@ -257,6 +270,7 @@ export default function Home() {
       <CreateNftModal open={openCreate} handleClose={() => setOpenCreate(false)}/>
       <SettingsModal open={openSettings} handleClose={() => setOpenSettings(false)}/>
       <AdminModal open={openAdmin} handleClose={() => setOpenAdmin(false)} users={users} permissions={usersPermissions}/>
+      <FeaturedModal open={openFeatured} handleClose={() => setOpenFeatured(false)} nfts={featured}/>
     </div>
   )
 }

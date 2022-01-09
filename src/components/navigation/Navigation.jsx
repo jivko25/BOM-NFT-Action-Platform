@@ -42,7 +42,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Navigation({isOpen = false, onOpenAdmin, onOpenCreate, onOpenSettings, bids, likes}) {
+export default function Navigation({isOpen = false, onOpenAdmin,onOpenFeatured, onOpenCreate, onOpenSettings, bids, likes}) {
   const theme = useTheme();
   const [open, setOpen] = useState(isOpen);
   const [userLikes, setUserLikes, items] = useContext(UserContext);
@@ -137,10 +137,10 @@ export default function Navigation({isOpen = false, onOpenAdmin, onOpenCreate, o
               </ListItemIcon>
               <ListItemText primary={"Create Auction"} />
             </ListItem>
-            {typeof window !== undefined ? JSON.parse(sessionStorage.getItem('user')).data.permissions == 'admin' ?<Divider />:null:null}
             {
               typeof window !== undefined ? JSON.parse(sessionStorage.getItem('user')).data.permissions == 'admin' ?
               <List>
+              <Divider />
                 <ListItem button key={"Permissions"} onClick={onOpenAdmin}>
                 <ListItemIcon>
                   <AdminPanelSettingsIcon style={{fill: "white"}}/>
@@ -148,7 +148,7 @@ export default function Navigation({isOpen = false, onOpenAdmin, onOpenCreate, o
                 <ListItemText primary={"User permissions"} />
                 </ListItem>
                 
-                <ListItem button key={"Featured"} onClick={onOpenAdmin}>
+                <ListItem button key={"Featured"} onClick={onOpenFeatured}>
                 <ListItemIcon>
                   <ImageIcon style={{fill: "white"}}/>
                 </ListItemIcon>
