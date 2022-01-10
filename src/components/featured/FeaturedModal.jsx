@@ -5,6 +5,9 @@ import FeaturedModalRow from "./FeaturedModalRow";
 
 
 export default function FeaturedModal({open, handleClose, nfts = []}){
+        const [bigImage, setBigImage] = useState([]);
+        const [midImage, setMidImage] = useState([]);
+        const [smallImage, setSmallImage] = useState([]);
         return(
         <div>
         <Dialog
@@ -18,7 +21,7 @@ export default function FeaturedModal({open, handleClose, nfts = []}){
                         <Grid item xs={3} sm={2} style={{textAlign : 'center'}}>
                             <Typography variant="p">Image</Typography>
                         </Grid>
-                        <Grid item xs={0} sm={4} style={{textAlign : 'center'}}>
+                        <Grid item xs={1} sm={4} style={{textAlign : 'center'}}>
                         <Box display={{'xs' : 'none', 'sm' : 'block'}}>
                             <Typography variant="p">Name</Typography>
                         </Box>
@@ -36,7 +39,10 @@ export default function FeaturedModal({open, handleClose, nfts = []}){
                 {
                     nfts.map(nft => {
                         return(
-                            <FeaturedModalRow nft={nft} key={nft.objectId}/>
+                            <FeaturedModalRow nft={nft} key={nft.objectId} 
+                            bigImage={bigImage} setBigImage={setBigImage} isBigImageSelected={bigImage.length == 1} 
+                            midImage={midImage} setMidImage={setMidImage} isMidImageSelected={midImage.length == 3}
+                            smallImage={smallImage} setSmallImage={setSmallImage} isSmallImageSelected={smallImage.length == 3}/>
                         )
                     })
                 }
