@@ -44,7 +44,8 @@ export default function Register(){
             "username" : username,
             "email" : email,
             "password" : password,
-            "url" : "https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"
+            "url" : "https://sothis.es/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png",
+            "permissions" : 'user'
         }, {headers: process.env.headers})
         .catch((error) => {
           setError({error : true, message: error.response.data.error});

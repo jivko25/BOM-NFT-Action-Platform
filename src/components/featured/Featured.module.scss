@@ -1,6 +1,5 @@
 .wrapper{
     grid-template-columns: repeat(6, 1fr) !important;
-    // width: 95rem;
 }
 
 .image{
@@ -9,4 +8,5 @@
 
 .image:hover{
     cursor: pointer;
+    transform: scale(0.95);
 }

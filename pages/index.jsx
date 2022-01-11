@@ -49,6 +49,7 @@ export default function Home() {
   const [users, setUsers] = useState([]);
   const [usersPermissions, setUsersPermissions] = useState([]);
 
+  const [featuredData, setFeaturedData] = useState([]);
   const [featured, setFeatured] = useState([]);
   const [featuredCards, setFeaturedCards] = useState([]);
   const [openFeatured, setOpenFeatured] = useState(false);
@@ -99,15 +100,10 @@ export default function Home() {
 
   //Featured
 
-  useEffect(() => {
-    fetch(featuredUrl)
-                        .then(res => res.json())
-                        .then(data => {
-                          data.nfts[0].cols = 3;
-                          data.nfts[0].rows = 2;
-                          setFeaturedCards(data.nfts);
-                        });
-  }, []);
+  useEffect(async () => {
+    const featuredData = await axios.get(`${process.env.api}/classes/Featured`, {headers : process.env.headers});
+    setFeaturedData(featuredData.data.results);
+  }, [openFeatured]);
 
   useEffect(async () => {
     const data = await axios.get(`${process.env.api}/classes/Nfts`, {headers: process.env.headers});
@@ -244,7 +240,7 @@ export default function Home() {
       onOpenSettings={() => setOpenSettings(true)} 
       onOpenFeatured={() => setOpenFeatured(true)}
       bids={bids.length} likes={likes.length}/>
-      <Featured items={featuredCards} />
+      <Featured items={featuredData} />
       <Trending 
       cards={trendingItems} 
       filters={sortValues} 
@@ -270,7 +266,7 @@ export default function Home() {
       <CreateNftModal open={openCreate} handleClose={() => setOpenCreate(false)}/>
       <SettingsModal open={openSettings} handleClose={() => setOpenSettings(false)}/>
       <AdminModal open={openAdmin} handleClose={() => setOpenAdmin(false)} users={users} permissions={usersPermissions}/>
-      <FeaturedModal open={openFeatured} handleClose={() => setOpenFeatured(false)} nfts={featured}/>
+      <FeaturedModal open={openFeatured} handleClose={() => setOpenFeatured(false)} nfts={featured} featuredData={featuredData}/>
     </div>
   )
 }

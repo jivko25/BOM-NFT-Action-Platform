@@ -6,7 +6,8 @@ import React from "react";
 import { useState } from "react";
 
 
-export const Featured = React.memo(({items = []}) => {  
+export const Featured = React.memo(({items = []}) => { 
+    const router = useRouter()
     if (typeof window === "undefined") {
         return(
             <div></div>
@@ -21,22 +22,22 @@ export const Featured = React.memo(({items = []}) => {
         <div className={styles.wrapper}>
             <Container>
                 <ImageList
-                    cols={6}
+                    cols={5}
+                    rowHeight={120}
                     variant="quilted"
                     gap={20}
                 >
                 {items.map(item => (
-                        <Link href={`/product/${item.id}`} key={item.id}>
                         <ImageListItem key={item.image} 
-                        cols={width < 700 ? item.cols*2 || 3 : item.cols || 1} 
-                        rows={width < 700 ? item.rows*2 || 3 : item.rows || 1} 
-                        id={item.id}>
+                        cols={width < 700 ? item.col*2 || 3 : item.col || 1} 
+                        rows={width < 700 ? item.row*2 || 3 : item.row || 1}
+                        onClick={() => router.push(item.image)}
+                        id={item.objectId}>
                             <img 
                                 className={styles.image}
                                 src={item.image}
                             />
                         </ImageListItem>
-                        </Link>
                 ))}
                 </ImageList>
             </Container>

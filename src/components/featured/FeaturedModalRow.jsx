@@ -5,6 +5,7 @@ import { useState } from "react";
 import Avatar from "../avatar/Avatar";
 
 export default function FeaturedModalRow({nft, bigImage, setBigImage, isBigImageSelected, midImage, setMidImage, isMidImageSelected, smallImage, setSmallImage, isSmallImageSelected}){
+    console.log(bigImage);
     return(
         <Grid container justifyContent={"center"} color="secondary">
             <Grid item xs={3} sm={2}>

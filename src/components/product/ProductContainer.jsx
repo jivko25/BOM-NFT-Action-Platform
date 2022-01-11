@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function ProductContainer({id, name, owner, price, currency, likes, auction_end, isLive, details, bids, url, bidAmount, onBuy, onBid, onEdit, timeEnd, onDelete, buyerId, isBought}){
     const [buyerObjectId, setBuyerObjectId] = useState(buyerId)
+    console.log(buyerId);
     async function setBuyer(){
         const header = {
           'X-Parse-Application-Id' : '7m3WuKH1Sd0yxe0MI5kfZHfhYpSBCRkHVuM5Yfxy',
@@ -24,11 +25,12 @@ export default function ProductContainer({id, name, owner, price, currency, like
       }
 
     useEffect(() => {
-        if(!buyerObjectId){
+        console.log(buyerId == '');
+        if((buyerId == '' || buyerId == undefined || buyerId == null) && timeEnd < 0){
         setBuyer();
         console.log("here");
         }
-    }, [])
+    }, [timeEnd])
 
     return(
         <div className={styles["product-container"]}>
