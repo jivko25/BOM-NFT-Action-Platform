@@ -22,15 +22,15 @@ export const Featured = React.memo(({items = []}) => {
         <div className={styles.wrapper}>
             <Container>
                 <ImageList
-                    cols={5}
+                    cols={10}
                     rowHeight={120}
                     variant="quilted"
                     gap={20}
                 >
-                {items.map(item => (
+                {items.map((item, index) => (
                         <ImageListItem key={item.image} 
-                        cols={width < 700 ? item.col*2 || 3 : item.col || 1} 
-                        rows={width < 700 ? item.row*2 || 3 : item.row || 1}
+                        cols={width < 700 ? index==0 ? 10 :5 : item.col*2 || 1} 
+                        rows={width < 700 ? 2 : item.row || 1}
                         onClick={() => router.push(item.image)}
                         id={item.objectId}>
                             <img 
